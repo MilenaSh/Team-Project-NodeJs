@@ -45,4 +45,11 @@ Initial notes and ideas for the project.
   
  To be continued....
   
+
+So far and current questions:
+
+- Configured eslintrc file
+- use of npm (not yarn)
+- use of isomorphic-fetch ? - to check if it works for us
+
   
