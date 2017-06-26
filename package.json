@@ -1,0 +1,24 @@
+{
+  "name": "team-project-watchmen",
+  "version": "1.0.0",
+  "description": "A team project for the Course Node Js applications in Telerik Academy, season 8.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MilenaSh/Team-Project-NodeJs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MilenaSh/Team-Project-NodeJs/issues"
+  },
+  "homepage": "https://github.com/MilenaSh/Team-Project-NodeJs#readme",
+  "dependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.1.1",
+    "eslint-config-google": "^0.8.0"
+  }
+}
