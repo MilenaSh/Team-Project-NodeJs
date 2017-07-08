@@ -16,4 +16,5 @@ const init = (db) => {
     return app;
 };
 
+module.exports = { init };
 
