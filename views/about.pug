@@ -1,3 +1,8 @@
 extends layout
 block content
-    | About
+    main
+        | About
+        each c in courses
+            p Title: #{c.title}
+            p Length: #{c.length}
+            p Lecturer: #{c.lecturer}

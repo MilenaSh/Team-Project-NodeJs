@@ -16,11 +16,22 @@ const init = (db) => {
     app.use('/libs', express.static(path.join(__dirname, '../node_modules/')));
 
     app.get('/', (request, response) => {
-        response.render('layout');
+        response.render('home');
     });
 
-    app.get('about', (request, response) => {
-        response.render('about');
+    app.get('/about', (request, response) => {
+        const coursesPromise = db.collection('courses')
+            .find()
+            .toArray();
+        coursesPromise.then((value) => {
+            response.render('about', {
+                courses: value
+            });
+        });
+    });
+
+    app.get('/auth/login', (request, response) => {
+        response.render('auth/login');
     });
 
     return Promise.resolve(app);

@@ -1,0 +1,22 @@
+/*html {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    margin-top: 50px;
+}
+
+nav {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+    overflow:hidden;
+}*/
+
+main {
+    margin-top: 60px;
+}
