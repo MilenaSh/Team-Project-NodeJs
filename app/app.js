@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const init = (db) => {
-
     const app = express();
 
     app.set('view engine', 'pug');
@@ -13,7 +12,7 @@ const init = (db) => {
     app.use('/static', express.static('../public'));
     app.use('/libs', express.static(('../node_modules')));
 
-    return app;
+    return Promise.resolve(app);
 };
 
-
+module.exports = { init };
