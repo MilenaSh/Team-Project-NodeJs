@@ -30,7 +30,7 @@ const init = (db) => {
         });
     });
 
-    app.get('/auth/login', (request, response) => {
+    app.get('/login', (request, response) => {
         response.render('auth/login');
     });
 
