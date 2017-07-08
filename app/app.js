@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const init = (db) => {
-
     const app = express();
 
     app.set('view engine', 'pug');
@@ -28,4 +27,3 @@ const init = (db) => {
 };
 
 module.exports = { init };
-
