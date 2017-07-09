@@ -22,7 +22,11 @@ body {
 }
 
 main {
-    margin-top: 100px;
+    margin-top: 50px;
+}
+
+.login-register-form {
+    margin-top: 150px;
 }
 
 .login h1,
@@ -144,5 +148,11 @@ main {
 }
 
 #my-navbar {
-    background-color: #FFFFFF;
+    background-color: #363E44;
+}
+
+.jumbotron {
+    background-image: url('../images/jumbotron.jpg');
+    background-size: cover;
+    height: 300px;
 }
