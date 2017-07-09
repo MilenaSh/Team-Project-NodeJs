@@ -1,4 +1,20 @@
 extends layout
 block content
     main
-        | Home
+        .jumbotron.full
+            .container.text-center
+                h2#main-slogan We help you to plan better, faster & cheaper
+                form.navbar-form.navbar-left(role='search')
+                    .col-md-8
+                        input#search-input-field.form-control(type='text', placeholder='Search place')
+                    button#search-btn.btn.btn-default(type='submit')
+                        span.glyphicon.glyphicon-search
+                        |  Search
+
+        .container 
+            .col-xs-4
+                p Column 1
+            .col-xs-4
+                p Column 2
+            .col-xs-4
+                p Column 3
