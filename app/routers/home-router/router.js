@@ -3,10 +3,11 @@ const attachTo = (app, db) => {
 
     app.get('/', controller.getHome);
 
-    app.get('/about', controller.getAbout);
+    app.get('/courses', controller.getCourses);
 
     app.get('/login', controller.getLoginPage);
 
+    app.get('/register', controller.getRegisterPage);
 };
 
 module.exports = { attachTo };

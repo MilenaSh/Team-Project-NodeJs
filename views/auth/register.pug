@@ -1,0 +1,18 @@
+extends ../layout
+block styles
+    link(href='https://fonts.googleapis.com/css?family=Ubuntu:500', rel='stylesheet', type='text/css')
+block content
+    main
+        .login
+            .login-header
+                h1#login-sign Register
+            .login-form
+                input(type='text', placeholder='Full Name')
+                br
+                input(type='text', placeholder='Username')
+                br
+                input(type='password', placeholder='Password')
+                br
+                input(type='password', placeholder='Confirm Password')
+                br
+                input#login-button.login-button(type='button', value='Register')
