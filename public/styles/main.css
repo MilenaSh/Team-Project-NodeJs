@@ -134,15 +134,15 @@ main {
 }
 
 #myLogo {
-    max-width: 130px;
-    max-height: 100px;
+    max-width: 100px;
+    max-height: 80px;
     margin-top: -15px;
 }
 
 .navbar-brand {
-    background-color: #1D8668;
+    background-color: #FFFFFF;
 }
 
 #my-navbar {
-    background-color: #363E44;
+    background-color: #FFFFFF;
 }
