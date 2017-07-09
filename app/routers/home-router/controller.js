@@ -12,8 +12,11 @@ const init = (db) => {
                     courses: value
                 });
             });
+        },
+        getLoginPage(request, response) {
+            return response.render('auth/login');
         }
-    }
+    };
     return controller;
 };
 

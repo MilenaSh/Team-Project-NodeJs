@@ -15,24 +15,29 @@ const init = (db) => {
     app.use('/static', express.static(path.join(__dirname, '../public/')));
     app.use('/libs', express.static(path.join(__dirname, '../node_modules/')));
 
-    app.get('/', (request, response) => {
-        response.render('home');
-    });
+    // app.get('/', (request, response) => {
+    //     response.render('home');
+    // });
 
-    app.get('/about', (request, response) => {
-        const coursesPromise = db.collection('courses')
-            .find()
-            .toArray();
-        coursesPromise.then((value) => {
-            response.render('about', {
-                courses: value
-            });
-        });
-    });
+    // app.get('/about', (request, response) => {
+    //     const coursesPromise = db.collection('courses')
+    //         .find()
+    //         .toArray();
+    //     coursesPromise.then((value) => {
+    //         response.render('about', {
+    //             courses: value
+    //         });
+    //     });
+    // });
 
-    app.get('/login', (request, response) => {
-        response.render('auth/login');
-    });
+    // app.get('/login', (request, response) => {
+    //     response.render('auth/login');
+    // });
+
+    
+    require('./routers')
+        .attachTo(app, db);
+
 
     return Promise.resolve(app);
 };
