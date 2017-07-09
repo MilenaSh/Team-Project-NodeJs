@@ -15,11 +15,11 @@ mixin nav
                     li
                         a(href='/') Home
                     li
-                        a(href='/about') About
-                    li
-                        a(href='/#!/sightseeing') Sightseeing
+                        a(href='/courses') Courses
                 ul.nav.navbar-nav.navbar-right
                     li.dropdown
-                        a#register-link.dropdown-toggle(href='#', data-toggle='dropdown')
-                            | Register 
+                        a#register-link.dropdown-toggle(href='/login')
                             | Log In 
+                    li
+                        a#register-link.dropdown-toggle(href='/register')
+                            | Register

@@ -3,18 +3,21 @@ const init = (db) => {
         getHome(request, response) {
             return response.render('home');
         },
-        getAbout(request, response) {
+        getCourses(request, response) {
             const coursesPromise = db.collection('courses')
                 .find()
                 .toArray();
             coursesPromise.then((value) => {
-                return response.render('about', {
+                return response.render('courses', {
                     courses: value
                 });
             });
         },
         getLoginPage(request, response) {
             return response.render('auth/login');
+        },
+        getRegisterPage(request, response) {
+            return response.render('auth/register');
         }
     };
     return controller;

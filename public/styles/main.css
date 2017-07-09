@@ -27,6 +27,7 @@ main {
 
 .login h1, .login h2, .login h3, .login h5, .login h6, .login a {
   margin:0; padding:0;
+  color: black;
 }
 
 .login {
