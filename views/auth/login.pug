@@ -1,24 +1,19 @@
 extends ../layout
 block styles
     link(href='https://fonts.googleapis.com/css?family=Ubuntu:500', rel='stylesheet', type='text/css')
-    link(href='/static/styles/login.css', rel='stylesheet')
 block scripts
     script(src='/static/scripts/login.js')
 block content
-    
-    .login
-        .login-header
-            h1 Login
-        .login-form
-            h3 Username:
-            input(type='text', placeholder='Username')
-            br
-            h3 Password:
-            input(type='password', placeholder='Password')
-            br
-            input.login-button(type='button', value='Login')
-            br
-            a.sign-up Sign Up!
-            br
-            h6.no-access Can't access your account?
+    main
+        .login
+            .login-header
+                h1#login-sign Login
+            .login-form
+                h3 Username:
+                input(type='text', placeholder='Username')
+                br
+                h3 Password:
+                input(type='password', placeholder='Password')
+                br
+                input#login-button.login-button(type='button', value='Login')
             
