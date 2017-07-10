@@ -10,6 +10,8 @@ const attachTo = (app, db) => {
     app.post('/login', controller.postLoginPage);
 
     app.get('/register', controller.getRegisterPage);
+
+    app.post('/register', controller.postRegisterPage);
 };
 
 module.exports = { attachTo };
