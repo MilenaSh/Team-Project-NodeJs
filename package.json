@@ -33,6 +33,7 @@
     "pug": "^2.0.0-rc.2"
   },
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-live-server": "0.0.30"
   }
 }
