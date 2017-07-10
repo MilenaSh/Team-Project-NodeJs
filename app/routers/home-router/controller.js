@@ -3,6 +3,7 @@ const init = (db) => {
         getHome(request, response) {
             return response.render('home');
         },
+
         getCourses(request, response) {
             const coursesPromise = db.collection('courses')
                 .find()
@@ -13,11 +14,23 @@ const init = (db) => {
                 });
             });
         },
+
         getLoginPage(request, response) {
             return response.render('auth/login');
         },
+
+        // TODO render information for the courses
+        postLoginPage(request, response) {
+            return response.render('courses');
+        },
+
         getRegisterPage(request, response) {
             return response.render('auth/register');
+        },
+
+        // TODO render information for successful registration
+        postRegisterPage(request, response) {
+            return response.render('home');
         }
     };
     return controller;

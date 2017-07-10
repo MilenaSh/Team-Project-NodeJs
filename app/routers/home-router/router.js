@@ -7,6 +7,8 @@ const attachTo = (app, db) => {
 
     app.get('/login', controller.getLoginPage);
 
+    app.post('/login', controller.postLoginPage);
+
     app.get('/register', controller.getRegisterPage);
 };
 
