@@ -5,9 +5,16 @@ block content
             .container.text-center
                 h2#main-slogan We help you to plan better, faster & cheaper
         .container
-            .col-xs-4
-                p Column 1
-            .col-xs-4
-                p Column 2
-            .col-xs-4
-                p Column 3
+            h1.text-center
+                | Most recent courses
+            each c in latestCourses
+                .col-sm-6.col-md-4
+                    .thumbnail
+                        // image here
+                        .caption
+                            h3 #{c.title}
+                            p #{c.lecturer}
+                            p #{c.length}
+        .container
+            h1.text-center
+                | Most popular courses

@@ -1,7 +1,15 @@
 const init = (db) => {
     const controller = {
         getHome(request, response) {
-            return response.render('home');
+            const coursesPromise = db.collection('courses')
+                .find()
+                .toArray();
+            coursesPromise.then((value) => {
+                const latestCourses = value.slice(-6).reverse();
+                return response.render('home', {
+                    latestCourses: latestCourses
+                });
+            });
         },
 
         getLoginPage(request, response) {

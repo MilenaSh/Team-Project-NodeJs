@@ -209,3 +209,7 @@ main {
 #courses-nav {
     color: #1F4838;
 }
+
+.course-container {
+    display: inline-block;
+}

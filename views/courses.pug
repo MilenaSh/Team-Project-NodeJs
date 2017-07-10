@@ -1,8 +1,13 @@
 extends layout
 block content
     main
-        | Courses
-        each c in courses
-            p Title: #{c.title}
-            p Length: #{c.length}
-            p Lecturer: #{c.lecturer}
+        .container
+            each c in courses
+                .col-sm-6.col-md-4
+                    .thumbnail
+                        // image here
+                        .caption
+                            h3 #{c.title}
+                            p #{c.lecturer}
+                            p #{c.length}
+                            // if statement here for like button on logged in users only
