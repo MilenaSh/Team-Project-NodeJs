@@ -10,13 +10,19 @@ mixin nav
                     span.icon-bar
                 a.navbar-brand(href='/')
                     img#myLogo(src='/static/images/logo.png', alt='Page logo')
+                form.navbar-form.pull-left(role='search')
+                    .input-group
+                        input#search-bar.form-control(type='text', placeholder='Search')
+                        .input-group-btn
+                            button#search-button.btn.btn-default(type='submit')
+                                span.glyphicon.glyphicon-search
             #navbar-collapse.collapse.navbar-collapse
                 ul.nav.navbar-nav
                     li
                         a(href='/courses') Courses
                 ul.nav.navbar-nav.navbar-right
                     li.dropdown
-                        a#register-link.dropdown-toggle(href='/login')
+                        a#login-link.dropdown-toggle(href='/login')
                             | Log In 
                     li
                         a#register-link.dropdown-toggle(href='/register')
