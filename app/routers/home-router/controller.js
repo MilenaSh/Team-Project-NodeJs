@@ -4,17 +4,6 @@ const init = (db) => {
             return response.render('home');
         },
 
-        getCourses(request, response) {
-            const coursesPromise = db.collection('courses')
-                .find()
-                .toArray();
-            coursesPromise.then((value) => {
-                return response.render('courses', {
-                    courses: value
-                });
-            });
-        },
-
         getLoginPage(request, response) {
             return response.render('auth/login');
         },
