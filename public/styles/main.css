@@ -55,12 +55,6 @@ main {
     font-size: 80px;
 }
 
-.login-form h3 {
-    text-align: left;
-    margin-left: 40px;
-    color: #fff;
-}
-
 .login-form {
     box-sizing: border-box;
     padding-top: 15px;
@@ -159,4 +153,3 @@ main {
 
 
 /* search bar css */
-
