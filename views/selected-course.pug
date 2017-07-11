@@ -1,4 +1,8 @@
 extends layout
+include mixins/nav
+
+block nav
+    +nav(isLoggedIn)
 block content
     main
         - const selectedCourse = course[0]
@@ -10,8 +14,8 @@ block content
                     h1 #{selectedCourse.title}
                     p
                         | Course description here
-                    // TODO: if statement for button here
-                    a.btn.btn-primary.btn-lg(href='#') Enroll
+                    if isLoggedIn
+                        a.btn.btn-primary.btn-lg(href='#') Enroll
             hr
             .row
                 .col-lg-12

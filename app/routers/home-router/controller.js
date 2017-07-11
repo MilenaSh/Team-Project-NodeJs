@@ -7,31 +7,22 @@ const init = (db, passport) => {
             coursesPromise.then((value) => {
                 const latestCourses = value.slice(-6).reverse();
                 return response.render('home', {
-                    latestCourses: latestCourses
+                    latestCourses: latestCourses,
+                    isLoggedIn: request.isAuthenticated(),
                 });
             });
         },
 
         getLoginPage(request, response) {
-            return response.render('auth/login');
-        },
-
-        // TODO render information for the courses
-        postLoginPage(request, response) {
-            // passport.authenticate('local', {
-            //     failureRedirect: '/login',
-            //     successRedirect: '/'
-            // });
-            return response.status(200).redirect('/');
+            return response.render('auth/login', {
+                isLoggedIn: request.isAuthenticated()
+            });
         },
 
         getRegisterPage(request, response) {
-            return response.render('auth/register');
-        },
-
-        // TODO render information for successful registration
-        postRegisterPage(request, response) {
-            return response.render('home');
+            return response.render('auth/register', {
+                isLoggedIn: request.isAuthenticated()
+            });
         },
 
         getProfilePage(request, response) {
@@ -40,9 +31,9 @@ const init = (db, passport) => {
             }
             else {
                 const user = request.user;
-                console.log(user)
                 return response.render('profile', {
-                    user: user[0]
+                    user: user[0],
+                    isLoggedIn: request.isAuthenticated()
                 });
             }
         }

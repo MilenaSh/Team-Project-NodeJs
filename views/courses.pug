@@ -1,4 +1,8 @@
 extends layout
+include mixins/nav
+
+block nav
+    +nav(isLoggedIn)
 block content
     main
         .container
@@ -10,4 +14,6 @@ block content
                             h3 #{c.title}
                             p #{c.lecturer}
                             p #{c.length}
-                            // if statement here for like button on logged in users only
+                            a(href='/courses/' + c._id)
+                                | View details
+                            // if statement here for like button on logged in users only and store users that have liked in mongodb

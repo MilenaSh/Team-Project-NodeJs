@@ -5,15 +5,7 @@ const attachTo = (app, db, passport) => {
 
     app.get('/login', controller.getLoginPage);
 
-    app.post('/login', passport.authenticate('local', {
-                failureRedirect: '/login',
-                successRedirect: '/',
-                session: true
-            }));
-
     app.get('/register', controller.getRegisterPage);
-
-    app.post('/register', controller.postRegisterPage);
 
     app.get('/profile', controller.getProfilePage);
 };

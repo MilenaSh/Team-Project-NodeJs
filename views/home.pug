@@ -1,4 +1,8 @@
 extends layout
+include mixins/nav
+
+block nav
+    +nav(isLoggedIn)
 block content
     main
         .jumbotron.full
@@ -15,6 +19,8 @@ block content
                             h3 #{c.title}
                             p #{c.lecturer}
                             p #{c.length}
+                            a(href='/courses/' + c._id)
+                                | View details
         .container
             h1.text-center
                 | Most popular courses

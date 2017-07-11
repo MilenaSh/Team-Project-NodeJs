@@ -1,4 +1,4 @@
-mixin nav
+mixin nav(isLoggedIn)
     nav#my-navbar.navbar.navbar-inverse.navbar-custom.navbar-fixed-top
         .container-fluid
             .navbar-header
@@ -21,9 +21,17 @@ mixin nav
                     li
                         a#courses-nav(href='/courses') Courses
                 ul.nav.navbar-nav.navbar-right
-                    li.dropdown
-                        a#login-link.dropdown-toggle(href='/login')
-                            | Log In 
-                    li
-                        a#register-link.dropdown-toggle(href='/register')
-                            | Register
+                    if isLoggedIn
+                        li.dropdown
+                            a#profile-link.dropdown-toggle(href='/profile')
+                                | Profile
+                        li.dropdown
+                            a#logout-link.dropdown-toggle(href='/auth/logout')
+                                | Logout 
+                    else
+                        li.dropdown
+                            a#login-link.dropdown-toggle(href='/login')
+                                | Log In 
+                        li
+                            a#register-link.dropdown-toggle(href='/register')
+                                | Register

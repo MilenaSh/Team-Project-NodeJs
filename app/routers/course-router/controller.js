@@ -12,7 +12,8 @@ const init = (db) => {
             selectedCoursePromise
                 .then((value) => {
                     response.render('selected-course', {
-                        course: value
+                        course: value,
+                        isLoggedIn: request.isAuthenticated()
                     });
                 });
         },
@@ -23,7 +24,8 @@ const init = (db) => {
                 .toArray();
             coursesPromise.then((value) => {
                 return response.render('courses', {
-                    courses: value
+                    courses: value,
+                    isLoggedIn: request.isAuthenticated()
                 });
             });
         },
