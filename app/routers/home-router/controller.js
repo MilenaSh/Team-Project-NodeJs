@@ -22,7 +22,7 @@ const init = (db, passport) => {
             //     failureRedirect: '/login',
             //     successRedirect: '/'
             // });
-            response.status(200).redirect('/');
+            return response.status(200).redirect('/');
         },
 
         getRegisterPage(request, response) {
@@ -36,12 +36,13 @@ const init = (db, passport) => {
 
         getProfilePage(request, response) {
             if (!request.isAuthenticated()) {
-                response.status(401).render('unauthorized');
+                return response.status(401).render('unauthorized');
             }
             else {
                 const user = request.user;
-                response.render('profile', {
-                    user: user
+                console.log(user)
+                return response.render('profile', {
+                    user: user[0]
                 });
             }
         }

@@ -7,7 +7,8 @@ const attachTo = (app, db, passport) => {
 
     app.post('/login', passport.authenticate('local', {
                 failureRedirect: '/login',
-                successRedirect: '/'
+                successRedirect: '/',
+                session: true
             }));
 
     app.get('/register', controller.getRegisterPage);

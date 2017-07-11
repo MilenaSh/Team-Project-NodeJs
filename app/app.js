@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const ObjectId = require('mongodb').ObjectID;
 
 const init = (db) => {
     const app = express();
@@ -18,7 +19,7 @@ const init = (db) => {
     app.use(cookieParser());
     app.use(session({
         secret: 'the camp alpha',
-        resave: false,
+        resave: true,
         saveUninitiallized: true
     }));
 
@@ -27,13 +28,8 @@ const init = (db) => {
             .find({ username: username })
             .toArray()
             .then((user) => {
-                console.log(user);
-                console.log('user.password is: ' + user[0].password);
-                console.log('password is: ' + password);
-                console.log(password === user[0].password);
-                if (user && (user[0].password === password)) {
-                    console.log('here');
-                    done(null, user);
+                 if (user.length > 0 && (user[0].password === password)) {
+                    done(null, user[0]);
                 } else {
                     done(null, false);
                 }
@@ -51,7 +47,7 @@ const init = (db) => {
 
     passport.deserializeUser((userId, done) => {
         db.collection('users')
-            .find({_id: userId})
+            .find({_id: ObjectId(userId)})
             .toArray()
             .then(user => done(null, user || false))
             .catch(error => done(error, false));
