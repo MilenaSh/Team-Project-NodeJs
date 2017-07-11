@@ -1,3 +1,5 @@
+const passport = require('passport');
+
 const init = (db) => {
     const controller = {
         getHome(request, response) {
@@ -18,7 +20,11 @@ const init = (db) => {
 
         // TODO render information for the courses
         postLoginPage(request, response) {
-            return response.render('courses');
+            passport.authenticate('local', {
+                failureRedirect: '/login',
+                successRedirect: '/'
+            });
+            response.status(200).redirect('/');
         },
 
         getRegisterPage(request, response) {
@@ -28,6 +34,18 @@ const init = (db) => {
         // TODO render information for successful registration
         postRegisterPage(request, response) {
             return response.render('home');
+        },
+
+        getProfilePage(request, response) {
+            if (!request.isAuthenticated()) {
+                response.status(401).render('unauthorized');
+            }
+            else {
+                const user = request.user;
+                response.render('profile', {
+                    user: user
+                });
+            }
         }
     };
     return controller;
