@@ -1,11 +1,14 @@
-const attachTo = (app, db) => {
-    const controller = require('./controller').init(db);
+const attachTo = (app, db, passport) => {
+    const controller = require('./controller').init(db, passport);
 
     app.get('/', controller.getHome);
 
     app.get('/login', controller.getLoginPage);
 
-    app.post('/login', controller.postLoginPage);
+    app.post('/login', passport.authenticate('local', {
+                failureRedirect: '/login',
+                successRedirect: '/'
+            }));
 
     app.get('/register', controller.getRegisterPage);
 

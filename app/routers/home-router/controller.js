@@ -1,6 +1,4 @@
-const passport = require('passport');
-
-const init = (db) => {
+const init = (db, passport) => {
     const controller = {
         getHome(request, response) {
             const coursesPromise = db.collection('courses')
@@ -20,10 +18,10 @@ const init = (db) => {
 
         // TODO render information for the courses
         postLoginPage(request, response) {
-            passport.authenticate('local', {
-                failureRedirect: '/login',
-                successRedirect: '/'
-            });
+            // passport.authenticate('local', {
+            //     failureRedirect: '/login',
+            //     successRedirect: '/'
+            // });
             response.status(200).redirect('/');
         },
 

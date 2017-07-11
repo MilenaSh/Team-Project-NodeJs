@@ -23,9 +23,16 @@ const init = (db) => {
     }));
 
     const AuthStrategy = new LocalStrategy((username, password, done) => {
-        db.collection('users').find({ username: username })
-            .then(user => {
-                if (user && (user.password === password)) {
+        db.collection('users')
+            .find({ username: username })
+            .toArray()
+            .then((user) => {
+                console.log(user);
+                console.log('user.password is: ' + user[0].password);
+                console.log('password is: ' + password);
+                console.log(password === user[0].password);
+                if (user && (user[0].password === password)) {
+                    console.log('here');
                     done(null, user);
                 } else {
                     done(null, false);
@@ -45,6 +52,7 @@ const init = (db) => {
     passport.deserializeUser((userId, done) => {
         db.collection('users')
             .find({_id: userId})
+            .toArray()
             .then(user => done(null, user || false))
             .catch(error => done(error, false));
     });
@@ -56,7 +64,7 @@ const init = (db) => {
     app.use('/libs', express.static(path.join(__dirname, '../node_modules/')));
 
     require('./routers')
-        .attachTo(app, db);
+        .attachTo(app, db, passport);
 
     return Promise.resolve(app);
 };
