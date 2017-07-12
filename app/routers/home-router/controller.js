@@ -6,9 +6,11 @@ const init = (db, passport) => {
                 .toArray();
             coursesPromise.then((value) => {
                 const latestCourses = value.slice(-6).reverse();
+                const user = request.user;
                 return response.render('home', {
                     latestCourses: latestCourses,
                     isLoggedIn: request.isAuthenticated(),
+                    user: user
                 });
             });
         },
@@ -32,7 +34,7 @@ const init = (db, passport) => {
             else {
                 const user = request.user;
                 return response.render('profile', {
-                    user: user[0],
+                    user: user,
                     isLoggedIn: request.isAuthenticated()
                 });
             }

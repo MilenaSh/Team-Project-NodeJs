@@ -10,10 +10,18 @@ block content
                 .col-sm-6.col-md-4
                     .thumbnail
                         // image here
+                        img.img-responsive.img-rounded(src='http://placehold.it/600x300', alt='')
                         .caption
-                            h3 #{c.title}
-                            p #{c.lecturer}
-                            p #{c.length}
+                            h3.title-label #{c.title}
+                            p.lecturer-label #{c.lecturer}
+                            p.length-label #{c.length}
                             a(href='/courses/' + c._id)
                                 | View details
-                            // if statement here for like button on logged in users only and store users that have liked in mongodb
+                            if isLoggedIn
+                                - const canLike = c.likeByUserId.find((id) => id === String(user[0]._id))
+                                if canLike
+                                    a(id='unlike-button')
+                                        img.img-responsive.img-rounded(src='/static/images/liked.png', alt='')
+                                else
+                                    a(id='like-button')
+                                        img.img-responsive.img-rounded(src='/static/images/unliked.png', alt='')

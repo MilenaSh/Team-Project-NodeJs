@@ -24,7 +24,7 @@ mixin nav(isLoggedIn)
                     if isLoggedIn
                         li.dropdown
                             a#profile-link.dropdown-toggle(href='/profile')
-                                | Profile
+                                span= user[0].username
                         li.dropdown
                             a#logout-link.dropdown-toggle(href='/auth/logout')
                                 | Logout 
