@@ -25,11 +25,11 @@ block content
                             if isLoggedIn
                                 - const canLike = c.likeByUserId.find((id) => id === String(user[0]._id))
                                 if canLike
-                                    a(id='unlike-button')
-                                        img.img-responsive.img-rounded(src='/static/images/liked.png', alt='')
+                                    a(class='unlike-button')
+                                        img.img-responsive.img-rounded.like-image(src='/static/images/liked.png', alt='')
                                 else
-                                    a(id='like-button')
-                                        img.img-responsive.img-rounded(src='/static/images/unliked.png', alt='')
+                                    a(class='like-button')
+                                        img.img-responsive.img-rounded.unline-image(src='/static/images/unliked.png', alt='')
         .container
             h1.text-center
                 | Most popular courses

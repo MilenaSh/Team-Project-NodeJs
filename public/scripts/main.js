@@ -18,7 +18,8 @@ $('#search-bar').on('keypress', (ev) => {
     }
 });
 
-$('#like-button').on('click', (ev) => {
+$('.like-button').on('click', (ev) => {
+    const $target = $(ev.target);
     const $container = $(ev.target).parent().parent();
 
     const lecturer = $container.find('.lecturer-label').text();
@@ -40,12 +41,21 @@ $('#like-button').on('click', (ev) => {
         success: resolve,
         error: reject
     }
-    )).then(() => {
-        $container.find('a img').attr('src', '/static/images/unliked.png');
-    });
+    ));
+
+    $target.attr('src', '/static/images/unliked.png');
+    $container.find('.like-button').attr('class', 'unlike-button');
+
+
+    // $target.click(function () {
+    //     $target.one('load', function () {
+            
+    //     }).attr('src', '/static/images/unliked.png');
+    // });
 });
 
-$('#unlike-button').on('click', (ev) => {
+$('.unlike-button').on('click', (ev) => {
+    const $target = $(ev.target);
     const $container = $(ev.target).parent().parent();
 
     const lecturer = $container.find('.lecturer-label').text();
@@ -67,7 +77,8 @@ $('#unlike-button').on('click', (ev) => {
         success: resolve,
         error: reject
     }
-    )).then(() => {
-        $container.find('a img').attr('src', '/static/images/liked.png');
-    });
+    ));
+
+    $target.attr('src', '/static/images/liked.png');
+    $container.find('.unlike-button').attr('class', 'like-button');
 });
