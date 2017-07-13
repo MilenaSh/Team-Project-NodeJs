@@ -1,10 +1,20 @@
 const gulp = require('gulp');
+const uglify = require('gulp-uglify');
+const rename = require('gulp-rename');
 
-<<<<<<< HEAD
-gulp.task('task-name', function() {
-    console.log('Test success!');
-=======
+
 const { config } = require('./app/config');
+
+
+// scripts task
+
+gulp.task('scripts', function() {
+    gulp.src(['public/scripts/main.js'])
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(uglify())
+        .pipe(gulp.dest('public/scripts'));
+});
+
 
 gulp.task('start-server', () => {
     return Promise.resolve()
@@ -16,5 +26,8 @@ gulp.task('start-server', () => {
                 config.port,
                 () => console.log(`Server running at localhost:${config.port}`));
         });
->>>>>>> c221db561cf8b551f6c6ed08115c0e565ffd5ffb
 });
+
+// default task
+
+gulp.task('default', ['start-server', 'scripts']);

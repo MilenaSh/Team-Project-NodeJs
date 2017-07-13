@@ -20,7 +20,7 @@ const init = (db) => {
     app.use(session({
         secret: 'the camp alpha',
         resave: true,
-        saveUninitiallized: true
+        saveUninitiallized: true,
     }));
 
     const AuthStrategy = new LocalStrategy((username, password, done) => {
@@ -28,7 +28,7 @@ const init = (db) => {
             .find({ username: username })
             .toArray()
             .then((user) => {
-                 if (user.length > 0 && (user[0].password === password)) {
+                if (user.length > 0 && (user[0].password === password)) {
                     done(null, user[0]);
                 } else {
                     done(null, false);
@@ -47,7 +47,7 @@ const init = (db) => {
 
     passport.deserializeUser((userId, done) => {
         db.collection('users')
-            .find({_id: ObjectId(userId)})
+            .find({ _id: ObjectId(userId) })
             .toArray()
             .then(user => done(null, user || false))
             .catch(error => done(error, false));
