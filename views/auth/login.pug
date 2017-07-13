@@ -5,15 +5,13 @@ block scripts
     script(src='/static/scripts/login.js')
 block content
     .login-register-form
-        .login
+        form.login(method="POST", action="/auth/login")
             .login-header
                 h1#login-sign Login
             .login-form
-                h3 Username:
-                input(type='text', placeholder='Username')
+                input(name="username" type='text', placeholder='Username')
                 br
-                h3 Password:
-                input(type='password', placeholder='Password')
+                input(name="password" type='password', placeholder='Password')
                 br
-                input#login-button.login-button(type='button', value='Login')
+                input#login-button.login-button(type='submit', value='Login')
             

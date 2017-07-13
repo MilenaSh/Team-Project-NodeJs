@@ -1,23 +1,43 @@
-const init = (db) => {
+const init = (db, passport) => {
     const controller = {
         getHome(request, response) {
-            return response.render('home');
-        },
-        getCourses(request, response) {
             const coursesPromise = db.collection('courses')
                 .find()
                 .toArray();
             coursesPromise.then((value) => {
-                return response.render('courses', {
-                    courses: value
+                const latestCourses = value.slice(-6).reverse();
+                const user = request.user;
+                return response.render('home', {
+                    latestCourses: latestCourses,
+                    isLoggedIn: request.isAuthenticated(),
+                    user: user
                 });
             });
         },
+
         getLoginPage(request, response) {
-            return response.render('auth/login');
+            return response.render('auth/login', {
+                isLoggedIn: request.isAuthenticated()
+            });
         },
+
         getRegisterPage(request, response) {
-            return response.render('auth/register');
+            return response.render('auth/register', {
+                isLoggedIn: request.isAuthenticated()
+            });
+        },
+
+        getProfilePage(request, response) {
+            if (!request.isAuthenticated()) {
+                return response.status(401).render('unauthorized');
+            }
+            else {
+                const user = request.user;
+                return response.render('profile', {
+                    user: user,
+                    isLoggedIn: request.isAuthenticated()
+                });
+            }
         }
     };
     return controller;

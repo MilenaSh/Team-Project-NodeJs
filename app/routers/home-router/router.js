@@ -1,13 +1,13 @@
-const attachTo = (app, db) => {
-    const controller = require('./controller').init(db);
+const attachTo = (app, db, passport) => {
+    const controller = require('./controller').init(db, passport);
 
     app.get('/', controller.getHome);
-
-    app.get('/courses', controller.getCourses);
 
     app.get('/login', controller.getLoginPage);
 
     app.get('/register', controller.getRegisterPage);
+
+    app.get('/profile', controller.getProfilePage);
 };
 
 module.exports = { attachTo };

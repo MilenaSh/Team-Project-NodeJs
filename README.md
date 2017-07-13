@@ -52,4 +52,9 @@ So far and current questions:
 - use of npm (not yarn)
 - use of isomorphic-fetch ? - to check if it works for us
 
+
+## To Fix:
+
+Search bar sends empty result on enter key press
+
   
