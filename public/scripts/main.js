@@ -18,7 +18,7 @@ $('#search-bar').on('keypress', (ev) => {
     }
 });
 
-$('.like-button').on('click', (ev) => {
+$('body').on('click', '.like-button', (ev) => {
     const $target = $(ev.target);
     const $container = $(ev.target).parent().parent();
 
@@ -43,18 +43,20 @@ $('.like-button').on('click', (ev) => {
     }
     ));
 
-    $target.attr('src', '/static/images/unliked.png');
-    $container.find('.like-button').attr('class', 'unlike-button');
+    const newImg = $('<img>')
+        .addClass('img-responsive img-rounded unlike-image')
+        .attr('src', '/static/images/liked.png');
 
+    const newA = $('<a>')
+        .addClass('unlike-button')
+        .append(newImg);
+    console.log(newA);
 
-    // $target.click(function () {
-    //     $target.one('load', function () {
-            
-    //     }).attr('src', '/static/images/unliked.png');
-    // });
+    $container.children('a:last-of-type').remove();
+    $container.append(newA);
 });
 
-$('.unlike-button').on('click', (ev) => {
+$('body').on('click', '.unlike-button', (ev) => {
     const $target = $(ev.target);
     const $container = $(ev.target).parent().parent();
 
@@ -79,6 +81,15 @@ $('.unlike-button').on('click', (ev) => {
     }
     ));
 
-    $target.attr('src', '/static/images/liked.png');
-    $container.find('.unlike-button').attr('class', 'like-button');
+    const newImg = $('<img>')
+        .addClass('img-responsive img-rounded like-image')
+        .attr('src', '/static/images/unliked.png');
+
+    const newA = $('<a>')
+        .addClass('like-button')
+        .append(newImg);
+    console.log(newA);
+
+    $container.children('a:last-of-type').remove();
+    $container.append(newA);
 });
