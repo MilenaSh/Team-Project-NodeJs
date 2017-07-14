@@ -44,6 +44,7 @@ const passportSetUp = (app, db) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
+    // add Promise.resolve if needed
     return passport;
 };
 

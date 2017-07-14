@@ -4,9 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-//const session = require('express-session');
 const passport = require('passport');
-//const LocalStrategy = require('passport-local');
 const ObjectId = require('mongodb').ObjectID;
 
 const init = (db) => {
@@ -18,6 +16,7 @@ const init = (db) => {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
 
+    // add .then if needed
     const passport = require('./passport').passportSetUp(app, db);
 
     app.use('/static', express.static(path.join(__dirname, '../public/')));
