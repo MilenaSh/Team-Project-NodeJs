@@ -1,30 +1,50 @@
+const ObjectId = require('mongodb').ObjectID;
 const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const session = require('express-session');
 
-// get user data
-//const data = require('../../data');
+const passportSetUp = (app, db) => {
 
-module.exports = (app, data) => {
-    passport.serializeUser((user, done) => {
-        if (user) {
-            done(null, user.id);
-        }
-    });
+    app.use(session({
+        secret: 'the camp alpha',
+        resave: true,
+        saveUninitiallized: true,
+    }));
 
-    passport.deserializeUser((userId, done) => {
-        data
-            .findById(userId)
+    const AuthStrategy = new LocalStrategy((username, password, done) => {
+        db.collection('users')
+            .find({ username: username })
+            .toArray()
             .then((user) => {
-                if (user) {
-                    return done(null, user);
+                if (user.length > 0 && (user[0].password === password)) {
+                    done(null, user[0]);
+                } else {
+                    done(null, false);
                 }
-
-                return done(null, false);
             })
             .catch(error => done(error, false));
     });
 
-    require('./local-strategy')(passport, data);
+    passport.use(AuthStrategy);
+
+    passport.serializeUser((user, done) => {
+        if (user) {
+            done(null, user._id);
+        }
+    });
+
+    passport.deserializeUser((userId, done) => {
+        db.collection('users')
+            .find({ _id: ObjectId(userId) })
+            .toArray()
+            .then(user => done(null, user || false))
+            .catch(error => done(error, false));
+    });
 
     app.use(passport.initialize());
     app.use(passport.session());
+
+    return passport;
 };
+
+module.exports = { passportSetUp };
