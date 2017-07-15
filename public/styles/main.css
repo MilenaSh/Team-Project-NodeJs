@@ -134,7 +134,7 @@ main {
 #myLogo {
     max-width: 100px;
     max-height: 80px;
-    margin-top: -15px;
+    margin-top: -12px;
 }
 
 .navbar-brand {
@@ -186,11 +186,19 @@ main {
     box-shadow: none;
 }
 
-#login-link:hover, #logout-link:hover, #register-link:hover, #profile-link:hover, #courses-nav:hover {
+#login-link:hover,
+#logout-link:hover,
+#register-link:hover,
+#profile-link:hover,
+#courses-nav:hover {
     color: #398CD2;
 }
 
-#login-link, #logout-link, #register-link, #profile-link, #courses-nav {
+#login-link,
+#logout-link,
+#register-link,
+#profile-link,
+#courses-nav {
     color: #1F4838;
 }
 

@@ -18,6 +18,7 @@ const { config } = require('./app/config');
 
 gulp.task('scripts', function() {
     gulp.src(['public/scripts/login.js', '!public/scripts/**/*.min.js'])
+        .pipe(plumber())
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify())
         .pipe(gulp.dest('public/scripts'));

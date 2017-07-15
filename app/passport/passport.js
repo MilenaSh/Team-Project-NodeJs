@@ -4,7 +4,6 @@ const LocalStrategy = require('passport-local');
 const session = require('express-session');
 
 const passportSetUp = (app, db) => {
-
     app.use(session({
         secret: 'the camp alpha',
         resave: true,
