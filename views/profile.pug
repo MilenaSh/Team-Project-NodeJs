@@ -5,4 +5,14 @@ block nav
     +nav(isLoggedIn)
 block content
     main
-        p Welcome, #{user[0].username}
+        .container
+            .row
+                .col-md-8
+                    img.img-responsive.img-rounded(src='http://placehold.it/350x350', alt='')
+                .col-md-4
+                    h1 #{user[0].username}'s profile
+            hr
+            .row
+                .col-lg-12
+                    .well.text-center.lecturer-label
+                        | bla

@@ -14,12 +14,29 @@ block content
                     h1 #{selectedCourse.title}
                     p
                         | Course description here
-                    if isLoggedIn
-                        a.btn.btn-primary.btn-lg(href='#') Enroll
+                    -
+                        let canEnroll;
+                        if (isLoggedIn) {
+                            canEnroll = true;
+                            const courseID = String(course[0]._id);
+                            const currentUser = user[0];
+                            currentUser.enrolledCourseIDs.forEach((cID) => {
+                                if (cID === courseID) {
+                                    canEnroll = false;
+                                }
+                            });
+                        }
+                    if (isLoggedIn && canEnroll) 
+                        a.btn.btn-primary.btn-lg.enroll-button Enroll
+                    else if (isLoggedIn && !canEnroll)
+                        h3 You have already enrolled for this course!
+                        a.btn.btn-primary.btn-lg.disenroll-button Disenroll
+                    else
+                        h3 Login to enroll for this course!
             hr
             .row
                 .col-lg-12
-                    .well.text-center
+                    .well.text-center.lecturer-label
                         | Course is taught by #{selectedCourse.lecturer}
             .row
                 .col-md-4
