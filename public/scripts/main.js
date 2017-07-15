@@ -114,5 +114,25 @@ $('body').on('click', '.enroll-button', (ev) => {
         error: reject
     }
     ));
+});
 
+$('body').on('click', '.disenroll-button', (ev) => {
+    const courseID = window.location.href.split('/').pop();
+
+    const obj = {
+        courseID: courseID
+    };
+
+    const data = JSON.stringify(obj);
+
+    const promise = new Promise((resolve, reject) => $.ajax({
+        url: '/courses/disenroll',
+        method: 'POST',
+        data: data,
+        headers: {},
+        contentType: 'application/json',
+        success: resolve,
+        error: reject
+    }
+    ));
 });

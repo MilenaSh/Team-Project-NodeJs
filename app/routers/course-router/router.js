@@ -3,6 +3,8 @@ const attachTo = (app, db) => {
 
     app.post('/courses/enroll', controller.enrollCourse);
 
+    app.post('/courses/disenroll', controller.disEnrollCourse);
+
     app.get('/courses/:id', controller.getCourseById);
 
     app.get('/courses', controller.getCourses);

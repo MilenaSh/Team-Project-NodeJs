@@ -76,6 +76,22 @@ const init = (db) => {
                         enrolledCourseIDs: courseID
                     }
                 });
+            response.status(200).redirect('/courses/' + courseID);
+        },
+
+        disEnrollCourse(request, response) {
+            const userID = request.user[0]._id;
+            const courseID = request.body.courseID;
+            
+            db.collection('users')
+                .update({
+                    _id: userID
+                }, {
+                    $pull: {
+                        enrolledCourseIDs: courseID
+                    }
+                });
+            response.status(200).redirect('/courses/' + courseID);
         }
     };
     return controller;
