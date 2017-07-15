@@ -143,12 +143,21 @@ main {
 
 #my-navbar {
     background-color: #FFFFFF;
+    border-bottom: 1px solid #CAD7D3;
 }
+
+
+/*#sandwitch {
+    background-color: white;
+    border-color: black;
+}*/
 
 .jumbotron {
     background-image: url('../images/jumbotron.jpg');
     background-size: cover;
     height: 300px;
+    color: #1F4838;
+    ;
 }
 
 
@@ -192,6 +201,7 @@ main {
 #profile-link:hover,
 #courses-nav:hover {
     color: #398CD2;
+    background-color: #CAD7D3;
 }
 
 #login-link,
