@@ -6,16 +6,22 @@ const plumber = require('gulp-plumber');
 
 const { config } = require('./app/config');
 
+// TODO
+// scripts task - still not working etirely
 
-// scripts task
+// gulp.task('scripts', function() {
+//     gulp.src(['public/scripts/**/*.js', '!public/scripts/**/*.min.js'])
+//         .pipe(rename({ suffix: '.min' }))
+//         .pipe(uglify())
+//         .pipe(gulp.dest('public/scripts'));
+// });
 
 gulp.task('scripts', function() {
-    gulp.src(['public/scripts/*.js'])
+    gulp.src(['public/scripts/login.js', '!public/scripts/**/*.min.js'])
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify())
         .pipe(gulp.dest('public/scripts'));
 });
-
 
 gulp.task('start-server', () => {
     return Promise.resolve()
