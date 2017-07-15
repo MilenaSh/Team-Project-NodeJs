@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
+const plumber = require('gulp-plumber');
 
 
 const { config } = require('./app/config');
@@ -9,7 +10,7 @@ const { config } = require('./app/config');
 // scripts task
 
 gulp.task('scripts', function() {
-    gulp.src(['public/scripts/main.js'])
+    gulp.src(['public/scripts/*.js'])
         .pipe(rename({ suffix: '.min' }))
         .pipe(uglify())
         .pipe(gulp.dest('public/scripts'));
@@ -30,4 +31,4 @@ gulp.task('start-server', () => {
 
 // default task
 
-gulp.task('default', ['start-server', 'scripts']);
+gulp.task('default', ['scripts']);
