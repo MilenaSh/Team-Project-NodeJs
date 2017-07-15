@@ -8,7 +8,6 @@ const init = (db) => {
                 .find({ "_id": ObjectId(id) })
                 .toArray();
 
-            // TODO: add logged in bool variable to determine whether to show enroll button or not
             selectedCoursePromise
                 .then((value) => {
                     response.render('selected-course', {
@@ -64,6 +63,20 @@ const init = (db) => {
                     }
                 });
         },
+
+        enrollCourse(request, response) {
+            const userID = request.user[0]._id;
+            const courseID = request.body.courseID;
+            
+            db.collection('users')
+                .update({
+                    _id: userID
+                }, {
+                    $push: {
+                        enrolledCourseIDs: courseID
+                    }
+                });
+        }
     };
     return controller;
 };
