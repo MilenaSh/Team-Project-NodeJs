@@ -1,4 +1,5 @@
 const init = (db, passport) => {
+    const ObjectId = require('mongodb').ObjectID;
     const controller = {
         getHome(request, response) {
             const coursesPromise = db.collection('courses')
@@ -33,10 +34,23 @@ const init = (db, passport) => {
             }
             else {
                 const user = request.user;
-                return response.render('profile', {
-                    user: user,
-                    isLoggedIn: request.isAuthenticated()
-                });
+                const enrolledCourseIDs = user[0].enrolledCourseIDs;
+                db.collection('courses')
+                    .find({
+                        _id: {
+                            $in: enrolledCourseIDs.map((id) => {
+                                return ObjectId(id);
+                            })
+                        }
+                    })
+                    .toArray()
+                    .then((courses) => {
+                        return response.render('profile', {
+                            user: user,
+                            isLoggedIn: request.isAuthenticated(),
+                            enrolledCourses: courses
+                        });
+                    });
             }
         }
     };
