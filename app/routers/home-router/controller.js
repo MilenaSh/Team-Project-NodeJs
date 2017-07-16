@@ -6,12 +6,18 @@ const init = (db, passport) => {
                 .find()
                 .toArray();
             coursesPromise.then((value) => {
+                const mostPopularCourses = value
+                    .sort((x, y) => {
+                        return y.likeByUserId.length - x.likeByUserId.length;
+                    })
+                    .slice(0, 6);
                 const latestCourses = value.slice(-6).reverse();
                 const user = request.user;
                 return response.render('home', {
                     latestCourses: latestCourses,
                     isLoggedIn: request.isAuthenticated(),
-                    user: user
+                    user: user,
+                    mostPopularCourses: mostPopularCourses
                 });
             });
         },
