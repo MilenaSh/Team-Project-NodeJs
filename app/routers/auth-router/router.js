@@ -7,9 +7,7 @@ const attachTo = (app, db, passport) => {
         session: true,
     }));
 
-    app.post('/auth/register', () => {
-
-    });
+    app.post('/auth/register', controller.register);
 
     app.get('/auth/logout', controller.logout);
 };

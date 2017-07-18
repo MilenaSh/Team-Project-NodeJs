@@ -136,11 +136,13 @@ main {
     }
 }
 
-#login-sign {
+#login-sign,
+#register-sign {
     color: black;
 }
 
-#login-button {
+#login-button,
+#register-button {
     background-color: #00F2B6;
 }
 

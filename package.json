@@ -19,6 +19,7 @@
     "homepage": "https://github.com/MilenaSh/Team-Project-NodeJs#readme",
     "dependencies": {
         "babel-eslint": "^7.2.3",
+        "bcrypt": "^1.0.2",
         "body-parser": "^1.17.2",
         "bootstrap": "^3.3.7",
         "cookie-parser": "^1.4.3",
