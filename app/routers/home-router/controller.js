@@ -40,23 +40,30 @@ const init = (db, passport) => {
             }
             else {
                 const user = request.user;
-                const enrolledCourseIDs = user[0].enrolledCourseIDs;
-                db.collection('courses')
-                    .find({
-                        _id: {
-                            $in: enrolledCourseIDs.map((id) => {
-                                return ObjectId(id);
-                            })
-                        }
-                    })
-                    .toArray()
-                    .then((courses) => {
-                        return response.render('profile', {
-                            user: user,
-                            isLoggedIn: request.isAuthenticated(),
-                            enrolledCourses: courses
-                        });
-                    });
+                const enrolledCourses = user[0].enrolledCourses;
+
+                return response.render('profile', {
+                    user: user,
+                    isLoggedIn: request.isAuthenticated(),
+                    enrolledCourses: enrolledCourses,
+                });
+
+                // db.collection('courses')
+                //     .find({
+                //         _id: {
+                //             $in: enrolledCourseIDs.map((id) => {
+                //                 return ObjectId(id);
+                //             })
+                //         }
+                //     })
+                //     .toArray()
+                //     .then((courses) => {
+                //         return response.render('profile', {
+                //             user: user,
+                //             isLoggedIn: request.isAuthenticated(),
+                //             enrolledCourses: courses
+                //         });
+                //     });
             }
         }
     };
