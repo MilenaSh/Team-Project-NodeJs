@@ -114,6 +114,11 @@ $('body').on('click', '.enroll-button', (ev) => {
         error: reject
     }
     ));
+
+    const $target = $(ev.target);
+    $target.removeClass('enroll-button');
+    $target.addClass('disenroll-button');
+    $target.text('Disenroll');
 });
 
 $('body').on('click', '.disenroll-button', (ev) => {
@@ -135,4 +140,10 @@ $('body').on('click', '.disenroll-button', (ev) => {
         error: reject
     }
     ));
+
+    const $target = $(ev.target);
+    $target.removeClass('disenroll-button');
+    $target.addClass('enroll-button');
+    $target.text('Enroll');
+    $target.prev().remove();
 });
