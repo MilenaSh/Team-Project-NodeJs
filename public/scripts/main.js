@@ -2,17 +2,19 @@ $('#search-button').on('click', () => {
     let text = $('#search-bar').val();
 
     text = text.split(' ').join('&');
-    const newURL = window.location.href.split('/').slice(0, 3).join('/') + '/courses?title=' + text;
+    const newURL = window.location.href.split('/')
+        .slice(0, 3).join('/') + '/courses?title=' + text;
 
     window.location.href = newURL;
 });
 
 $('#search-bar').on('keypress', (ev) => {
-    if (ev.keyCode == 13) {
+    if (ev.keyCode === 13) {
         let text = $('#search-bar').val();
 
         text = text.split(' ').join('&');
-        const newURL = window.location.href.split('/').slice(0, 3).join('/') + '/courses?title=' + text;
+        const newURL = window.location.href.split('/').slice(0, 3)
+            .join('/') + '/courses?title=' + text;
 
         window.location.href = newURL;
     }
@@ -27,7 +29,7 @@ $('body').on('click', '.like-button', (ev) => {
 
     const obj = {
         lecturer: lecturer,
-        title: title
+        title: title,
     };
 
     const data = JSON.stringify(obj);
@@ -39,7 +41,7 @@ $('body').on('click', '.like-button', (ev) => {
         headers: {},
         contentType: 'application/json',
         success: resolve,
-        error: reject
+        error: reject,
     }
     ));
 
@@ -50,7 +52,6 @@ $('body').on('click', '.like-button', (ev) => {
     const newA = $('<a>')
         .addClass('unlike-button')
         .append(newImg);
-    console.log(newA);
 
     $container.children('a:last-of-type').remove();
     $container.append(newA);
@@ -65,7 +66,7 @@ $('body').on('click', '.unlike-button', (ev) => {
 
     const obj = {
         lecturer: lecturer,
-        title: title
+        title: title,
     };
 
     const data = JSON.stringify(obj);
@@ -77,7 +78,7 @@ $('body').on('click', '.unlike-button', (ev) => {
         headers: {},
         contentType: 'application/json',
         success: resolve,
-        error: reject
+        error: reject,
     }
     ));
 
@@ -99,7 +100,7 @@ $('body').on('click', '.enroll-button', (ev) => {
     const courseID = window.location.href.split('/').pop();
 
     const obj = {
-        courseID: courseID
+        courseID: courseID,
     };
 
     const data = JSON.stringify(obj);
@@ -111,7 +112,7 @@ $('body').on('click', '.enroll-button', (ev) => {
         headers: {},
         contentType: 'application/json',
         success: resolve,
-        error: reject
+        error: reject,
     }
     ));
 
@@ -125,7 +126,7 @@ $('body').on('click', '.disenroll-button', (ev) => {
     const courseID = window.location.href.split('/').pop();
 
     const obj = {
-        courseID: courseID
+        courseID: courseID,
     };
 
     const data = JSON.stringify(obj);
@@ -137,7 +138,7 @@ $('body').on('click', '.disenroll-button', (ev) => {
         headers: {},
         contentType: 'application/json',
         success: resolve,
-        error: reject
+        error: reject,
     }
     ));
 

@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const passport = require('passport');
+// const passport = require('passport');
 const ObjectId = require('mongodb').ObjectID;
 
 const init = (db) => {

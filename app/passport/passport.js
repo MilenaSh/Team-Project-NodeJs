@@ -1,4 +1,4 @@
-const ObjectId = require('mongodb').ObjectID;
+const objectId = require('mongodb').ObjectID;
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
@@ -21,7 +21,7 @@ const passportSetUp = (app, db) => {
                     done(null, false);
                 }
             })
-            .catch(error => done(error, false));
+            .catch((error) => done(error, false));
     });
 
     passport.use(AuthStrategy);
@@ -34,10 +34,10 @@ const passportSetUp = (app, db) => {
 
     passport.deserializeUser((userId, done) => {
         db.collection('users')
-            .find({ _id: ObjectId(userId) })
+            .find({ _id: objectId(userId) })
             .toArray()
-            .then(user => done(null, user || false))
-            .catch(error => done(error, false));
+            .then((user) => done(null, user || false))
+            .catch((error) => done(error, false));
     });
 
     app.use(passport.initialize());
