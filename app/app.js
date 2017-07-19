@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const flash = require('connect-flash');
 // const passport = require('passport');
 const ObjectId = require('mongodb').ObjectID;
 
@@ -15,6 +16,7 @@ const init = (db) => {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
+    app.use(flash());
 
     // add .then if needed
     const passport = require('./passport').passportSetUp(app, db);

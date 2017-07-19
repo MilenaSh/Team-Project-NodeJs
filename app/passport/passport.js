@@ -8,7 +8,7 @@ const saltRounds = 10;
 
 // Generates hash using bCrypt
 const createHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(saltRounds), null);
 };
 
 const passportSetUp = (app, db) => {
@@ -42,7 +42,8 @@ const passportSetUp = (app, db) => {
                 .then((user) => {
                     if (user) {
                         console.log('User already exists');
-                        done(null, false);
+                        done(null, false,
+                            request.flash('message', 'Username already exists!'));
                     } else {
                         const newUser = {
                             fullname: request.body.fullname,
@@ -52,7 +53,8 @@ const passportSetUp = (app, db) => {
                         };
                         db.collection('users').insert(newUser);
                         console.log('User registration successful');
-                        done(null, newUser);
+                        done(null, newUser,
+                            request.flash('message', 'You have registered successfully!'));
                     }
                 })
                 .catch((error) => done(error, false));
