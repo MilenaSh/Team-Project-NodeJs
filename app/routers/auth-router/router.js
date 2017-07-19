@@ -7,7 +7,10 @@ const attachTo = (app, db, passport) => {
         session: true,
     }));
 
-    app.post('/auth/register', controller.register);
+    app.post('/auth/register', passport.authenticate('signup', {
+        failureRedirect: '/register',
+        successRedirect: '/',
+    }));
 
     app.get('/auth/logout', controller.logout);
 };
