@@ -25,7 +25,7 @@ const init = (data) => {
     app.use('/libs', express.static(path.join(__dirname, '../node_modules/')));
 
     require('./routers')
-        .attachTo(app, db, passport);
+        .attachTo(app, db, passport, data);
 
     return Promise.resolve(app);
 };

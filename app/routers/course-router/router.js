@@ -1,5 +1,5 @@
-const attachTo = (app, db) => {
-    const controller = require('./controller').init(db);
+const attachTo = (app, db, passport, data) => {
+    const controller = require('./controller').init(db, data);
 
     app.post('/courses/enroll', controller.enrollCourse);
 
@@ -12,7 +12,6 @@ const attachTo = (app, db) => {
     app.post('/courses/likeCourse', controller.likeCourse);
 
     app.post('/courses/unlikeCourse', controller.unlikeCourse);
-    
 };
 
 module.exports = { attachTo };
