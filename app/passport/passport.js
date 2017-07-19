@@ -3,7 +3,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
 
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
 
 // Generates hash using bCrypt
@@ -23,7 +23,8 @@ const passportSetUp = (app, db) => {
             .find({ username: username })
             .toArray()
             .then((user) => {
-                if (user.length > 0 && (user[0].password === password)) {
+                if (user.length > 0 &&
+                    bcrypt.compareSync(password, user[0].password)) {
                     done(null, user[0]);
                 } else {
                     done(null, false);
@@ -46,7 +47,7 @@ const passportSetUp = (app, db) => {
                         const newUser = {
                             fullname: request.body.fullname,
                             username: username,
-                            password: password,
+                            password: createHash(password),
                             enrolledCourses: [],
                         };
                         db.collection('users').insert(newUser);
