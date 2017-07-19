@@ -7,8 +7,10 @@ const cookieParser = require('cookie-parser');
 // const passport = require('passport');
 const ObjectId = require('mongodb').ObjectID;
 
-const init = (db) => {
+const init = (data) => {
     const app = express();
+
+    const db = data.db;
 
     app.set('view engine', 'pug');
 

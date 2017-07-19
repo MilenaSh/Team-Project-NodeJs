@@ -1,16 +1,18 @@
 const init = (db) => {
+    const data = {
+        db: db,
+    };
+
     const getCourses = () => {
-        // let filter = { "title":
-        // { $regex: new RegExp(request.query.title, "i") } };
         const coursesPromise = db.collection('courses')
             .find()
-            .toArray();
-        coursesPromise.then((collection) => {
+            .toArray()
+            .then((collection) => {
             return Promise.resolve(collection);
         });
     };
 
-    return Promise.resolve(db);
+    return Promise.resolve(data);
 };
 
 module.exports = { init };

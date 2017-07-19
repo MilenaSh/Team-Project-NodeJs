@@ -17,20 +17,20 @@ const init = (db, passport) => {
                     latestCourses: latestCourses,
                     isLoggedIn: request.isAuthenticated(),
                     user: user,
-                    mostPopularCourses: mostPopularCourses
+                    mostPopularCourses: mostPopularCourses,
                 });
             });
         },
 
         getLoginPage(request, response) {
             return response.render('auth/login', {
-                isLoggedIn: request.isAuthenticated()
+                isLoggedIn: request.isAuthenticated(),
             });
         },
 
         getRegisterPage(request, response) {
             return response.render('auth/register', {
-                isLoggedIn: request.isAuthenticated()
+                isLoggedIn: request.isAuthenticated(),
             });
         },
 
@@ -38,38 +38,18 @@ const init = (db, passport) => {
             if (!request.isAuthenticated()) {
                 return response.status(401).render('unauthorized');
             }
-            else {
-                const user = request.user;
-                const enrolledCourses = user[0].enrolledCourses;
+            const user = request.user;
+            const enrolledCourses = user[0].enrolledCourses;
 
-                return response.render('profile', {
-                    user: user,
-                    isLoggedIn: request.isAuthenticated(),
-                    enrolledCourses: enrolledCourses,
-                });
-
-                // db.collection('courses')
-                //     .find({
-                //         _id: {
-                //             $in: enrolledCourseIDs.map((id) => {
-                //                 return ObjectId(id);
-                //             })
-                //         }
-                //     })
-                //     .toArray()
-                //     .then((courses) => {
-                //         return response.render('profile', {
-                //             user: user,
-                //             isLoggedIn: request.isAuthenticated(),
-                //             enrolledCourses: courses
-                //         });
-                //     });
-            }
-        }
+            return response.render('profile', {
+                user: user,
+                isLoggedIn: request.isAuthenticated(),
+                enrolledCourses: enrolledCourses,
+            });
+        },
     };
     return controller;
 };
-
 
 
 module.exports = { init };
