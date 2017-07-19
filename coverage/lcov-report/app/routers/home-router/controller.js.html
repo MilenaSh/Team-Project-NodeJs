@@ -98,26 +98,7 @@
 53
 54
 55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+56</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -157,7 +138,6 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -168,30 +148,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >const init = (db, passport) =&gt; {</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >const init = (db, passport) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const ObjectId = require('mongodb').ObjectID;</span>
 <span class="cstat-no" title="statement not covered" >    const controller = {</span>
         getHome<span class="fstat-no" title="function not covered" >(request, response) {</span>
@@ -210,20 +172,20 @@
                     latestCourses: latestCourses,
                     isLoggedIn: request.isAuthenticated(),
                     user: user,
-                    mostPopularCourses: mostPopularCourses
+                    mostPopularCourses: mostPopularCourses,
                 });
             });
         },
 &nbsp;
         getLoginPage<span class="fstat-no" title="function not covered" >(request, response) {</span>
 <span class="cstat-no" title="statement not covered" >            return response.render('auth/login', {</span>
-                isLoggedIn: request.isAuthenticated()
+                isLoggedIn: request.isAuthenticated(),
             });
         },
 &nbsp;
         getRegisterPage<span class="fstat-no" title="function not covered" >(request, response) {</span>
 <span class="cstat-no" title="statement not covered" >            return response.render('auth/register', {</span>
-                isLoggedIn: request.isAuthenticated()
+                isLoggedIn: request.isAuthenticated(),
             });
         },
 &nbsp;
@@ -231,47 +193,28 @@
 <span class="cstat-no" title="statement not covered" >            if (!request.isAuthenticated()) {</span>
 <span class="cstat-no" title="statement not covered" >                return response.status(401).render('unauthorized');</span>
             }
-            else {
-<span class="cstat-no" title="statement not covered" >                const user = request.user;</span>
-<span class="cstat-no" title="statement not covered" >                const enrolledCourses = user[0].enrolledCourses;</span>
+<span class="cstat-no" title="statement not covered" >            const user = request.user;</span>
+<span class="cstat-no" title="statement not covered" >            const enrolledCourses = user[0].enrolledCourses;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >                return response.render('profile', {</span>
-                    user: user,
-                    isLoggedIn: request.isAuthenticated(),
-                    enrolledCourses: enrolledCourses,
-                });
-&nbsp;
-                // db.collection('courses')
-                //     .find({
-                //         _id: {
-                //             $in: enrolledCourseIDs.map((id) =&gt; {
-                //                 return ObjectId(id);
-                //             })
-                //         }
-                //     })
-                //     .toArray()
-                //     .then((courses) =&gt; {
-                //         return response.render('profile', {
-                //             user: user,
-                //             isLoggedIn: request.isAuthenticated(),
-                //             enrolledCourses: courses
-                //         });
-                //     });
-            }
-        }
+<span class="cstat-no" title="statement not covered" >            return response.render('profile', {</span>
+                user: user,
+                isLoggedIn: request.isAuthenticated(),
+                enrolledCourses: enrolledCourses,
+            });
+        },
     };
 <span class="cstat-no" title="statement not covered" >    return controller;</span>
 };
 &nbsp;
 &nbsp;
-&nbsp;
-<span class="cstat-no" title="statement not covered" >module.exports = { init };</span></pre></td></tr>
+<span class="cstat-no" title="statement not covered" >module.exports = { init };</span>
+&nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 19 2017 14:50:02 GMT+0300 (FLE Summer Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Jul 19 2017 15:19:29 GMT+0300 (GTB Summer Time)
 </div>
 </div>
 <script src="../../../prettify.js"></script>

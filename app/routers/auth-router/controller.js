@@ -1,4 +1,4 @@
-const init = (db, passport) => {
+const init = (db, data) => {
     const controller = {
         logout(request, response) {
             request.logout();

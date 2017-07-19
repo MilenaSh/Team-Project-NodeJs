@@ -8,8 +8,10 @@ const flash = require('connect-flash');
 // const passport = require('passport');
 const ObjectId = require('mongodb').ObjectID;
 
-const init = (db) => {
+const init = (data) => {
     const app = express();
+
+    const db = data.db;
 
     app.set('view engine', 'pug');
 
@@ -25,7 +27,7 @@ const init = (db) => {
     app.use('/libs', express.static(path.join(__dirname, '../node_modules/')));
 
     require('./routers')
-        .attachTo(app, db, passport);
+        .attachTo(app, db, passport, data);
 
     return Promise.resolve(app);
 };
