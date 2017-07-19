@@ -2,6 +2,8 @@ const gulp = require('gulp');
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const plumber = require('gulp-plumber');
+const mocha = require('gulp-mocha');
+const istanbul = require('gulp-istanbul');
 
 
 const { config } = require('./app/config');
@@ -34,6 +36,27 @@ gulp.task('start-server', () => {
                 config.port,
                 () => console.log(`Server running at localhost:${config.port}`));
         });
+});
+
+gulp.task('pre-test', () => {
+    return gulp.src([
+            './app/**/*.js',
+            './data/**/*.js',
+            './db/**/*.js',
+        ])
+        .pipe(istanbul({
+            includeUntested: true,
+        }))
+        .pipe(istanbul.hookRequire());
+});
+
+gulp.task('tests:unit', ['pre-test'], () => {
+    return gulp.src('./tests/unitTests/**/*.js')
+        .pipe(mocha({
+            reporter: 'spec',
+            // reporter: 'landing'
+        }))
+        .pipe(istanbul.writeReports());
 });
 
 // default task
