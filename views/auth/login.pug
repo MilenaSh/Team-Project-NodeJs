@@ -1,11 +1,9 @@
 extends ../layout
 block styles
     link(href='https://fonts.googleapis.com/css?family=Ubuntu:500', rel='stylesheet', type='text/css')
-block scripts
-    script(src='/static/scripts/login.js')
 block content
     .login-register-form
-        form.login(method="POST", action="/auth/login")
+        form.login(method='POST', action='/auth/login')
             .login-header
                 h1#login-sign Login
             .login-form

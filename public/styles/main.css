@@ -34,28 +34,38 @@ main {
 .login h3,
 .login h5,
 .login h6,
-.login a {
+.login a,
+.register h1,
+.register h2,
+.register h3,
+.register h5,
+.register h6,
+.register a {
     margin: 0;
     padding: 0;
     color: black;
 }
 
-.login {
+.login,
+.register {
     margin: 0 auto;
     max-width: 500px;
 }
 
-.login-header {
+.login-header,
+.register-header {
     color: #fff;
     text-align: center;
     font-size: 300%;
 }
 
-.login-header h1 {
+.login-header h1,
+.register-header h1 {
     font-size: 80px;
 }
 
-.login-form {
+.login-form,
+.register-form {
     box-sizing: border-box;
     padding-top: 15px;
     padding-bottom: 10%;
@@ -64,7 +74,9 @@ main {
 }
 
 .login input[type="text"],
-.login input[type="password"] {
+.login input[type="password"],
+.register input[type="text"],
+.register input[type="password"] {
     max-width: 400px;
     width: 80%;
     line-height: 3em;
@@ -75,7 +87,8 @@ main {
     padding-left: 10px;
 }
 
-.login-form input[type="button"] {
+.login-form input[type="button"],
+.register-form input[type="button"] {
     height: 30px;
     width: 100px;
     background: #fff;
@@ -123,11 +136,13 @@ main {
     }
 }
 
-#login-sign {
+#login-sign,
+#register-sign {
     color: black;
 }
 
-#login-button {
+#login-button,
+#register-button {
     background-color: #00F2B6;
 }
 
@@ -210,6 +225,7 @@ main {
 #profile-link,
 #courses-nav {
     color: #1F4838;
+    font-size: 17px;
 }
 
 .course-container {
