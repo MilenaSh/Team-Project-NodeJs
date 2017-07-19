@@ -34,11 +34,62 @@ const init = (db) => {
             });
     };
 
+    const pullLikedUser = (title, lecturer, user) => {
+        return coursesCollection
+            .update({
+                title: title,
+                lecturer: lecturer,
+            }, {
+                $pull: {
+                    usersLiked: user,
+                },
+            });
+    };
+
+    const pushEnrolledCourse = (courseID, userID) => {
+        return coursesCollection
+            .findOne({
+                _id: objectId(courseID),
+            })
+            .then((course) => {
+                delete course.usersLiked;
+                usersCollection
+                    .update({
+                        _id: objectId(userID),
+                    }, {
+                        $push: {
+                            enrolledCourses: course,
+                        },
+                    });
+            });
+    };
+
+    const pullEnrolledCourse = (courseID, userID) => {
+        return coursesCollection
+            .findOne({
+                _id: objectId(courseID),
+            })
+            .then((course) => {
+                delete course.usersLiked;
+                usersCollection
+                    .update({
+                        _id: objectId(userID),
+                    }, {
+                        $pull: {
+                            enrolledCourses: course,
+                        },
+                    });
+            });
+    };
+
     const data = {
         db,
         getCourses,
         getCourseById,
         pushLikedUser,
+        pullLikedUser,
+        pushEnrolledCourse,
+        pullEnrolledCourse,
     };
 
     return Promise.resolve(data);

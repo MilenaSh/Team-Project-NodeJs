@@ -1,5 +1,4 @@
 const init = (db, data) => {
-    const objectId = require('mongodb').ObjectID;
     const controller = {
         getCourseById(request, response) {
             const id = request.params.id;
@@ -18,7 +17,7 @@ const init = (db, data) => {
                 'title': { $regex: new RegExp(request.query.title, 'i') },
             };
 
-            data.getCourses()
+            data.getCourses(filter)
                 .then((courses) => {
                     return response.render('courses', {
                         courses: courses,
@@ -39,65 +38,29 @@ const init = (db, data) => {
 
         unlikeCourse(request, response) {
             const user = request.user[0];
-
             delete user.enrolledCourses;
 
             const title = request.body.title;
             const lecturer = request.body.lecturer;
 
-            db.collection('courses')
-                .update({
-                    lecturer: lecturer,
-                    title: title,
-                }, {
-                    $pull: {
-                        usersLiked: user,
-                    },
-                });
+            data.pullLikedUser(title, lecturer, user);
         },
 
         enrollCourse(request, response) {
-            const userID = objectId(request.user[0]._id);
-            const courseID = objectId(request.body.courseID);
+            const userID = request.user[0]._id;
+            const courseID = request.body.courseID;
 
-            db.collection('courses')
-                .findOne({
-                    _id: courseID,
-                })
-                .then((course) => {
-                    delete course.usersLiked;
-                    db.collection('users')
-                        .update({
-                            _id: userID,
-                        }, {
-                            $push: {
-                                enrolledCourses: course,
-                            },
-                        });
-                });
+            data.pushEnrolledCourse(courseID, userID);
 
             response.status(200).redirect('/courses/' + courseID);
         },
 
         disEnrollCourse(request, response) {
-            const userID = objectId(request.user[0]._id);
-            const courseID = objectId(request.body.courseID);
+            const userID = request.user[0]._id;
+            const courseID = request.body.courseID;
 
-            db.collection('courses')
-                .findOne({
-                    _id: courseID,
-                })
-                .then((course) => {
-                    delete course.usersLiked;
-                    db.collection('users')
-                        .update({
-                            _id: userID,
-                        }, {
-                            $pull: {
-                                enrolledCourses: course,
-                            },
-                        });
-                });
+            data.pullEnrolledCourse(courseID, userID);
+
             response.status(200).redirect('/courses/' + courseID);
         },
     };

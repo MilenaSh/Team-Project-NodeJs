@@ -1,25 +1,22 @@
-const init = (db, passport) => {
-    const ObjectId = require('mongodb').ObjectID;
+const init = (db, data) => {
     const controller = {
         getHome(request, response) {
-            const coursesPromise = db.collection('courses')
-                .find()
-                .toArray();
-            coursesPromise.then((value) => {
-                const mostPopularCourses = value
-                    .sort((x, y) => {
-                        return y.likeByUserId.length - x.likeByUserId.length;
-                    })
-                    .slice(0, 6);
-                const latestCourses = value.slice(-6).reverse();
-                const user = request.user;
-                return response.render('home', {
-                    latestCourses: latestCourses,
-                    isLoggedIn: request.isAuthenticated(),
-                    user: user,
-                    mostPopularCourses: mostPopularCourses,
+            data.getCourses()
+                .then((courses) => {
+                    const mostPopularCourses = courses
+                        .sort((x, y) => {
+                            return y.usersLiked.length - x.usersLiked.length;
+                        })
+                        .slice(0, 6);
+                    const latestCourses = courses.slice(-6).reverse();
+                    const user = request.user;
+                    return response.render('home', {
+                        latestCourses: latestCourses,
+                        isLoggedIn: request.isAuthenticated(),
+                        user: user,
+                        mostPopularCourses: mostPopularCourses,
+                    });
                 });
-            });
         },
 
         getLoginPage(request, response) {

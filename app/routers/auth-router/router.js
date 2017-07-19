@@ -1,5 +1,5 @@
-const attachTo = (app, db, passport) => {
-    const controller = require('./controller').init(db, passport);
+const attachTo = (app, db, passport, data) => {
+    const controller = require('./controller').init(db, data);
 
     app.post('/auth/login', passport.authenticate('local', {
         failureRedirect: '/login',

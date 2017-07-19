@@ -1,5 +1,5 @@
-const attachTo = (app, db, passport) => {
-    const controller = require('./controller').init(db, passport);
+const attachTo = (app, db, passport, data) => {
+    const controller = require('./controller').init(db, data);
 
     app.get('/', controller.getHome);
 
@@ -11,28 +11,3 @@ const attachTo = (app, db, passport) => {
 };
 
 module.exports = { attachTo };
-
-
-
-// const { Router } = require('express');
-
-// const getHomeRouter = (db) => {
-//     const router = new Router();
-//     router
-//         .get('/', (request, response) => {
-//             response.render('home');
-//         })
-//         .get('/about', (request, response) => {
-//             const coursesPromise = db.collection('courses')
-//                 .find()
-//                 .toArray();
-//             coursesPromise.then((value) => {
-//                 response.render('about', {
-//                     courses: value
-//                 });
-//             });
-//         });
-//     return router;
-// };
-
-// module.exports = { getHomeRouter };
