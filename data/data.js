@@ -82,6 +82,20 @@ const init = (db) => {
             });
     };
 
+    const updateUser = (username, details) => {
+        return usersCollection
+            .update({
+                username: username,
+            }, {
+                $set: {
+                    fullname: details.fullname,
+                    city: details.city,
+                    street: details.street,
+                    website: details.website,
+                },
+            });
+    };
+
     const data = {
         db,
         getCourses,
@@ -90,6 +104,7 @@ const init = (db) => {
         pullLikedUser,
         pushEnrolledCourse,
         pullEnrolledCourse,
+        updateUser,
     };
 
     return Promise.resolve(data);

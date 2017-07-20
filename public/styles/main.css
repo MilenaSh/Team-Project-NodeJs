@@ -231,3 +231,11 @@ main {
 .course-container {
     /*display: inline-block;*/
 }
+
+#fullname-textfield,
+#city-textfield,
+#street-textfield,
+#website-textfield {
+    margin-top: 5px;
+    border-radius: 5px;
+}

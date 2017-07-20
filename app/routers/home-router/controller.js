@@ -44,6 +44,29 @@ const init = (db, data) => {
                 enrolledCourses: enrolledCourses,
             });
         },
+
+        updateProfile(request, response) {
+            const username = request.body.username;
+
+            const details = {
+                fullname: request.body.fullname,
+                city: request.body.city,
+                street: request.body.street,
+                website: request.body.website,
+            };
+
+            const user = request.user;
+            const enrolledCourses = user[0].enrolledCourses;
+
+            data.updateUser(username, details)
+                .then(() => {
+                    return response.render('profile', {
+                        user: user,
+                        isLoggedIn: request.isAuthenticated(),
+                        enrolledCourses: enrolledCourses,
+                    });
+                });
+        },
     };
     return controller;
 };

@@ -9,9 +9,9 @@ const attachTo = (app, db, passport, data) => {
 
     app.get('/courses', controller.getCourses);
 
-    app.post('/courses/likeCourse', controller.likeCourse);
+    app.post('/courses/like', controller.likeCourse);
 
-    app.post('/courses/unlikeCourse', controller.unlikeCourse);
+    app.post('/courses/unlike', controller.unlikeCourse);
 };
 
 module.exports = { attachTo };
