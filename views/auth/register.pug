@@ -16,3 +16,5 @@ block content
             input(name='passwordConfirmation' type='password', placeholder='Confirm Password')
             br
             input#register-button.register-button(type='submit', value='Register')
+        if(messages)
+            div#note.alert-warning #{messages}

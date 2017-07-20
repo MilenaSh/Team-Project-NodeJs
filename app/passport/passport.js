@@ -43,7 +43,7 @@ const passportSetUp = (app, db) => {
                     if (user) {
                         console.log('User already exists');
                         done(null, false,
-                            request.flash('message', 'Username already exists!'));
+                            request.flash('error', 'Username already exists!'));
                     } else {
                         const newUser = {
                             fullname: request.body.fullname,
@@ -53,8 +53,7 @@ const passportSetUp = (app, db) => {
                         };
                         db.collection('users').insert(newUser);
                         console.log('User registration successful');
-                        done(null, newUser,
-                            request.flash('message', 'You have registered successfully!'));
+                        done(null, newUser);
                     }
                 })
                 .catch((error) => done(error, false));

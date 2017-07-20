@@ -28,6 +28,7 @@ const init = (db, data) => {
         getRegisterPage(request, response) {
             return response.render('auth/register', {
                 isLoggedIn: request.isAuthenticated(),
+                messages: request.flash('error'),
             });
         },
 

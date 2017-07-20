@@ -231,3 +231,10 @@ main {
 .course-container {
     /*display: inline-block;*/
 }
+
+#note {
+    position: relative;
+    display: inline-block;
+    border: 1px bold black;
+    cursor: pointer;
+}
