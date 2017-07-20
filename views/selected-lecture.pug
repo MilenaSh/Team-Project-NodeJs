@@ -6,8 +6,11 @@ block nav
 block content
     main
         .container
-            - const lectureUrl = lecture.url.replace("watch?v=", "embed/");
-            h1= course.title
-            h2 Lecture ##{lecture.number} #{lecture.title}
-            iframe(width='640', height='480', src=lecture.url allowfullscreen)
-            a(href='/courses/' + course._id + '/lectures').btn.btn-default Go back
+            if isLoggedIn
+                - const lectureUrl = lecture.url.replace("watch?v=", "embed/");
+                h1= course.title
+                h2 Lecture ##{lecture.number} #{lecture.title}
+                iframe(width='640', height='480', src=lecture.url allowfullscreen)
+                a(href='/courses/' + course._id + '/lectures').btn.btn-default Go back
+            else
+                h1 Unauthorized
