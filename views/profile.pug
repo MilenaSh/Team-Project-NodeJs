@@ -34,6 +34,6 @@ block content
                     .col-md-4
                         h2= c.title
                         p= c.lecturer
-                        a.btn.btn-default More Info
+                        a.btn.btn-default(href='/courses/' + c._id + '/lectures') View lectures
 block scripts
     script(src='/static/scripts/profile.js')

@@ -96,6 +96,26 @@ const init = (db) => {
             });
     };
 
+    const getLectureByNumber = (courseID, lectureNumber) => {
+        return coursesCollection
+            .findOne({
+                _id: objectId(courseID),
+            })
+            .then((course) => {
+                const lecture = course.lectures.find((l) => {
+                    return +l.number === +lectureNumber;
+                });
+                if (!lecture) {
+                    throw Error('No lecture with number ' + lectureNumber);
+                }
+                const details = {
+                    lecture: lecture,
+                    course: course,
+                };
+                return Promise.resolve(details);
+            });
+    };
+
     const data = {
         db,
         getCourses,
@@ -105,6 +125,7 @@ const init = (db) => {
         pushEnrolledCourse,
         pullEnrolledCourse,
         updateUser,
+        getLectureByNumber,
     };
 
     return Promise.resolve(data);

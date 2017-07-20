@@ -7,6 +7,10 @@ const attachTo = (app, db, passport, data) => {
 
     app.get('/courses/:id', controller.getCourseById);
 
+    app.get('/courses/:id/lectures', controller.getLectures);
+
+    app.get('/courses/:id/lectures/:number', controller.getCurrentLecture);
+
     app.get('/courses', controller.getCourses);
 
     app.post('/courses/like', controller.likeCourse);
