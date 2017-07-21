@@ -1,0 +1,21 @@
+extends layout
+include mixins/nav
+
+block nav
+    +nav(isLoggedIn)
+block content
+    main
+        .container
+        if !isLoggedIn
+            h1 Unauthorized
+        else
+            h1 Lectures for #{course[0].title}
+            each lecture in course[0].lectures
+                .col-sm-6.col-md-4.course-container
+                    .thumbnail
+                        // image here
+                        img.img-responsive.img-rounded(src='http://placehold.it/600x300', alt='')
+                        .caption
+                            h3.title-label #{lecture.title}
+                            p.number-label #{lecture.number}
+                            a.url-label(href='/courses/' + course[0]._id + '/lectures/' + lecture.number) Watch video

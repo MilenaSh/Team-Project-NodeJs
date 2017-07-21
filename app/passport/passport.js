@@ -49,6 +49,9 @@ const passportSetUp = (app, db) => {
                             username: username,
                             password: createHash(password),
                             enrolledCourses: [],
+                            city: '',
+                            street: '',
+                            website: '',
                         };
                         db.collection('users').insert(newUser);
                         console.log('User registration successful');

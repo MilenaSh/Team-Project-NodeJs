@@ -10,15 +10,30 @@ block content
                 .col-md-8
                     img.img-responsive.img-rounded(src='http://placehold.it/350x350', alt='')
                 .col-md-4
-                    h1 #{user[0].username}'s profile
+                    h1#username-label #{user[0].username}'s profile
+                .row
+                    #label-container.col-xs-2.pull-left
+                        h4#fullname-label Full name:
+                        h4#city-label City:
+                        h4#street-label Street:
+                        h4#website-label Website:
+                    #field-container.col-xs-2.pull-right
+                        h4#fullname-field= user[0].fullname
+                        h4#city-field= user[0].city
+                        h4#street-field= user[0].street
+                        h4#website-field= user[0].website
+                .col-md-4
+                    a(id='edit-button') Edit Profile
             hr
             .row
                 .col-lg-12
                     .well.text-center.lecturer-label
-                        | bla
+                        h3 Courses enrolled in
             .row
                 each c in enrolledCourses
                     .col-md-4
                         h2= c.title
                         p= c.lecturer
-                        a.btn.btn-default More Info
+                        a.btn.btn-default(href='/courses/' + c._id + '/lectures') View lectures
+block scripts
+    script(src='/static/scripts/profile.js')

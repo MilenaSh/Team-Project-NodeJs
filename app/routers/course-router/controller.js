@@ -63,6 +63,36 @@ const init = (db, data) => {
 
             response.status(200).redirect('/courses/' + courseID);
         },
+
+        getLectures(request, response) {
+            const id = request.params.id;
+            const user = request.user;
+
+            data.getCourseById(id)
+                .then((value) => {
+                    response.render('lectures', {
+                        user: user,
+                        course: value,
+                        isLoggedIn: request.isAuthenticated(),
+                    });
+                });
+        },
+
+        getCurrentLecture(request, response) {
+            const courseID = request.params.id;
+            const lectureNumber = request.params.number;
+            const user = request.user;
+
+            data.getLectureByNumber(courseID, lectureNumber)
+                .then((details) => {
+                    return response.render('selected-lecture', {
+                        lecture: details.lecture,
+                        course: details.course,
+                        user: user,
+                        isLoggedIn: request.isAuthenticated(),
+                    });
+                });
+        },
     };
     return controller;
 };
