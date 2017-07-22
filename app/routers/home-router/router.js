@@ -8,6 +8,8 @@ const attachTo = (app, db, passport, data) => {
     app.get('/register', controller.getRegisterPage);
 
     app.get('/profile', controller.getProfilePage);
+
+    app.put('/profile', controller.updateProfile);
 };
 
 module.exports = { attachTo };

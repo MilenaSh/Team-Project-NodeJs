@@ -39,18 +39,11 @@ block content
                     .well.text-center.lecturer-label
                         | Course is taught by #{selectedCourse.lecturer}
             .row
-                .col-md-4
-                    h2 Heading 1
-                    p
-                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.
-                    a.btn.btn-default(href='#') More Info
-                .col-md-4
-                    h2 Heading 2
-                    p
-                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.
-                    a.btn.btn-default(href='#') More Info
-                .col-md-4
-                    h2 Heading 3
-                    p
-                        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.
-                    a.btn.btn-default(href='#') More Info
+                if isLoggedIn
+                    each lecture in course[0].lectures
+                        .col-md-4
+                            h2= lecture.title
+                            p Lecture ##{lecture.number}
+                            a.btn.btn-default(href='/courses/' + course[0]._id + '/lectures/' + lecture.number) Watch video
+                else
+                    h3 Login to view lectures

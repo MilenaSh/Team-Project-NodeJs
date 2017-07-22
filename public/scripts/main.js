@@ -35,7 +35,7 @@ $('body').on('click', '.like-button', (ev) => {
     const data = JSON.stringify(obj);
 
     const promise = new Promise((resolve, reject) => $.ajax({
-        url: '/courses/likeCourse',
+        url: '/courses/like',
         method: 'POST',
         data: data,
         headers: {},
@@ -72,7 +72,7 @@ $('body').on('click', '.unlike-button', (ev) => {
     const data = JSON.stringify(obj);
 
     const promise = new Promise((resolve, reject) => $.ajax({
-        url: '/courses/unlikeCourse',
+        url: '/courses/unlike',
         method: 'POST',
         data: data,
         headers: {},
@@ -148,3 +148,4 @@ $('body').on('click', '.disenroll-button', (ev) => {
     $target.text('Enroll');
     $target.prev().remove();
 });
+
