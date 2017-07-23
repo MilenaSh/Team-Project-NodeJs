@@ -1,3 +1,5 @@
+/* globals $ */
+
 $('#search-button').on('click', () => {
     let text = $('#search-bar').val();
 
@@ -42,8 +44,7 @@ $('body').on('click', '.like-button', (ev) => {
         contentType: 'application/json',
         success: resolve,
         error: reject,
-    }
-    ));
+    }));
 
     const newImg = $('<img>')
         .addClass('img-responsive img-rounded unlike-image')
@@ -79,8 +80,7 @@ $('body').on('click', '.unlike-button', (ev) => {
         contentType: 'application/json',
         success: resolve,
         error: reject,
-    }
-    ));
+    }));
 
     const newImg = $('<img>')
         .addClass('img-responsive img-rounded like-image')
@@ -113,8 +113,7 @@ $('body').on('click', '.enroll-button', (ev) => {
         contentType: 'application/json',
         success: resolve,
         error: reject,
-    }
-    ));
+    }));
 
     const $target = $(ev.target);
     $target.removeClass('enroll-button');
@@ -139,8 +138,7 @@ $('body').on('click', '.disenroll-button', (ev) => {
         contentType: 'application/json',
         success: resolve,
         error: reject,
-    }
-    ));
+    }));
 
     const $target = $(ev.target);
     $target.removeClass('disenroll-button');
@@ -148,4 +146,3 @@ $('body').on('click', '.disenroll-button', (ev) => {
     $target.text('Enroll');
     $target.prev().remove();
 });
-
