@@ -8,8 +8,11 @@ block nav
 block content
     main
         .jumbotron.full
-            .container.text-center
-                h2#main-slogan Access to the best programming courses
+            .container
+                br
+                h2#main-slogan Access to the best programming
+                h2#main-slogan courses with just one click!
+                a#jumbotron-button(href='/courses') Check our courses              
         .container
             h1.text-center
                 | Most recent courses
@@ -17,7 +20,7 @@ block content
                 .col-sm-6.col-md-4.course-container
                     .thumbnail
                         // image here
-                        img.img-responsive.img-rounded(src='http://placehold.it/600x300', alt='')
+                        img.img-responsive.img-rounded(src= c.coverPhoto , alt='')
                         .caption
                             h3.title-label #{c.title}
                             p.lecturer-label #{c.lecturer}
@@ -47,7 +50,7 @@ block content
                 .col-sm-6.col-md-4.course-container
                     .thumbnail
                         // image here
-                        img.img-responsive.img-rounded(src='http://placehold.it/600x300', alt='')
+                        img.img-responsive.img-rounded(src= c.coverPhoto, alt='')
                         .caption
                             h3.title-label #{c.title}
                             p.lecturer-label #{c.lecturer}

@@ -146,6 +146,14 @@ main {
     background-color: #00F2B6;
 }
 
+#jumbotron-button {
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: #538074;
+    padding: 10px;
+}
+
 #myLogo {
     max-width: 100px;
     max-height: 80px;
@@ -214,7 +222,8 @@ main {
 #logout-link:hover,
 #register-link:hover,
 #profile-link:hover,
-#courses-nav:hover {
+#courses-nav:hover,
+#jumbotron-button:hover {
     color: #398CD2;
     background-color: #CAD7D3;
 }
