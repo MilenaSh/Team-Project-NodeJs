@@ -20,12 +20,12 @@ const init = (data) => {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
     app.use(flash());
-    app.use(multer({
-        dest: '/public/images/uploads/',
-        rename: function(fieldname, filename) {
-            return filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
-        },
-    }));
+    // app.use(multer({
+    //     dest: '/public/images/uploads/',
+    //     rename: function(fieldname, filename) {
+    //         return filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
+    //     },
+    // }));
 
 
     // add .then if needed

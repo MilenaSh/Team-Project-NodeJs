@@ -232,18 +232,22 @@ main {
     /*display: inline-block;*/
 }
 
-<<<<<<< HEAD
-#note {
-    position: relative;
-    display: inline-block;
-    border: 1px bold black;
-    cursor: pointer;
-=======
 #fullname-textfield,
 #city-textfield,
 #street-textfield,
 #website-textfield {
     margin-top: 5px;
     border-radius: 5px;
->>>>>>> 06e45b2adf0671e450b44f475a778f7120d1c548
+}
+
+#my-footer hr {
+    border-color: #CAD7D3
+}
+
+#my-footer a {
+    color: #0A4D3C
+}
+
+#my-footer ul {
+    list-style-type: none;
 }
