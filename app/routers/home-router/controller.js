@@ -22,6 +22,7 @@ const init = (db, data) => {
         getLoginPage(request, response) {
             return response.render('auth/login', {
                 isLoggedIn: request.isAuthenticated(),
+                messages: request.flash('error'),
             });
         },
 
