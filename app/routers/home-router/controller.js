@@ -47,6 +47,11 @@ const init = (db, data) => {
             });
         },
 
+        // TODO
+        getContactPage(request, response) {
+            return response.render('contact-form');
+        },
+
         updateProfile(request, response) {
             const username = request.body.username;
 
