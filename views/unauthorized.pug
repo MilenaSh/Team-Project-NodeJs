@@ -1,8 +1,11 @@
 extends layout
 include mixins/nav
+include mixins/footer
 
 block nav
     +nav()
 block content
     main
         h1 Unauthorized
+block footer
+    +footer

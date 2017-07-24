@@ -1,5 +1,6 @@
 extends layout
 include mixins/nav
+include mixins/footer
 
 block nav
     +nav(isLoggedIn)
@@ -37,3 +38,5 @@ block content
                         a.btn.btn-default(href='/courses/' + c._id + '/lectures') View lectures
 block scripts
     script(src='/static/scripts/profile.js')
+block footer
+    +footer
