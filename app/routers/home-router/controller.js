@@ -52,6 +52,10 @@ const init = (db, data) => {
             return response.render('contact-form');
         },
 
+        getAboutPage(request, response) {
+            return response.render('about-us');
+        },
+
         updateProfile(request, response) {
             const username = request.body.username;
 
