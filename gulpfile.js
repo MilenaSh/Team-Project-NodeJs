@@ -84,7 +84,7 @@ gulp.task('test-server:start', () => {
 
 
 gulp.task('test-server:stop', () => {
-    return MongoClient.connect(config.connectionString)
+    return MongoClient.connect(configTest.connectionString)
         .then((db) => {
             return db.dropDatabase();
         });
