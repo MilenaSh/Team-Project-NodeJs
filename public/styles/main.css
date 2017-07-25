@@ -263,15 +263,23 @@ main {
 }
 
 
-/*Contact form decorations*/
+/*Validation messages */
 
-.red {
-    color: red;
-}
 
-.form-area {
-    background-color: #FAFAFA;
-    padding: 10px 40px 60px;
-    margin: 10px 0px 60px;
-    border: 1px solid GREY;
+/* #note {
+    background: transparent url(/files/theme/image/input-text-8.jpg) repeat-x;
+    border: 1px solid #999;
+    outline: 0;
+    height: 25px;
+    width: 275px;
+} */
+
+.alert-danger {
+    margin-left: 25%;
+    width: 50%;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 16px;
+    border: 1px;
+    border-radius: 2px;
 }

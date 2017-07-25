@@ -9,7 +9,7 @@ const attachTo = (app, db, passport, data) => {
 
     app.get('/profile', controller.getProfilePage);
 
-    app.get('/contactform', controller.getContactPage);
+    app.get('/contact', controller.getContactPage);
 
     app.put('/profile', controller.updateProfile);
 };
