@@ -5,6 +5,7 @@ const session = require('express-session');
 
 const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
+const userValidator = require('./userValidator');
 
 // Generates hash using bCrypt
 const createHash = function(password) {
@@ -18,25 +19,31 @@ const passportSetUp = (app, db) => {
         saveUninitiallized: true,
     }));
 
-    const AuthStrategy = new LocalStrategy((username, password, done) => {
-        db.collection('users')
-            .find({ username: username })
-            .toArray()
-            .then((user) => {
-                if (user.length > 0 &&
-                    bcrypt.compareSync(password, user[0].password)) {
-                    done(null, user[0]);
-                } else {
-                    done(null, false);
-                }
-            })
-            .catch((error) => done(error, false));
-    });
+    const AuthStrategy = new LocalStrategy({
+            passReqToCallback: true,
+        },
+        (request, username, password, done) => {
+            db.collection('users')
+                .find({ username: username })
+                .toArray()
+                .then((user) => {
+                    if (user.length > 0 &&
+                        bcrypt.compareSync(password, user[0].password)) {
+                        done(null, user[0]);
+                    } else {
+                        done(null, false,
+                            request.flash('error',
+                                'Username or password is incorrect!'));
+                    }
+                })
+                .catch((error) => done(error, false));
+        });
 
     const RegistrationStrategy = new LocalStrategy({
             passReqToCallback: true,
         },
         (request, username, password, done) => {
+            // userValidator.validateUser(username, console.log('in'))
             db.collection('users')
                 .findOne({ username: username })
                 .then((user) => {

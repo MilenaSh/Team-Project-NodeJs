@@ -22,6 +22,7 @@ const init = (db, data) => {
         getLoginPage(request, response) {
             return response.render('auth/login', {
                 isLoggedIn: request.isAuthenticated(),
+                messages: request.flash('error'),
             });
         },
 
@@ -44,6 +45,11 @@ const init = (db, data) => {
                 isLoggedIn: request.isAuthenticated(),
                 enrolledCourses: enrolledCourses,
             });
+        },
+
+        // TODO
+        getContactPage(request, response) {
+            return response.render('contact-form');
         },
 
         updateProfile(request, response) {

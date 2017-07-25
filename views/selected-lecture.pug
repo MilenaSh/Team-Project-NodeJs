@@ -1,5 +1,6 @@
 extends layout
 include mixins/nav
+include mixins/footer
 
 block nav
     +nav(isLoggedIn)
@@ -14,3 +15,5 @@ block content
                 a(href='/courses/' + course._id + '/lectures').btn.btn-default Go back
             else
                 h1 Unauthorized
+block footer
+    +footer
