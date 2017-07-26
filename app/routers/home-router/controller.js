@@ -62,17 +62,7 @@ const init = (db, data) => {
                 website: request.body.website,
             };
 
-            const user = request.user;
-            const enrolledCourses = user[0].enrolledCourses;
-
-            data.updateUser(username, details)
-                .then(() => {
-                    return response.render('profile', {
-                        user: user,
-                        isLoggedIn: request.isAuthenticated(),
-                        enrolledCourses: enrolledCourses,
-                    });
-                });
+            data.updateUser(username, details);
         },
     };
     return controller;
