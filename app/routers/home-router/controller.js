@@ -66,6 +66,16 @@ const init = (db, data) => {
             return response.render('contact-form');
         },
 
+        // addContact(request, response) {
+        //     const name = request.body.name;
+
+        //     const details = {
+        //         email: request.body.email,
+        //         mobile: request.body.mobile,
+        //         subject: request.body.subject,
+        //         message: request.body.message,
+        //     };
+
         getAboutPage(request, response) {
             return response.render('about-us');
         },
