@@ -1,4 +1,18 @@
+/* globals __dirname */
+
 const init = (db, data) => {
+    // multer 
+    const multer = require('multer');
+    const storage = multer.diskStorage({
+        destination: (request, file, cb) => {
+            cb(null, __dirname + '/../../../public/images/uploads/');
+        },
+        filename: (request, file, cb) => {
+            cb(null, file.fieldname + '.jpg');
+        },
+    });
+    const upload = multer({ storage: storage }).single('avatar');
+
     const controller = {
         getHome(request, response) {
             data.getCourses()
@@ -67,6 +81,16 @@ const init = (db, data) => {
             };
 
             data.updateUser(username, details);
+        },
+
+        updateAvatar(request, response) {
+            console.log(request.file);
+            upload(request, response, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log('done');
+            });
         },
     };
     return controller;

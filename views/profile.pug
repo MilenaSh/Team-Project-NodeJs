@@ -24,6 +24,9 @@ block content
                         h4#street-field= user[0].street
                         h4#website-field= user[0].website
                 .col-md-4
+                    form(action='/profile/avatar' method='POST' enctype='multipart/form-data')
+                        input(type='file' id='choose-avatar-input' name='avatar')
+                        input(id='edit-avatar-button' type='submit' value='Edit Avatar' name='submit')
                     a(id='edit-button') Edit Profile
             hr
             .row
