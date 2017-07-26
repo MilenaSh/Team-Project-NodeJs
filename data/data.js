@@ -83,7 +83,7 @@ const init = (db) => {
     };
 
     const updateUser = (username, details) => {
-        return usersCollection
+        usersCollection
             .update({
                 username: username,
             }, {
@@ -94,6 +94,24 @@ const init = (db) => {
                     website: details.website,
                 },
             });
+        coursesCollection
+            .updateMany(
+                {
+                    usersLiked: {
+                        $elemMatch: {
+                            username: username,
+                        },
+                    },
+                },
+                {
+                    $set: {
+                        'usersLiked.$.fullname': details.fullname,
+                        'usersLiked.$.city': details.city,
+                        'usersLiked.$.street': details.street,
+                        'usersLiked.$.website': details.website,
+                    },
+                }
+            );
     };
 
     const getLectureByNumber = (courseID, lectureNumber) => {

@@ -77,7 +77,7 @@ gulp.task('test-server:start', () => {
         .then((data) => require('./app').init(data))
         .then((app) => {
             app.listen(
-                config.port,
+                configTest.port,
                 () => console.log(`Magic happends at :${configTest.port}`));
         });
 });
