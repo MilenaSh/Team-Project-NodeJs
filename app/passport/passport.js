@@ -43,15 +43,15 @@ const passportSetUp = (app, db) => {
             passReqToCallback: true,
         },
         (request, username, password, done) => {
-            // userValidator.validateUser(username, console.log('in'))
             db.collection('users')
                 .findOne({ username: username })
                 .then((user) => {
                     if (user) {
                         console.log('User already exists');
                         done(null, false,
-                            request.flash('error', 'Username already exists!'));
+                            request.flash('error', 'Test'));
                     } else {
+                        // userValidator.validateUser(user, console.log('test'));
                         const newUser = {
                             fullname: request.body.fullname,
                             username: username,

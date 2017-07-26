@@ -19,10 +19,11 @@ nav {
 
 body {
     font-family: 'Ubuntu', sans-serif;
+    margin: 0 0 200px;
 }
 
 main {
-    margin-top: 50px;
+    margin-top: 55px;
 }
 
 .login-register-form {
@@ -250,6 +251,15 @@ main {
     border-radius: 5px;
 }
 
+#my-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+}
+
 #my-footer hr {
     border-color: #CAD7D3
 }
@@ -265,15 +275,6 @@ main {
 
 /*Validation messages */
 
-
-/* #note {
-    background: transparent url(/files/theme/image/input-text-8.jpg) repeat-x;
-    border: 1px solid #999;
-    outline: 0;
-    height: 25px;
-    width: 275px;
-} */
-
 .alert-danger {
     margin-left: 25%;
     width: 50%;
@@ -282,4 +283,9 @@ main {
     font-size: 16px;
     border: 1px;
     border-radius: 2px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
 }
