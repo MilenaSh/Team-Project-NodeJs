@@ -8,8 +8,16 @@ block content
     main
         .container
             .row
+                -
+                    let imageUrl;
+                    if (user[0].avatarUrl) {
+                        imageUrl = user[0].avatarUrl;
+                    }
+                    else {
+                        imageUrl = 'http://placehold.it/350x350';
+                    }
                 .col-md-8
-                    img.img-responsive.img-rounded(src='http://placehold.it/350x350', alt='')
+                    img.img-responsive.img-rounded(src= imageUrl alt='Avatar Photo')
                 .col-md-4
                     h1#username-label #{user[0].username}'s profile
                 .row
