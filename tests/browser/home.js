@@ -11,9 +11,9 @@ describe('Browser tests', () => {
         driver = setupDriver('chrome');
     });
 
-    afterEach(() => {
-        driver.quit();
-    });
+    // afterEach(() => {
+    //     //driver.quit();
+    // });
 
     it('Document Title', () => {
         return driver.get(url)
@@ -32,7 +32,8 @@ describe('Browser tests', () => {
 
         driver.get(url);
         driver.findElement(webdriver.By.css('nav li #login-link')).click();
-        driver.wait(webdriver.until.elementLocated(webdriver.By.css('input[name="fullname"]')));
+        
+        // driver.wait(webdriver.until.elementLocated(webdriver.By.css('input[name="fullname"]')));
         driver.findElement(webdriver.By
             .css('input[name="fullname"]'))
             .sendKeys(username);

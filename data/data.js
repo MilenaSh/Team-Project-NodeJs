@@ -105,10 +105,10 @@ const init = (db) => {
                 },
                 {
                     $set: {
-                        'usersLiked.username': details.username,
-                        'usersLiked.city': details.city,
-                        'usersLiked.street': details.street,
-                        'usersLiked.website': details.website,
+                        'usersLiked.$.fullname': details.fullname,
+                        'usersLiked.$.city': details.city,
+                        'usersLiked.$.street': details.street,
+                        'usersLiked.$.website': details.website,
                     },
                 }
             );
