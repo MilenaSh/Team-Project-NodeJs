@@ -1,3 +1,5 @@
+/* globals $ */
+
 $('body').on('click', '#edit-button', (ev) => {
     const $target = $(ev.target);
 
@@ -62,8 +64,7 @@ $('body').on('click', '#save-button', (ev) => {
         contentType: 'application/json',
         success: resolve,
         error: reject,
-    }
-    ));
+    }));
 
     const $h4 = $('<h4>');
 
