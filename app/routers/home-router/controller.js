@@ -8,7 +8,7 @@ const init = (db, data) => {
             cb(null, __dirname + '/../../../public/images/uploads/');
         },
         filename: (request, file, cb) => {
-            cb(null, file.fieldname + '.jpg');
+            cb(null, file.originalname);
         },
     });
     const upload = multer({ storage: storage }).single('avatar');
@@ -94,12 +94,10 @@ const init = (db, data) => {
         },
 
         updateAvatar(request, response) {
-            console.log(request.file);
             upload(request, response, (err) => {
                 if (err) {
                     console.log(err);
                 }
-                console.log('done');
             });
         },
     };
