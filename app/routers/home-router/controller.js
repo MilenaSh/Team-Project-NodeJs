@@ -66,15 +66,17 @@ const init = (db, data) => {
             return response.render('contact-form');
         },
 
-        // addContact(request, response) {
-        //     const name = request.body.name;
-
-        //     const details = {
-        //         email: request.body.email,
-        //         mobile: request.body.mobile,
-        //         subject: request.body.subject,
-        //         message: request.body.message,
-        //     };
+        sendContactForm(request, response) {
+            const newContact = {
+                name: request.body.name,
+                email: request.body.email,
+                mobile: request.body.mobile,
+                subject: request.body.subject,
+                message: request.body.message,
+            };
+            db.collection('contact').insert(newContact);
+            return response.redirect('/');
+        },
 
         getAboutPage(request, response) {
             return response.render('about-us');

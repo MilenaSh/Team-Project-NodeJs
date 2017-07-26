@@ -55,6 +55,7 @@ const passportSetUp = (app, db) => {
                         const newUser = {
                             fullname: request.body.fullname,
                             username: username,
+                            avatarUrl: '',
                             password: createHash(password),
                             enrolledCourses: [],
                             city: '',

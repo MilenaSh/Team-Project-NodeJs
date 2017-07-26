@@ -3,6 +3,7 @@ const init = (db) => {
 
     const usersCollection = db.collection('users');
     const coursesCollection = db.collection('courses');
+    const contactCollection = db.collection('contact');
 
     const getCourses = (filter) => {
         return coursesCollection
@@ -95,23 +96,20 @@ const init = (db) => {
                 },
             });
         coursesCollection
-            .updateMany(
-                {
-                    usersLiked: {
-                        $elemMatch: {
-                            username: username,
-                        },
+            .updateMany({
+                usersLiked: {
+                    $elemMatch: {
+                        username: username,
                     },
                 },
-                {
-                    $set: {
-                        'usersLiked.$.fullname': details.fullname,
-                        'usersLiked.$.city': details.city,
-                        'usersLiked.$.street': details.street,
-                        'usersLiked.$.website': details.website,
-                    },
-                }
-            );
+            }, {
+                $set: {
+                    'usersLiked.$.fullname': details.fullname,
+                    'usersLiked.$.city': details.city,
+                    'usersLiked.$.street': details.street,
+                    'usersLiked.$.website': details.website,
+                },
+            });
     };
 
     const getLectureByNumber = (courseID, lectureNumber) => {

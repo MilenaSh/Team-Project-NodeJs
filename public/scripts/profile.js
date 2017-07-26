@@ -1,3 +1,5 @@
+/* globals $ */
+
 $('body').on('click', '#edit-button', (ev) => {
     const $target = $(ev.target);
 
@@ -62,8 +64,7 @@ $('body').on('click', '#save-button', (ev) => {
         contentType: 'application/json',
         success: resolve,
         error: reject,
-    }
-    ));
+    }));
 
     const $h4 = $('<h4>');
 
@@ -89,6 +90,9 @@ $('body').on('click', '#save-button', (ev) => {
     $target
         .attr('id', 'edit-button')
         .text('Edit Profile');
+<<<<<<< HEAD
+});
+=======
 });
 
     // $('body').on('click', '#edit-avatar-button', (ev) => {
@@ -112,3 +116,4 @@ $('body').on('click', '#save-button', (ev) => {
     //     }
     //     ));
     // });
+>>>>>>> e03526f40dc2cf8b8f23d5f6c86bac68c0075dd6
