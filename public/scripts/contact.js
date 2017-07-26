@@ -1,8 +1,6 @@
 /* globals $ */
 
 $('body').on('click', '#submit', (ev) => {
-    const $target = $(ev.target);
-
     const name = $('#name').val();
     const email = $('#email').val();
     const mobile = $('#mobile').val();
@@ -28,4 +26,7 @@ $('body').on('click', '#submit', (ev) => {
         success: resolve,
         error: reject,
     }));
+
+    const url = window.location.href.split('//').pop().split('/').shift();
+    window.location.href = url;
 });

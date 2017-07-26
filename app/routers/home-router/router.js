@@ -16,6 +16,8 @@ const attachTo = (app, db, passport, data) => {
     app.get('/about', controller.getAboutPage);
 
     app.put('/profile', controller.updateProfile);
+
+    app.post('/profile/avatar', controller.updateAvatar);
 };
 
 module.exports = { attachTo };

@@ -90,4 +90,30 @@ $('body').on('click', '#save-button', (ev) => {
     $target
         .attr('id', 'edit-button')
         .text('Edit Profile');
+<<<<<<< HEAD
 });
+=======
+});
+
+    // $('body').on('click', '#edit-avatar-button', (ev) => {
+
+    //     const file = $('#choose-avatar-input').val();
+
+    //     const obj = {
+    //         file: file,
+    //     };
+
+    //     const data = JSON.stringify(obj);
+
+    //     const promise = new Promise((resolve, reject) => $.ajax({
+    //         url: '/profile/avatar',
+    //         method: 'PUT',
+    //         data: data,
+    //         headers: {},
+    //         contentType: 'application/json',
+    //         success: resolve,
+    //         error: reject,
+    //     }
+    //     ));
+    // });
+>>>>>>> e03526f40dc2cf8b8f23d5f6c86bac68c0075dd6

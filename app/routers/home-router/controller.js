@@ -1,4 +1,18 @@
+/* globals __dirname */
+
 const init = (db, data) => {
+    // multer 
+    const multer = require('multer');
+    const storage = multer.diskStorage({
+        destination: (request, file, cb) => {
+            cb(null, __dirname + '/../../../public/images/uploads/');
+        },
+        filename: (request, file, cb) => {
+            cb(null, file.fieldname + '.jpg');
+        },
+    });
+    const upload = multer({ storage: storage }).single('avatar');
+
     const controller = {
         getHome(request, response) {
             data.getCourses()
@@ -52,15 +66,17 @@ const init = (db, data) => {
             return response.render('contact-form');
         },
 
-        // addContact(request, response) {
-        //     const name = request.body.name;
-
-        //     const details = {
-        //         email: request.body.email,
-        //         mobile: request.body.mobile,
-        //         subject: request.body.subject,
-        //         message: request.body.message,
-        //     };
+        sendContactForm(request, response) {
+            const newContact = {
+                name: request.body.name,
+                email: request.body.email,
+                mobile: request.body.mobile,
+                subject: request.body.subject,
+                message: request.body.message,
+            };
+            db.collection('contact').insert(newContact);
+            return response.redirect('/');
+        },
 
         getAboutPage(request, response) {
             return response.render('about-us');
@@ -77,6 +93,16 @@ const init = (db, data) => {
             };
 
             data.updateUser(username, details);
+        },
+
+        updateAvatar(request, response) {
+            console.log(request.file);
+            upload(request, response, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                console.log('done');
+            });
         },
     };
     return controller;
