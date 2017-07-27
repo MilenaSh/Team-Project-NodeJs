@@ -7,13 +7,13 @@ block content
         .register-header
             h1#register-sign Register
         .register-form
-            input(name='fullname' type='text', placeholder='Full Name')
+            input(name='fullname' type='text', placeholder='Full Name' required)
             br
-            input(name='username' type='text', placeholder='Username')
+            input(name='username' type='text', placeholder='Username' required)
             br
-            input(name='password' type='password', placeholder='Password')
+            input(name='password' type='password', placeholder='Password' required)
             br
-            input(name='passwordConfirmation' type='password', placeholder='Confirm Password')
+            input(name='passwordConfirmation' type='password', placeholder='Confirm Password' required)
             br
             input#register-button.register-button(type='submit', value='Register')
             |
