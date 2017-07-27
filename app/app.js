@@ -6,7 +6,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const multer = require('multer');
-// const passport = require('passport');
 const ObjectId = require('mongodb').ObjectID;
 
 const init = (data) => {
