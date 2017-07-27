@@ -40,10 +40,16 @@ gulp.task('start-server', () => {
 });
 
 gulp.task('pre-test', () => {
-    return gulp.src([ 
+    return gulp.src([
             './app/**/*.js',
             './data/**/*.js',
-            './db/**/*.js',
+            '!./app/app.js',
+            '!./app/index.js',
+            '!./app/config**/*.js',
+            '!./app/passport**/*.js',
+            '!./app/routers/auth-router**/*.js',
+            '!./app/routers/index.js',
+            '!./app/routers/routers.js',
         ])
         .pipe(istanbul({
             includeUntested: true,
@@ -114,5 +120,3 @@ gulp.task('tests:browser', ['test-server:start'], () => {
             gulp.start('test-server:stop');
         });
 });
-
-

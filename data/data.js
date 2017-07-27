@@ -53,7 +53,7 @@ const init = (db) => {
             })
             .then((course) => {
                 delete course.usersLiked;
-                usersCollection
+                return usersCollection
                     .update({
                         _id: objectId(userID),
                     }, {
