@@ -36,7 +36,7 @@ const init = (db, data) => {
                 return response.status(401).render('unauthorized');
             }
             const user = request.user;
-            const enrolledCourses = user[0].enrolledCourses;
+            const enrolledCourses = user.enrolledCourses;
 
             return response.render('profile', {
                 user: user,

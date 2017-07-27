@@ -7,21 +7,35 @@ describe('Get data for the courses', () => {
     let courses = [];
     let data = null;
     const db = {
-        collection: () => {},
+        collection: () => {
+            return courses;
+        },
     };
 
-    const toArray = () => {
+    let toArray = () => {
         return Promise.resolve(courses);
     };
 
-    const find = () => {
+
+    let find = (id) => {
+        console.log(id);
         return {
             toArray,
         };
     };
 
     beforeEach(() => {
-        courses = ['C#', 'Java'];
+        courses = [{
+                id: 1,
+                title: 'Java',
+                lecturer: 'Doncho',
+            },
+            {
+                _id: '00000002cae76707e4f55408',
+                title: 'C++',
+                lecturer: 'Cuki',
+            },
+        ];
         sinon.stub(db, 'collection')
             .callsFake(() => {
                 return { find };
@@ -42,7 +56,7 @@ describe('Get data for the courses', () => {
     });
 
     it('Get courses', () => {
-        data = init(db);
+
         data.then(function(d) {
             return d.getCourses()
                 .then((coursesCollection) => {
@@ -52,12 +66,12 @@ describe('Get data for the courses', () => {
     });
 
     it('Get course by Id', () => {
-        const id = 1;
-        data = init(db);
+        const id = 2;
+
         data.then(function(d) {
-            return d.getCourseById(id)
-                .then((coursesCollection) => {
-                    expect(coursesCollection).to.be.equal(courses);
+            d.getCourseById(id)
+                .then((course) => {
+                    expect(course.length).to.be.equal(30);
                 });
         });
     });
@@ -107,9 +121,6 @@ describe('Get data for the courses', () => {
                 return { update };
             });
 
-        // const coursesCollection = ['JS'];
-        // update = coursesCollection.update.bind(coursesCollection);
-
         data.then(function(d) {
             return d.pullLikedUser(title, lecturer, user)
                 .then((col) => {
@@ -132,7 +143,6 @@ describe('Get data for the courses', () => {
             .callsFake(() => {
                 return { findOne };
             });
-        data = init(db);
         data.then(function(d) {
             return d.pushEnrolledCourse(courseId, userId)
                 .then((foundCourse) => {

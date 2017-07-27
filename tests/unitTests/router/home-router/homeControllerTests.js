@@ -1,11 +1,12 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
+var MongoMock = require('mongomock');
 
 const { init } = require('../../../../app/routers/home-router/controller');
 
 describe('Home controllers', () => {
     const db = null;
-    // let passport = null;
+    //const data = require('../../../../data').init(db);
     let controller = null;
     let request = null;
     let response = null;
@@ -17,7 +18,16 @@ describe('Home controllers', () => {
             return true;
         });
         controller = init(db);
+
+
     });
+
+    // it('Get home page', () => {
+
+
+    //     controller.getHome(request, response);
+    //     expect(response.viewName).to.be.equal('home');
+    // });
 
     it('Get login page', () => {
         controller.getLoginPage(request, response);
@@ -37,13 +47,14 @@ describe('Home controllers', () => {
         expect(response.statusCode).to.equal(401);
     });
 
-    // it('Get profile page', () => {
-    //     const user = ['Pesho'];
-    //     //request.user = ['Pesho'];
+    it('Get profile page', () => {
+        request.user = [{
+            name: 'Pesho',
+            enrolledCourses: ['JS']
+        }];
 
-    //     const enrolledCourses = user[0].enrolledCourses;
+        controller.getProfilePage(request, response);
+        expect(response.viewName).to.be.equal('profile');
+    });
 
-    //     controller.getProfilePage(request, response);
-    //     expect(response.viewName).to.be.equal('profile');
-    // });
 });
