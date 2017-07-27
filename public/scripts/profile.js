@@ -111,6 +111,5 @@ $('body').on('click', '#edit-avatar-button', (ev) => {
         contentType: 'application/json',
         success: resolve,
         error: reject,
-    }
-    ));
+    }));
 });
