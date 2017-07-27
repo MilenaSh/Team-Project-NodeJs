@@ -1,5 +1,6 @@
 extends layout
 include mixins/nav
+include mixins/footer
 
 block nav
     +nav(isLoggedIn)
@@ -9,7 +10,7 @@ block content
         .container
             .row
                 .col-md-8
-                    img.img-responsive.img-rounded(src='http://placehold.it/900x350', alt='')
+                    img.img-responsive.img-rounded(src= selectedCourse.coverPhoto, alt='')
                 .col-md-4
                     h1 #{selectedCourse.title}
                     p
@@ -47,3 +48,5 @@ block content
                             a.btn.btn-default(href='/courses/' + course[0]._id + '/lectures/' + lecture.number) Watch video
                 else
                     h3 Login to view lectures
+block footer
+    +footer

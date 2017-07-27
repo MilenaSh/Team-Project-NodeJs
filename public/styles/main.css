@@ -19,10 +19,14 @@ nav {
 
 body {
     font-family: 'Ubuntu', sans-serif;
+    margin: 0 0 200px;
 }
 
+
+/* TODO */
+
 main {
-    margin-top: 50px;
+    margin-top: 55px;
 }
 
 .login-register-form {
@@ -146,6 +150,15 @@ main {
     background-color: #00F2B6;
 }
 
+#jumbotron-button {
+    border-radius: 5px;
+    font-weight: bold;
+    color: white;
+    background-color: #538074;
+    padding: 10px;
+    text-decoration: none;
+}
+
 #myLogo {
     max-width: 100px;
     max-height: 80px;
@@ -214,7 +227,8 @@ main {
 #logout-link:hover,
 #register-link:hover,
 #profile-link:hover,
-#courses-nav:hover {
+#courses-nav:hover,
+#jumbotron-button:hover {
     color: #398CD2;
     background-color: #CAD7D3;
 }
@@ -238,4 +252,48 @@ main {
 #website-textfield {
     margin-top: 5px;
     border-radius: 5px;
+}
+
+#my-footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+}
+
+#my-footer hr {
+    border-color: #CAD7D3
+}
+
+#my-footer a {
+    color: #0A4D3C
+}
+
+#my-footer ul {
+    list-style-type: none;
+}
+
+
+/*Validation messages */
+
+.alert-danger {
+    margin-left: 25%;
+    width: 50%;
+    font-family: sans-serif;
+    text-align: center;
+    font-size: 16px;
+    border: 1px;
+    border-radius: 2px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+#avatar-img {
+    max-height: 350px;
+    max-width: 350px;
 }

@@ -1,3 +1,5 @@
+/* globals $ */
+
 $('body').on('click', '#edit-button', (ev) => {
     const $target = $(ev.target);
 
@@ -62,8 +64,7 @@ $('body').on('click', '#save-button', (ev) => {
         contentType: 'application/json',
         success: resolve,
         error: reject,
-    }
-    ));
+    }));
 
     const $h4 = $('<h4>');
 
@@ -89,4 +90,27 @@ $('body').on('click', '#save-button', (ev) => {
     $target
         .attr('id', 'edit-button')
         .text('Edit Profile');
+});
+
+$('body').on('click', '#edit-avatar-button', (ev) => {
+    const username = $('#username-label')
+        .text()
+        .split('\'s ')[0];
+
+    const obj = {
+        username: username,
+    };
+
+    const data = JSON.stringify(obj);
+
+    const promise = new Promise((resolve, reject) => $.ajax({
+        url: '/profile/avatar',
+        method: 'PUT',
+        data: data,
+        headers: {},
+        contentType: 'application/json',
+        success: resolve,
+        error: reject,
+    }
+    ));
 });

@@ -7,6 +7,7 @@ const istanbul = require('gulp-istanbul');
 
 
 const { config } = require('./app/config');
+const { MongoClient } = require('mongodb');
 
 // TODO
 // scripts task - still not working etirely
@@ -65,6 +66,57 @@ gulp.task('tests:unit', ['pre-test'], () => {
         .pipe(istanbul.writeReports());
 });
 
+
+gulp.task('tests:integration', ['test-server:start'], () => {
+    return gulp.src('./tests/integration/**/*.js')
+        .pipe(mocha({
+            reporter: 'spec',
+        }))
+        .pipe(istanbul.writeReports())
+        .once('end', () => {
+            gulp.start('test-server:stop');
+        });
+});
+
 // default task
 
 gulp.task('default', ['scripts']);
+
+
+const configTest = {
+    connectionString: 'mongodb://milena:123456@ds129352.mlab.com:29352/watchmen-db-test',
+    port: 3002,
+};
+
+gulp.task('test-server:start', () => {
+    return Promise.resolve()
+        .then(() => require('./db').init(configTest.connectionString))
+        .then((db) => require('./data').init(db))
+        .then((data) => require('./app').init(data))
+        .then((app) => {
+            app.listen(
+                configTest.port,
+                () => console.log(`Magic happends at :${configTest.port}`));
+        });
+});
+
+
+gulp.task('test-server:stop', () => {
+    return MongoClient.connect(configTest.connectionString)
+        .then((db) => {
+            return db.dropDatabase();
+        });
+});
+
+// browser tests
+
+gulp.task('tests:browser', ['test-server:start'], () => {
+    return gulp.src('./tests/browser/home.js')
+        .pipe(mocha({
+            reporter: 'spec',
+            timeout: 10000,
+        }))
+        .once('end', () => {
+            gulp.start('test-server:stop');
+        });
+});

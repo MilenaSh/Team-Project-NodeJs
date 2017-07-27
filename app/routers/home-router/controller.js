@@ -1,4 +1,19 @@
+/* globals __dirname */
+const fs = require('fs');
+
 const init = (db, data) => {
+    // multer 
+    const multer = require('multer');
+    const storage = multer.diskStorage({
+        destination: (request, file, cb) => {
+            cb(null, __dirname + '/../../../public/images/uploads/');
+        },
+        filename: (request, file, cb) => {
+            cb(null, file.originalname);
+        },
+    });
+    const upload = multer({ storage: storage }).single('avatar');
+
     const controller = {
         getHome(request, response) {
             data.getCourses()
@@ -22,12 +37,14 @@ const init = (db, data) => {
         getLoginPage(request, response) {
             return response.render('auth/login', {
                 isLoggedIn: request.isAuthenticated(),
+                messages: request.flash('error'),
             });
         },
 
         getRegisterPage(request, response) {
             return response.render('auth/register', {
                 isLoggedIn: request.isAuthenticated(),
+                messages: request.flash('error'),
             });
         },
 
@@ -45,6 +62,27 @@ const init = (db, data) => {
             });
         },
 
+        // TODO
+        getContactPage(request, response) {
+            return response.render('contact-form');
+        },
+
+        sendContactForm(request, response) {
+            const newContact = {
+                name: request.body.name,
+                email: request.body.email,
+                mobile: request.body.mobile,
+                subject: request.body.subject,
+                message: request.body.message,
+            };
+            db.collection('contact').insert(newContact);
+            return response.redirect('/');
+        },
+
+        getAboutPage(request, response) {
+            return response.render('about-us');
+        },
+
         updateProfile(request, response) {
             const username = request.body.username;
 
@@ -55,17 +93,40 @@ const init = (db, data) => {
                 website: request.body.website,
             };
 
-            const user = request.user;
-            const enrolledCourses = user[0].enrolledCourses;
+            data.updateUser(username, details);
+        },
 
-            data.updateUser(username, details)
-                .then(() => {
-                    return response.render('profile', {
-                        user: user,
-                        isLoggedIn: request.isAuthenticated(),
-                        enrolledCourses: enrolledCourses,
-                    });
+        postAvatar(request, response) {
+            const username = request.user[0].username;
+
+            const regex = new RegExp('^' + username + '\..*$');
+            fs
+                .readdirSync(__dirname + '/../../../public/images/uploads/')
+                .filter((file) => regex.test(file))
+                .forEach((f) => {
+                    fs.unlinkSync(__dirname
+                        + '/../../../public/images/uploads/'
+                        + f);
                 });
+            upload(request, response, (err) => {
+                if (err) {
+                    console.log(err);
+                }
+                response.status(201);
+            });
+        },
+
+        changeAvatar(request, response) {
+            const username = request.body.username;
+            const regex = new RegExp('^' + username + '\..*$');
+
+            const imageName = fs.readdirSync(__dirname + '/../../../public/images/uploads/')
+                .filter((file) => regex.test(file))[0];
+
+            const url = '/static/images/uploads/' + imageName;
+
+            data.changeUserAvatar(username, url);
+            response.status(201);
         },
     };
     return controller;

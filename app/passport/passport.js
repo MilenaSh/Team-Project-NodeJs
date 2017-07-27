@@ -5,10 +5,11 @@ const session = require('express-session');
 
 const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
+const userValidator = require('./userValidator');
 
 // Generates hash using bCrypt
 const createHash = function(password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(saltRounds), null);
 };
 
 const passportSetUp = (app, db) => {
@@ -18,20 +19,25 @@ const passportSetUp = (app, db) => {
         saveUninitiallized: true,
     }));
 
-    const AuthStrategy = new LocalStrategy((username, password, done) => {
-        db.collection('users')
-            .find({ username: username })
-            .toArray()
-            .then((user) => {
-                if (user.length > 0 &&
-                    bcrypt.compareSync(password, user[0].password)) {
-                    done(null, user[0]);
-                } else {
-                    done(null, false);
-                }
-            })
-            .catch((error) => done(error, false));
-    });
+    const AuthStrategy = new LocalStrategy({
+            passReqToCallback: true,
+        },
+        (request, username, password, done) => {
+            db.collection('users')
+                .find({ username: username })
+                .toArray()
+                .then((user) => {
+                    if (user.length > 0 &&
+                        bcrypt.compareSync(password, user[0].password)) {
+                        done(null, user[0]);
+                    } else {
+                        done(null, false,
+                            request.flash('error',
+                                'Username or password is incorrect!'));
+                    }
+                })
+                .catch((error) => done(error, false));
+        });
 
     const RegistrationStrategy = new LocalStrategy({
             passReqToCallback: true,
@@ -42,11 +48,14 @@ const passportSetUp = (app, db) => {
                 .then((user) => {
                     if (user) {
                         console.log('User already exists');
-                        done(null, false);
+                        done(null, false,
+                            request.flash('error', 'Test'));
                     } else {
+                        // userValidator.validateUser(user, console.log('test'));
                         const newUser = {
                             fullname: request.body.fullname,
                             username: username,
+                            avatarUrl: '',
                             password: createHash(password),
                             enrolledCourses: [],
                             city: '',

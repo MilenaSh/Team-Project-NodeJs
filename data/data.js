@@ -83,7 +83,7 @@ const init = (db) => {
     };
 
     const updateUser = (username, details) => {
-        return usersCollection
+        usersCollection
             .update({
                 username: username,
             }, {
@@ -92,6 +92,44 @@ const init = (db) => {
                     city: details.city,
                     street: details.street,
                     website: details.website,
+                },
+            });
+        coursesCollection
+            .updateMany({
+                usersLiked: {
+                    $elemMatch: {
+                        username: username,
+                    },
+                },
+            }, {
+                $set: {
+                    'usersLiked.$.fullname': details.fullname,
+                    'usersLiked.$.city': details.city,
+                    'usersLiked.$.street': details.street,
+                    'usersLiked.$.website': details.website,
+                },
+            });
+    };
+
+    const changeUserAvatar = (username, url) => {
+        usersCollection
+            .update({
+                username: username,
+            }, {
+                $set: {
+                    avatarUrl: url,
+                },
+            });
+        coursesCollection
+            .updateMany({
+                usersLiked: {
+                    $elemMatch: {
+                        username: username,
+                    },
+                },
+            }, {
+                $set: {
+                    'usersLiked.$.avatarUrl': url,
                 },
             });
     };
@@ -126,6 +164,7 @@ const init = (db) => {
         pullEnrolledCourse,
         updateUser,
         getLectureByNumber,
+        changeUserAvatar,
     };
 
     return Promise.resolve(data);

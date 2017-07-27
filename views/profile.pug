@@ -1,5 +1,6 @@
 extends layout
 include mixins/nav
+include mixins/footer
 
 block nav
     +nav(isLoggedIn)
@@ -7,8 +8,16 @@ block content
     main
         .container
             .row
+                -
+                    let imageUrl;
+                    if (user[0].avatarUrl) {
+                        imageUrl = user[0].avatarUrl;
+                    }
+                    else {
+                        imageUrl = 'http://placehold.it/350x350';
+                    }
                 .col-md-8
-                    img.img-responsive.img-rounded(src='http://placehold.it/350x350', alt='')
+                    img.img-responsive.img-rounded(id='avatar-img' src= imageUrl alt='Avatar Photo')
                 .col-md-4
                     h1#username-label #{user[0].username}'s profile
                 .row
@@ -23,6 +32,9 @@ block content
                         h4#street-field= user[0].street
                         h4#website-field= user[0].website
                 .col-md-4
+                    form(action='/profile/avatar' method='POST' enctype='multipart/form-data')
+                        input(type='file' id='choose-avatar-input' name='avatar')
+                        input(id='edit-avatar-button' type='submit' value='Edit Avatar' name='submit')
                     a(id='edit-button') Edit Profile
             hr
             .row
@@ -37,3 +49,5 @@ block content
                         a.btn.btn-default(href='/courses/' + c._id + '/lectures') View lectures
 block scripts
     script(src='/static/scripts/profile.js')
+block footer
+    +footer
