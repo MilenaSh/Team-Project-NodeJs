@@ -60,6 +60,18 @@ gulp.task('tests:unit', ['pre-test'], () => {
         .pipe(istanbul.writeReports());
 });
 
+
+gulp.task('tests:integration', ['test-server:start'], () => {
+    return gulp.src('./tests/integration/**/*.js')
+        .pipe(mocha({
+            reporter: 'spec',
+        }))
+        .pipe(istanbul.writeReports())
+        .once('end', () => {
+            gulp.start('test-server:stop');
+        });
+});
+
 // default task
 
 gulp.task('default', ['scripts']);

@@ -1,4 +1,5 @@
 /* globals __dirname */
+const fs = require('fs');
 
 const init = (db, data) => {
     // multer 
@@ -8,7 +9,7 @@ const init = (db, data) => {
             cb(null, __dirname + '/../../../public/images/uploads/');
         },
         filename: (request, file, cb) => {
-            cb(null, file.fieldname + '.jpg');
+            cb(null, file.originalname);
         },
     });
     const upload = multer({ storage: storage }).single('avatar');
@@ -95,14 +96,37 @@ const init = (db, data) => {
             data.updateUser(username, details);
         },
 
-        updateAvatar(request, response) {
-            console.log(request.file);
+        postAvatar(request, response) {
+            const username = request.user[0].username;
+
+            const regex = new RegExp('^' + username + '\..*$');
+            fs
+                .readdirSync(__dirname + '/../../../public/images/uploads/')
+                .filter((file) => regex.test(file))
+                .forEach((f) => {
+                    fs.unlinkSync(__dirname
+                        + '/../../../public/images/uploads/'
+                        + f);
+                });
             upload(request, response, (err) => {
                 if (err) {
                     console.log(err);
                 }
-                console.log('done');
+                response.status(201);
             });
+        },
+
+        changeAvatar(request, response) {
+            const username = request.body.username;
+            const regex = new RegExp('^' + username + '\..*$');
+
+            const imageName = fs.readdirSync(__dirname + '/../../../public/images/uploads/')
+                .filter((file) => regex.test(file))[0];
+
+            const url = '/static/images/uploads/' + imageName;
+
+            data.changeUserAvatar(username, url);
+            response.status(201);
         },
     };
     return controller;

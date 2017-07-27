@@ -3,7 +3,6 @@ const init = (db) => {
 
     const usersCollection = db.collection('users');
     const coursesCollection = db.collection('courses');
-    const contactCollection = db.collection('contact');
 
     const getCourses = (filter) => {
         return coursesCollection
@@ -112,6 +111,29 @@ const init = (db) => {
             });
     };
 
+    const changeUserAvatar = (username, url) => {
+        usersCollection
+            .update({
+                username: username,
+            }, {
+                $set: {
+                    avatarUrl: url,
+                },
+            });
+        coursesCollection
+            .updateMany({
+                usersLiked: {
+                    $elemMatch: {
+                        username: username,
+                    },
+                },
+            }, {
+                $set: {
+                    'usersLiked.$.avatarUrl': url,
+                },
+            });
+    };
+
     const getLectureByNumber = (courseID, lectureNumber) => {
         return coursesCollection
             .findOne({
@@ -142,6 +164,7 @@ const init = (db) => {
         pullEnrolledCourse,
         updateUser,
         getLectureByNumber,
+        changeUserAvatar,
     };
 
     return Promise.resolve(data);

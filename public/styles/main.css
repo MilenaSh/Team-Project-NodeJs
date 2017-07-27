@@ -292,3 +292,8 @@ html {
     position: relative;
     min-height: 100%;
 }
+
+#avatar-img {
+    max-height: 350px;
+    max-width: 350px;
+}

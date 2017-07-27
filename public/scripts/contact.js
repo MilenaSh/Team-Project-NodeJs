@@ -27,6 +27,7 @@ $('body').on('click', '#submit', (ev) => {
         error: reject,
     }));
 
-    const url = window.location.href.split('//').pop().split('/').shift();
-    window.location.href = url;
+    const newURL = window.location.href.split('/')
+        .slice(0, 3).join('/');
+    window.location.href = newURL;
 });
