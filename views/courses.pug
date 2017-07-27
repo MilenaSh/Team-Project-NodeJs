@@ -16,7 +16,7 @@ block content
                             h3.title-label #{c.title}
                             p.lecturer-label #{c.lecturer}
                             p.length-label #{c.length}
-                            a(href='/courses/' + c._id)
+                            a(id='details-button' href='/courses/' + c._id)
                                 | View details
                             if isLoggedIn
                                 - const canLike = c.usersLiked.find((u) => u._id == String(user[0]._id))
