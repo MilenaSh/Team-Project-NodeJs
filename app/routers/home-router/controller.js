@@ -53,7 +53,7 @@ const init = (db, data) => {
                 return response.status(401).render('unauthorized');
             }
             const user = request.user;
-            const enrolledCourses = user.enrolledCourses;
+            const enrolledCourses = user[0].enrolledCourses;
 
             return response.render('profile', {
                 user: user,
@@ -62,7 +62,6 @@ const init = (db, data) => {
             });
         },
 
-        // TODO
         getContactPage(request, response) {
             return response.render('contact-form');
         },
@@ -120,7 +119,8 @@ const init = (db, data) => {
             const username = request.body.username;
             const regex = new RegExp('^' + username + '\..*$');
 
-            const imageName = fs.readdirSync(__dirname + '/../../../public/images/uploads/')
+            const imageName = fs
+                .readdirSync(__dirname + '/../../../public/images/uploads/')
                 .filter((file) => regex.test(file))[0];
 
             const url = '/static/images/uploads/' + imageName;
