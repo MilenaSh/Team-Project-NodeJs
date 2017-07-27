@@ -17,12 +17,29 @@ const init = (db, data) => {
                 'title': { $regex: new RegExp(request.query.title, 'i') },
             };
 
+            const page = request.query.page;
+            const COURSES_PER_PAGE = 15;
+
             data.getCourses(filter)
                 .then((courses) => {
+                    const pageLimits = {
+                        low: 1,
+                        high: Math.ceil(courses.length / 15),
+                    };
+                    if (page < pageLimits.low || page > pageLimits.high) {
+                        if (courses.length !== 0) {
+                            return response.redirect('/404');
+                        }
+                    }
+                    courses = courses
+                        .slice((page - 1) * COURSES_PER_PAGE,
+                        COURSES_PER_PAGE * page);
                     return response.render('courses', {
                         courses: courses,
                         isLoggedIn: request.isAuthenticated(),
                         user: request.user,
+                        pageLimits: pageLimits,
+                        page,
                     });
                 });
         },

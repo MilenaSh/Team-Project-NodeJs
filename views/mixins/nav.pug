@@ -19,7 +19,7 @@ mixin nav(isLoggedIn)
             #navbar-collapse.collapse.navbar-collapse
                 ul.nav.navbar-nav
                     li
-                        a#courses-nav(href='/courses') Courses
+                        a#courses-nav(href='/courses?page=1') Courses
                 ul.nav.navbar-nav.navbar-right
                     if isLoggedIn
                         li.dropdown

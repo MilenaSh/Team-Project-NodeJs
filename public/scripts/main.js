@@ -5,7 +5,7 @@ $('#search-button').on('click', () => {
 
     text = text.split(' ').join('&');
     const newURL = window.location.href.split('/')
-        .slice(0, 3).join('/') + '/courses?title=' + text;
+        .slice(0, 3).join('/') + '/courses?title=' + text + '&page=1';
 
     window.location.href = newURL;
 });
