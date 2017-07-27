@@ -9,11 +9,12 @@ describe('Browser tests', () => {
 
     beforeEach(() => {
         driver = setupDriver('chrome');
+        ui.setDriver(driver);
     });
 
-    // afterEach(() => {
-    //     //driver.quit();
-    // });
+    afterEach(() => {
+        return driver.quit();
+    });
 
     it('Document Title', () => {
         return driver.get(url)
@@ -28,50 +29,74 @@ describe('Browser tests', () => {
     it('Register a user', () => {
         const username = 'test' + String(Math.random() * 1000, 10);
 
-        // driver.wait(webdriver.until.elementLocated(webdriver.By.css("button[type='submit']")));
+        return driver.get(url)
+            .then(() => {
+                return ui.click('nav li #register-link');
+            })
+            .then(() => {
+                return ui.setValue('input[name=fullname]', username);
+            })
+            .then(() => {
+                return ui.setValue('input[name="username"]', username);
+            })
+            .then(() => {
+                return ui.setValue('input[name="password"]', username);
+            })
+            .then(() => {
+                return ui.setValue('input[name="passwordConfirmation"]',
+                 username);
+            })
+            .then(() => {
+                return ui.click('#register-button');
+            })
+            .then(() => {
+                return ui.getText('#profile-link span');
+            })
+            .then((text) => {
+                expect(text).to.eql(username);
+            });
+    });
 
-        driver.get(url);
-        driver.findElement(webdriver.By.css('nav li #login-link')).click();
-        
-        // driver.wait(webdriver.until.elementLocated(webdriver.By.css('input[name="fullname"]')));
-        driver.findElement(webdriver.By
-            .css('input[name="fullname"]'))
-            .sendKeys(username);
-        driver.findElement(webdriver.By
-            .css('input[name="username"]'))
-            .sendKeys(username);
-        driver.findElement(webdriver.By
-            .css('input[name="password"]'))
-            .sendKeys(username);
-        driver.findElement(webdriver.By
-            .css('input[name="passwordConfirm"]'))
-            .sendKeys(username);
-        driver.findElement(webdriver.By.css('#login-button')).click();
+    it('Enroll in a course', () => {
+        const username = 'test' + String(Math.random() * 1000, 10);
 
-        // return driver.get(url)
-        //     .then(() => {
-        //         // ui.click('nav li #login-link');
-        //     })
-        //     .then(() => {
-        //         // ui.setValue('input[name="fullname"]', username);
-        //     })
-        //     .then(() => {
-        //         // ui.setValue('input[name="username"]', username);
-        //     })
-        //     .then(() => {
-        //         // ui.setValue('input[name="password"]', username);
-        //     })
-        //     .then(() => {
-        //         // ui.setValue('input[name="passwordConfirmation"]', username);
-        //     })
-        //     .then(() => {
-        //         // ui.click('#login-button');
-        //     })
-        //     .then(() => {
-        //         ui.getText('#profile-link span');
-        //     })
-        //     .then((text) => {
-        //         expect(text).to.eql(username);
-        //     });
+        return driver.get(url)
+            .then(() => {
+                return ui.click('nav li #register-link');
+            })
+            .then(() => {
+                return ui.setValue('input[name=fullname]', username);
+            })
+            .then(() => {
+                return ui.setValue('input[name="username"]', username);
+            })
+            .then(() => {
+                return ui.setValue('input[name="password"]', username);
+            })
+            .then(() => {
+                return ui.setValue('input[name="passwordConfirmation"]',
+                 username);
+            })
+            .then(() => {
+                return ui.click('#register-button');
+            })
+            .then(() => {
+                return ui.click('#courses-nav');
+            })
+            .then(() => {
+                return ui.click('.course-container:nth-of-type(1) #details-button');
+            })
+            .then(() => {
+                return ui.click('#enroll-button');
+            })
+            .then(() => {
+                return ui.click('#profile-link');
+            })
+            .then(() => {
+                return ui.getText('.enrolled-course-container .enrolled-title-label');
+            })
+            .then((text) => {
+                expect(text.length).not.to.equal('');
+            });
     });
 });

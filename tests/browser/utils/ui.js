@@ -1,7 +1,7 @@
 const webdriver = require('selenium-webdriver');
 
 // const driver = require('./setup-driver').setupDriver('chrome');
-const driver = null;
+let driver = null;
 
 const async = () => {
     return Promise.resolve();
@@ -77,4 +77,7 @@ const click = (selector) => {
 
 module.exports = {
     waitFor, getText, getTexts, getSelected, setValue, click,
+    setDriver(_driver) {
+        driver = _driver;
+    },
 };
