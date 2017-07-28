@@ -26,7 +26,12 @@ $('body').on('click', '.like-button', (ev) => {
     const $target = $(ev.target);
     const $container = $(ev.target).parent().parent();
 
-    const lecturer = $container.find('.lecturer-label').text();
+    let lecturer = $container.find('.lecturer-label')
+        .text()
+        .split('Lecturer: ');
+    lecturer.shift();
+    lecturer.join('');
+    lecturer = lecturer[0];
     const title = $container.find('.title-label').text();
 
     const obj = {
@@ -62,7 +67,12 @@ $('body').on('click', '.unlike-button', (ev) => {
     const $target = $(ev.target);
     const $container = $(ev.target).parent().parent();
 
-    const lecturer = $container.find('.lecturer-label').text();
+    let lecturer = $container.find('.lecturer-label')
+        .text()
+        .split('Lecturer: ');
+    lecturer.shift();
+    lecturer.join('');
+    lecturer = lecturer[0];
     const title = $container.find('.title-label').text();
 
     const obj = {
