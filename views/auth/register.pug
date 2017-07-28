@@ -25,5 +25,7 @@ block content
             p
             if(messages)
             div#note.alert-danger #{messages}
+block scripts
+    script(src='/static/scripts/passwordMatch.js')
 block footer
     +footer
