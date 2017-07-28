@@ -51,16 +51,19 @@ $('body').on('click', '.like-button', (ev) => {
         error: reject,
     }));
 
-    const newImg = $('<img>')
-        .addClass('img-responsive img-rounded unlike-image')
-        .attr('src', '/static/images/liked.png');
+    $target.attr('src', '/static/images/liked.png');
+    $target.parent().attr('class', 'unlike-button');
 
-    const newA = $('<a>')
-        .addClass('unlike-button')
-        .append(newImg);
+    // const newImg = $('<img>')
+    //     .addClass('img-responsive img-rounded unlike-image')
+    //     .attr('src', '/static/images/liked.png');
 
-    $container.children('a:last-of-type').remove();
-    $container.append(newA);
+    // const newA = $('<a>')
+    //     .addClass('unlike-button')
+    //     .append(newImg);
+
+    // $container.children('a:last-of-type').remove();
+    // $container.append(newA);
 });
 
 $('body').on('click', '.unlike-button', (ev) => {
@@ -92,17 +95,20 @@ $('body').on('click', '.unlike-button', (ev) => {
         error: reject,
     }));
 
-    const newImg = $('<img>')
-        .addClass('img-responsive img-rounded like-image')
-        .attr('src', '/static/images/unliked.png');
 
-    const newA = $('<a>')
-        .addClass('like-button')
-        .append(newImg);
-    console.log(newA);
+    $target.attr('src', '/static/images/unliked.png');
+    $target.parent().attr('class', 'like-button');
 
-    $container.children('a:last-of-type').remove();
-    $container.append(newA);
+    // const newImg = $('<img>')
+    //     .addClass('img-responsive img-rounded like-image')
+    //     .attr('src', '/static/images/unliked.png');
+
+    // const newA = $('<a>')
+    //     .addClass('like-button')
+    //     .append(newImg);
+
+    // $container.children('a:last-of-type').remove();
+    // $container.append(newA);
 });
 
 
