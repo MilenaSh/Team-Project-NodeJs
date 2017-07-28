@@ -1,15 +1,18 @@
+const chai = require('chai');
 const { expect } = require('chai');
 const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
+chai.use(sinonChai);
 
 const { init } = require('../../../data');
 
 describe('Get data for the courses', () => {
     let courses = [];
+    let users = [];
     let data = null;
+    
     const db = {
-        collection: () => {
-            return courses;
-        },
+        collection: () => { },
     };
 
     const toArray = () => {
@@ -35,6 +38,15 @@ describe('Get data for the courses', () => {
                 lecturer: 'Cuki',
             },
         ];
+        users = [{
+                id: 1,
+                username: 'gosho',
+            },
+            {
+                _id: '00000002cae76707e4f55407',
+                username: 'pesho',
+            },
+        ];
         sinon.stub(db, 'collection')
             .callsFake(() => {
                 return { find };
@@ -55,7 +67,6 @@ describe('Get data for the courses', () => {
     });
 
     it('Get courses', () => {
-
         data.then(function(d) {
             return d.getCourses()
                 .then((coursesCollection) => {
@@ -129,16 +140,15 @@ describe('Get data for the courses', () => {
     });
 
     it('Push enrolled courses', () => {
-        const course = 'JS';
+        const course = 'Java';
         const courseId = 1;
         const userId = 2;
         const findOne = () => {
-            return {
-                courseId,
-            };
+            return Promise.resolve(courses);
         };
 
-        sinon.stub(db, 'coursesCollection')
+        db.collection.restore();
+        sinon.stub(db, 'collection')
             .callsFake(() => {
                 return { findOne };
             });
