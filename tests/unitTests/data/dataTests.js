@@ -12,13 +12,12 @@ describe('Get data for the courses', () => {
         },
     };
 
-    let toArray = () => {
+    const toArray = () => {
         return Promise.resolve(courses);
     };
 
 
-    let find = (id) => {
-        console.log(id);
+    const find = (id) => {
         return {
             toArray,
         };
@@ -71,7 +70,7 @@ describe('Get data for the courses', () => {
         data.then(function(d) {
             d.getCourseById(id)
                 .then((course) => {
-                    expect(course.length).to.be.equal(30);
+                    expect(course).to.be.equal(courses);
                 });
         });
     });

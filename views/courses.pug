@@ -14,7 +14,7 @@ block content
                         img.img-responsive.img-rounded.course-img(src= c.coverPhoto, alt='')
                         .caption
                             h3.title-label #{c.title}
-                            p.lecturer-label #{c.lecturer}
+                            p.lecturer-label Lecturer: #{c.lecturer}
                             p.length-label #{c.length}
                             a(id='details-button' href='/courses/' + c._id)
                                 | View details
