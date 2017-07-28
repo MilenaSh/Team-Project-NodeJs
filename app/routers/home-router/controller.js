@@ -128,6 +128,10 @@ const init = (db, data) => {
             data.changeUserAvatar(username, url);
             response.status(201);
         },
+
+        get404(request, response) {
+            return response.render('404');
+        },
     };
     return controller;
 };

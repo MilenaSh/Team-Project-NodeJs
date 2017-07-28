@@ -1,0 +1,11 @@
+extends layout
+include mixins/nav
+include mixins/footer
+
+block nav
+    +nav(isLoggedIn)
+block content
+    main
+        img(src="/static/images/404.jpg", alt="404 image").image-responsive#not-found-img
+block footer
+    +footer

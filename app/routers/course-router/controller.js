@@ -18,13 +18,13 @@ const init = (db, data) => {
             };
 
             const page = request.query.page;
-            const COURSES_PER_PAGE = 15;
+            const COURSES_PER_PAGE = 12;
 
             data.getCourses(filter)
                 .then((courses) => {
                     const pageLimits = {
                         low: 1,
-                        high: Math.ceil(courses.length / 15),
+                        high: Math.ceil(courses.length / 12),
                     };
                     if (page < pageLimits.low || page > pageLimits.high) {
                         if (courses.length !== 0) {
