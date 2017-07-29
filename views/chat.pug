@@ -1,0 +1,29 @@
+
+extends layout
+include mixins/nav
+include mixins/footer
+
+block nav
+    +nav(isLoggedIn)
+block content
+    main
+        .container
+            .row
+                .col-md-4
+                    .well
+                        h3 Online users
+                        ul#Users.list-group
+                .col-md-8
+                    #chat.chat
+                    form#messageForm
+                        .form-group
+                            label(for='') Enter Message
+                            textarea#message.form-control
+                            br
+                            input.btn.btn-primary(type='submit', value='Send Message')
+block scripts
+    script(src='/socket.io/socket.io.js')
+    script(src='/static/scripts/chat.js')
+block footer
+    +footer
+

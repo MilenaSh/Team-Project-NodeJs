@@ -13,6 +13,8 @@ const attachTo = (app, db, passport, data) => {
 
     app.post('/contact', controller.sendContactForm);
 
+    app.get('/chat', controller.serveChat);
+
     app.get('/about', controller.getAboutPage);
 
     app.put('/profile', controller.updateProfile);

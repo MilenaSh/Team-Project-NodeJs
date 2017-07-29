@@ -7,10 +7,14 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const multer = require('multer');
 const ObjectId = require('mongodb').ObjectID;
+// const http = require('http');
+const users = [];
+const connections = [];
+
+
+const app = express();
 
 const init = (data) => {
-    const app = express();
-
     const db = data.db;
 
     app.set('view engine', 'pug');
@@ -36,7 +40,28 @@ const init = (data) => {
     require('./routers')
         .attachTo(app, db, passport, data);
 
-    return Promise.resolve(app);
+    const server = require('http').Server(app);
+    const io = require('socket.io')(server);
+
+    io.sockets.on('connection', function(socket) {
+        connections.push(socket);
+        console.log('Connected: %s sockets connected', connections.length);
+
+        // Disconnecting the sockets
+        socket.on('disconnect', function(someData) {
+            connections.splice(connections.indexOf(socket), 1);
+            console.log('Disconnected: %s sockets connected',
+                connections.length);
+        });
+
+        // Send message
+        socket.on('send message', function(someData) {
+            console.log(someData);
+            io.sockets.emit('new message', { msg: someData });
+        });
+    });
+
+    return Promise.resolve(server);
 };
 
 module.exports = { init };
