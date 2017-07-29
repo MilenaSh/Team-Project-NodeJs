@@ -15,7 +15,7 @@ const controllerInit
 
 const { init } = require('../../../data');
 
-describe('Data tests', () => {
+describe('Course data tests', () => {
     let courses = [];
     let users = [];
     let details = {};
@@ -38,15 +38,6 @@ describe('Data tests', () => {
             };
         },
     };
-
-    // const data = new Promise((resolve, reject) => {
-    //     const d = {
-    //         getCourses() { },
-    //         pushLikedUser() { },
-    //         pushEnrolledCourse() { },
-    //     };
-    //     resolve(d);
-    // });
 
     const data = {
         getCourseById() { },

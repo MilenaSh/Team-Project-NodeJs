@@ -27,7 +27,10 @@ describe('Browser tests', () => {
     });
 
     it('Register a user', () => {
-        const username = 'test' + String(Math.random() * 1000, 10);
+        const username = 'Testing' +
+            String(parseInt(Math.random() * 1000, 10), 10);
+        const password = 'Testing*' +
+            String(parseInt(Math.random() * 1000, 10), 10);
 
         return driver.get(url)
             .then(() => {
@@ -40,11 +43,11 @@ describe('Browser tests', () => {
                 return ui.setValue('input[name="username"]', username);
             })
             .then(() => {
-                return ui.setValue('input[name="password"]', username);
+                return ui.setValue('input[name="password"]', password);
             })
             .then(() => {
                 return ui.setValue('input[name="passwordConfirmation"]',
-                 username);
+                    password);
             })
             .then(() => {
                 return ui.click('#register-button');
@@ -57,46 +60,49 @@ describe('Browser tests', () => {
             });
     });
 
-    // it('Enroll in a course', () => {
-    //     const username = 'test' + String(Math.random() * 1000, 10);
+    it('Enroll in a course', () => {
+        const username = 'Testing' +
+            String(parseInt(Math.random() * 1000, 10), 10);
+        const password = 'Testing*' +
+            String(parseInt(Math.random() * 1000, 10), 10);
 
-    //     return driver.get(url)
-    //         .then(() => {
-    //             return ui.click('nav li #register-link');
-    //         })
-    //         .then(() => {
-    //             return ui.setValue('input[name=fullname]', username);
-    //         })
-    //         .then(() => {
-    //             return ui.setValue('input[name="username"]', username);
-    //         })
-    //         .then(() => {
-    //             return ui.setValue('input[name="password"]', username);
-    //         })
-    //         .then(() => {
-    //             return ui.setValue('input[name="passwordConfirmation"]',
-    //              username);
-    //         })
-    //         .then(() => {
-    //             return ui.click('#register-button');
-    //         })
-    //         .then(() => {
-    //             return ui.click('#courses-nav');
-    //         })
-    //         .then(() => {
-    //             return ui.click('.course-container:nth-of-type(1) #details-button');
-    //         })
-    //         .then(() => {
-    //             return ui.click('#enroll-button');
-    //         })
-    //         .then(() => {
-    //             return ui.click('#profile-link');
-    //         })
-    //         .then(() => {
-    //             return ui.getText('.enrolled-course-container .enrolled-title-label');
-    //         })
-    //         .then((text) => {
-    //             expect(text.length).not.to.equal('');
-    //         });
-    // });
+        return driver.get(url)
+            .then(() => {
+                return ui.click('nav li #register-link');
+            })
+            .then(() => {
+                return ui.setValue('input[name=fullname]', username);
+            })
+            .then(() => {
+                return ui.setValue('input[name="username"]', username);
+            })
+            .then(() => {
+                return ui.setValue('input[name="password"]', password);
+            })
+            .then(() => {
+                return ui.setValue('input[name="passwordConfirmation"]',
+                    password);
+            })
+            .then(() => {
+                return ui.click('#register-button');
+            })
+            .then(() => {
+                return ui.click('#courses-nav');
+            })
+            .then(() => {
+                return ui.click('.course-container:nth-of-type(1) #details-button');
+            })
+            .then(() => {
+                return ui.click('#enroll-button');
+            })
+            .then(() => {
+                return ui.click('#profile-link');
+            })
+            .then(() => {
+                return ui.getText('.enrolled-course-container .enrolled-title-label');
+            })
+            .then((text) => {
+                expect(text.length).not.to.equal('');
+            });
+    });
 });

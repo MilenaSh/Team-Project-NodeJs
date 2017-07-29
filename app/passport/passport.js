@@ -48,7 +48,6 @@ const passportSetUp = (app, db) => {
                 username: username,
                 password: password,
             };
-            console.log(done);
             try {
                 userValidator.validateUser(userToValidate);
             } catch (err) {
