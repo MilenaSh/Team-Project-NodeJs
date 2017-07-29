@@ -24,6 +24,11 @@ describe('Integration Tests', () => {
                 .get('/register')
                 .expect(200, done);
         });
+        it('Chat page to return status 200', (done) => {
+            request(url)
+                .get('/chat')
+                .expect(200, done);
+        });
         it('Courses page to return status 200', (done) => {
             request(url)
                 .get('/courses')
