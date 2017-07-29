@@ -9,18 +9,23 @@ block content
     main
         .container
             .row
-                .col-md-4
-                    .well
-                        h3 Online users
-                        ul#Users.list-group
-                .col-md-8
-                    #chat.chat
-                    form#messageForm
-                        .form-group
-                            label(for='') Enter Message
-                            textarea#message.form-control
-                            br
-                            input.btn.btn-primary(type='submit', value='Send Message')
+                if isLoggedIn
+                    p
+                    |
+                    .col-md-4
+                        .well
+                            h3 Users Currently Online
+                            ul#Users.list-group
+                    .col-md-8
+                        #chat.chat
+                        form#messageForm
+                            .form-group
+                                label(for='') Enter a Message
+                                textarea#message.form-control
+                                br
+                                input#chat-button.btn.btn-primary(type='submit', value='Send Message')
+                else
+                    h3 Login to Chat with the other connected users.
 block scripts
     script(src='/socket.io/socket.io.js')
     script(src='/static/scripts/chat.js')

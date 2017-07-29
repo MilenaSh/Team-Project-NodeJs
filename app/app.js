@@ -59,6 +59,17 @@ const init = (data) => {
             console.log(someData);
             io.sockets.emit('new message', { msg: someData });
         });
+
+        // New User
+
+        // socket.on('new user', function(data, callback) {
+        //     callback(true);
+        //     socet.username = data
+        // })
+
+        // function updateUsernames() {
+        //     io.sockets.emit('get users', usernames);
+        // }
     });
 
     return Promise.resolve(server);
