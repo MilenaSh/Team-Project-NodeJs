@@ -78,6 +78,15 @@ const init = (db, data) => {
             return response.redirect('/');
         },
 
+        serveChat(request, response) {
+            const user = request.user;
+
+            return response.render('chat', {
+                user: user,
+                isLoggedIn: request.isAuthenticated(),
+            });
+        },
+
         getAboutPage(request, response) {
             return response.render('about-us');
         },
@@ -103,9 +112,9 @@ const init = (db, data) => {
                 .readdirSync(__dirname + '/../../../public/images/uploads/')
                 .filter((file) => regex.test(file))
                 .forEach((f) => {
-                    fs.unlinkSync(__dirname
-                        + '/../../../public/images/uploads/'
-                        + f);
+                    fs.unlinkSync(__dirname +
+                        '/../../../public/images/uploads/' +
+                        f);
                 });
             upload(request, response, (err) => {
                 if (err) {

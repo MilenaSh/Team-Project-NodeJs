@@ -20,11 +20,13 @@ mixin nav(isLoggedIn)
                 ul.nav.navbar-nav
                     li
                         a#courses-nav(href='/courses?page=1') Courses
+                    li
+                        a#chat-nav(href='/chat') Chat
                 ul.nav.navbar-nav.navbar-right
                     if isLoggedIn
                         li.dropdown
                             a#profile-link.dropdown-toggle(href='/profile')
-                                span= user[0].username
+                                span#user-name= user[0].username
                         li.dropdown
                             a#logout-link.dropdown-toggle(href='/auth/logout')
                                 | Logout 
