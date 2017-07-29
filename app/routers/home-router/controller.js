@@ -78,6 +78,15 @@ const init = (db, data) => {
             return response.redirect('/');
         },
 
+        serveChat(request, response) {
+            const user = request.user;
+
+            return response.render('chat', {
+                user: user,
+                isLoggedIn: request.isAuthenticated(),
+            });
+        },
+
         getAboutPage(request, response) {
             return response.render('about-us');
         },

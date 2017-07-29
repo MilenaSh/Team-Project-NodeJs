@@ -159,6 +159,23 @@ main {
     text-decoration: none;
 }
 
+#chat-button {
+    font-weight: bold;
+    color: white;
+    background-color: #1F4838;
+    text-decoration: none;
+}
+
+#chat-button:hover {
+    color: white;
+    background-color: #001C10;
+}
+
+#messageForm,
+h3 {
+    color: #001C10;
+}
+
 #myLogo {
     max-width: 100px;
     max-height: 80px;
@@ -228,6 +245,7 @@ main {
 #register-link:hover,
 #profile-link:hover,
 #courses-nav:hover,
+#chat-nav:hover,
 #jumbotron-button:hover {
     color: #398CD2;
     background-color: #CAD7D3;
@@ -237,7 +255,8 @@ main {
 #logout-link,
 #register-link,
 #profile-link,
-#courses-nav {
+#courses-nav,
+#chat-nav {
     color: #1F4838;
     font-size: 17px;
 }
