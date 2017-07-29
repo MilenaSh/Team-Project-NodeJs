@@ -297,3 +297,12 @@ html {
     max-height: 350px;
     max-width: 350px;
 }
+
+#not-found-img {
+    max-width: 100%;
+}
+
+.course-img {
+    max-width: 600px;
+    max-height: 300px;
+}

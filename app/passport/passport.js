@@ -5,7 +5,7 @@ const session = require('express-session');
 
 const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
-const userValidator = require('./userValidator');
+const { userValidator } = require('./userValidator');
 
 // Generates hash using bCrypt
 const createHash = function(password) {
@@ -43,15 +43,30 @@ const passportSetUp = (app, db) => {
             passReqToCallback: true,
         },
         (request, username, password, done) => {
+            let error;
+            const userToValidate = {
+                username: username,
+                password: password,
+            };
+            console.log(done);
+            try {
+                userValidator.validateUser(userToValidate);
+            } catch (err) {
+                error = err;
+                done(null, false,
+                    request.flash('error', userValidator.getErrorMessage()));
+            }
+            if (error) {
+                return;
+            }
             db.collection('users')
                 .findOne({ username: username })
                 .then((user) => {
                     if (user) {
-                        console.log('User already exists');
+                        console.log('User already exists!');
                         done(null, false,
-                            request.flash('error', 'Test'));
+                            request.flash('error', 'User already exists!'));
                     } else {
-                        // userValidator.validateUser(user, console.log('test'));
                         const newUser = {
                             fullname: request.body.fullname,
                             username: username,
@@ -67,7 +82,7 @@ const passportSetUp = (app, db) => {
                         done(null, newUser);
                     }
                 })
-                .catch((error) => done(error, false));
+                .catch((error2) => done(error2, false));
         });
 
     passport.use(AuthStrategy);

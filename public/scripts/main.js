@@ -5,7 +5,7 @@ $('#search-button').on('click', () => {
 
     text = text.split(' ').join('&');
     const newURL = window.location.href.split('/')
-        .slice(0, 3).join('/') + '/courses?title=' + text;
+        .slice(0, 3).join('/') + '/courses?title=' + text + '&page=1';
 
     window.location.href = newURL;
 });
@@ -26,7 +26,12 @@ $('body').on('click', '.like-button', (ev) => {
     const $target = $(ev.target);
     const $container = $(ev.target).parent().parent();
 
-    const lecturer = $container.find('.lecturer-label').text();
+    let lecturer = $container.find('.lecturer-label')
+        .text()
+        .split('Lecturer: ');
+    lecturer.shift();
+    lecturer.join('');
+    lecturer = lecturer[0];
     const title = $container.find('.title-label').text();
 
     const obj = {
@@ -46,23 +51,31 @@ $('body').on('click', '.like-button', (ev) => {
         error: reject,
     }));
 
-    const newImg = $('<img>')
-        .addClass('img-responsive img-rounded unlike-image')
-        .attr('src', '/static/images/liked.png');
+    $target.attr('src', '/static/images/liked.png');
+    $target.parent().attr('class', 'unlike-button');
 
-    const newA = $('<a>')
-        .addClass('unlike-button')
-        .append(newImg);
+    // const newImg = $('<img>')
+    //     .addClass('img-responsive img-rounded unlike-image')
+    //     .attr('src', '/static/images/liked.png');
 
-    $container.children('a:last-of-type').remove();
-    $container.append(newA);
+    // const newA = $('<a>')
+    //     .addClass('unlike-button')
+    //     .append(newImg);
+
+    // $container.children('a:last-of-type').remove();
+    // $container.append(newA);
 });
 
 $('body').on('click', '.unlike-button', (ev) => {
     const $target = $(ev.target);
     const $container = $(ev.target).parent().parent();
 
-    const lecturer = $container.find('.lecturer-label').text();
+    let lecturer = $container.find('.lecturer-label')
+        .text()
+        .split('Lecturer: ');
+    lecturer.shift();
+    lecturer.join('');
+    lecturer = lecturer[0];
     const title = $container.find('.title-label').text();
 
     const obj = {
@@ -82,17 +95,20 @@ $('body').on('click', '.unlike-button', (ev) => {
         error: reject,
     }));
 
-    const newImg = $('<img>')
-        .addClass('img-responsive img-rounded like-image')
-        .attr('src', '/static/images/unliked.png');
 
-    const newA = $('<a>')
-        .addClass('like-button')
-        .append(newImg);
-    console.log(newA);
+    $target.attr('src', '/static/images/unliked.png');
+    $target.parent().attr('class', 'like-button');
 
-    $container.children('a:last-of-type').remove();
-    $container.append(newA);
+    // const newImg = $('<img>')
+    //     .addClass('img-responsive img-rounded like-image')
+    //     .attr('src', '/static/images/unliked.png');
+
+    // const newA = $('<a>')
+    //     .addClass('like-button')
+    //     .append(newImg);
+
+    // $container.children('a:last-of-type').remove();
+    // $container.append(newA);
 });
 
 

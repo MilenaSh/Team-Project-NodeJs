@@ -20,6 +20,10 @@ const attachTo = (app, db, passport, data) => {
     app.post('/profile/avatar', controller.postAvatar);
 
     app.put('/profile/avatar', controller.changeAvatar);
+
+    app.get('/404', controller.get404);
+
+    app.get('*', controller.get404);
 };
 
 module.exports = { attachTo };

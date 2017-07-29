@@ -94,7 +94,7 @@ const init = (db) => {
                     website: details.website,
                 },
             });
-        coursesCollection
+        return coursesCollection
             .updateMany({
                 usersLiked: {
                     $elemMatch: {
@@ -120,7 +120,7 @@ const init = (db) => {
                     avatarUrl: url,
                 },
             });
-        coursesCollection
+        return coursesCollection
             .updateMany({
                 usersLiked: {
                     $elemMatch: {

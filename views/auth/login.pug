@@ -1,4 +1,9 @@
 extends ../layout
+include ../mixins/nav
+include ../mixins/footer
+
+block nav
+    +nav(isLoggedIn)
 block styles
     link(href='https://fonts.googleapis.com/css?family=Ubuntu:500', rel='stylesheet', type='text/css')
 block content
@@ -7,16 +12,17 @@ block content
             .login-header
                 h1#login-sign Login
             .login-form
-                input(name="username" type='text', placeholder='Username')
+                input(name="username" type='text', placeholder='Username' required)
                 br
-                input(name="password" type='password', placeholder='Password')
+                input(name="password" type='password', placeholder='Password' required)
                 br
                 input#login-button.login-button(type='submit', value='Login')
                 |
                 p
                 if(messages)
                 div#note.alert-danger #{messages}
-
+block footer
+    +footer
 
 
             

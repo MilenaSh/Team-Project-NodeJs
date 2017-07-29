@@ -1,4 +1,9 @@
 extends ../layout
+include ../mixins/nav
+include ../mixins/footer
+
+block nav
+    +nav(isLoggedIn)
 block styles
     link(href='https://fonts.googleapis.com/css?family=Ubuntu:500', rel='stylesheet', type='text/css')
 block content
@@ -7,16 +12,20 @@ block content
         .register-header
             h1#register-sign Register
         .register-form
-            input(name='fullname' type='text', placeholder='Full Name')
+            input(name='fullname' type='text', placeholder='Full Name' required)
             br
-            input(name='username' type='text', placeholder='Username')
+            input(name='username' type='text', placeholder='Username' required)
             br
-            input(name='password' type='password', placeholder='Password')
+            input(name='password' type='password', placeholder='Password' required)
             br
-            input(name='passwordConfirmation' type='password', placeholder='Confirm Password')
+            input(name='passwordConfirmation' type='password', placeholder='Confirm Password' required)
             br
             input#register-button.register-button(type='submit', value='Register')
             |
             p
             if(messages)
             div#note.alert-danger #{messages}
+block scripts
+    script(src='/static/scripts/passwordMatch.js')
+block footer
+    +footer

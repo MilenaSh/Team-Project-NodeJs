@@ -1,109 +1,322 @@
+const chai = require('chai');
 const { expect } = require('chai');
 const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
+chai.use(sinonChai);
 
-const { init } = require('../../../../app/routers/course-router/controller');
-const dataInit = require('../../../../data/data').init;
-//const courses = [];
-const db = {
-    collection: () => {
-        return {
-            find: () => {
-                return {
-                    toArray: () => {
-                        return Promise.resolve();
-                    },
-                };
-            },
-        };
-    },
-};
+const { getRequestMock } = require('../request-response');
+const { getResponseMock } = require('../request-response');
 
-const dataPromise = dataInit(db);
+const request = getRequestMock();
+const response = getResponseMock();
 
-describe('Course controllers', () => {
-    // data = null;
+const controllerInit = require('../../../../app/routers/course-router/controller').init;
 
-    // let toArray = () => {
-    //     return Promise.resolve(courses);
-    // };
+const { init } = require('../../../../data');
 
-    // let find = (id) => {
-    //     console.log(id);
-    //     return {
-    //         toArray,
+describe('Course controller render tests', () => {
+    let courses = [];
+    let users = [];
+    let details = {};
+    const db = {
+        collection() {
+            return {
+                find() {
+                    return {
+                        toArray() {
+                            return Promise.resolve(courses);
+                        },
+                    };
+                },
+                update() {
+
+                },
+                findOne() {
+
+                },
+            };
+        },
+    };
+
+    // const data = new Promise((resolve, reject) => {
+    //     const d = {
+    //         getCourses() { },
+    //         pushLikedUser() { },
+    //         pushEnrolledCourse() { },
     //     };
-    // };
-
-    // afterEach(() => {
-    //     db.collection.restore();
+    //     resolve(d);
     // });
 
-    let controller = null;
-    let request = null;
-    let response = null;
+    const data = {
+        getCourseById() {},
+        getCourses() {},
+        pushLikedUser() {},
+        pullLikedUser() {},
+        pushEnrolledCourse() {},
+        pullEnrolledCourse() {},
+        changeUserAvatar() {},
+        getLectureByNumber() {},
+        updateUser() {},
+    };
+
+    const courseController = controllerInit(db, data);
 
     beforeEach(() => {
-        request = require('../request-response').getRequestMock();
-        response = require('../request-response').getResponseMock();
-        controller = init(db);
-
         request.isAuthenticated = () => {
             return true;
         };
+
+        courses = [{
+                id: 1,
+                title: 'Java',
+                lecturer: 'Doncho',
+            },
+            {
+                _id: '00000002cae76707e4f55408',
+                title: 'C++',
+                lecturer: 'Cuki',
+            },
+        ];
+        users = [{
+                id: 1,
+                username: 'gosho',
+            },
+            {
+                _id: '00000002cae76707e4f55407',
+                username: 'pesho',
+            },
+        ];
+        details = {
+            course: 'JS',
+            lectures: 'Introduction',
+        };
     });
 
-    it('Get courses', () => {
-        request = {
-            query: {
-                title: 'JS',
-            },
+    it('Render course by ID', (done) => {
+        const getCourseByIdStub = sinon
+            .stub(data, 'getCourseById')
+            .returns(Promise.resolve());
+
+        request.user = users;
+        request.params = {
+            id: 3,
+        };
+        request.body = {
+            title: '',
+            lecturer: '',
         };
 
-        dataPromise
-            .then((d) => {
-                controller = init(db, d);
-                const obj = {
-                    d,
-                    controller,
-                };
-                return Promise.resolve(obj);
-            })
-            .then((obj) => {
-                return obj.controller.getCourses(request, response);
-            })
+        courseController.getCourseById(request, response)
             .then(() => {
-                expect(response.viewName).to.be.equal('home');
+                // eslint-disable-next-line no-unused-expressions
+                expect(response.viewName).to.be.equal('selected-course');
+                getCourseByIdStub.restore();
+                done();
+            })
+            .catch((err) => {
+                getCourseByIdStub.restore();
+                done(err);
             });
     });
 
-    it('Enroll courses', () => {
-        const userID = null;
-        const courseID = null;
+    it('Get courses', (done) => {
+        const getCoursesStub = sinon
+            .stub(data, 'getCourses')
+            .returns(Promise.resolve(courses));
 
-        request.user = [{
-            userID: 1,
-            courseID: 1,
-        }];
+        const filter = {
+            title: '',
+        };
+        const query = {
+            title: '',
+        };
 
-        // dataPromise
-        //     .then((d) => {
-        //         controller = init(db, d);
-        //         const obj = {
-        //             d,
-        //             controller,
-        //         };
-        //         return Promise.resolve(obj);
-        //     })
-        //     .then((obj) => {
-        //         return obj.controller.enrollCourse(request, response);
-        //     })
-        //     .then(() => {
-        //          expect(response.statusCode).to.equal(200);
-        //     });
+        request.filter = filter;
+        request.query = query;
 
-        controller.enrollCourse(request, response)
+        courseController.getCourses(request, response)
             .then(() => {
-                expect(response.statusCode).to.equal(200);
+                // eslint-disable-next-line no-unused-expressions
+                expect(response.viewName).to.be.equal('courses');
+                getCoursesStub.restore();
+                done();
+            })
+            .catch((err) => {
+                getCoursesStub.restore();
+                done(err);
+            });
+    });
+
+    // it('Redirect if pageLimit is lower or higherthan the page', (done) => {
+    //     const page = 20;
+    //     request.query = {
+    //         page: page,
+    //     };
+
+    //     const getCoursesStub = sinon
+    //         .stub(data, 'getCourses')
+    //         .returns(Promise.resolve(courses));
+
+    //     const filter = {
+    //         title: '',
+    //     };
+    //     const query = {
+    //         title: '',
+    //     };
+
+    //     request.filter = filter;
+    //     request.query = query;
+
+    //     courseController.getCourses(request, response)
+    //         .then(() => {
+    //             // eslint-disable-next-line no-unused-expressions
+    //             expect(response.status).to.equal('/404');
+    //             getCoursesStub.restore();
+    //             done();
+    //         })
+    //         .catch((err) => {
+    //             getCoursesStub.restore();
+    //             done(err);
+    //         });
+    // });
+
+    it('Get courses if the user is authenticated', (done) => {
+        const getCoursesStub = sinon
+            .stub(data, 'getCourses')
+            .returns(Promise.resolve(courses));
+
+        const filter = {
+            title: '',
+        };
+        const query = {
+            title: '',
+        };
+
+        request.filter = filter;
+        request.query = query;
+
+        courseController.getCourses(request, response)
+            .then(() => {
+                // eslint-disable-next-line no-unused-expressions
+                expect(response.viewName).to.be.equal('courses');
+                getCoursesStub.restore();
+                done();
+            })
+            .catch((err) => {
+                getCoursesStub.restore();
+                done(err);
+            });
+    });
+
+    it('Enroll course', (done) => {
+        const getCoursesStub = sinon
+            .stub(data, 'pushEnrolledCourse')
+            .returns(Promise.resolve(courses));
+
+        const filter = {
+            title: '',
+        };
+        const query = {
+            title: '',
+        };
+
+        request.filter = filter;
+        request.query = query;
+
+        courseController.enrollCourse(request, response)
+            .then(() => {
+                // eslint-disable-next-line no-unused-expressions
+                expect(response.viewName).to.be.equal('courses');
+                getCoursesStub.restore();
+                done();
+            })
+            .catch((err) => {
+                getCoursesStub.restore();
+                done(err);
+            });
+    });
+
+    it('Disenroll course', (done) => {
+        const getCoursesStub = sinon
+            .stub(data, 'pullEnrolledCourse')
+            .returns(Promise.resolve(courses));
+
+        const filter = {
+            title: '',
+        };
+        const query = {
+            title: '',
+        };
+
+        request.filter = filter;
+        request.query = query;
+
+        courseController.disEnrollCourse(request, response)
+            .then(() => {
+                // eslint-disable-next-line no-unused-expressions
+                expect(response.viewName).to.be.equal('courses');
+                getCoursesStub.restore();
+                done();
+            })
+            .catch((err) => {
+                getCoursesStub.restore();
+                done(err);
+            });
+    });
+
+    it('Get lectures', (done) => {
+        const getCoursesStub = sinon
+            .stub(data, 'getCourseById')
+            .returns(Promise.resolve(courses));
+
+        const filter = {
+            title: '',
+        };
+        const query = {
+            title: '',
+        };
+
+        request.filter = filter;
+        request.query = query;
+
+        courseController.getLectures(request, response)
+            .then(() => {
+                // eslint-disable-next-line no-unused-expressions
+                expect(response.viewName).to.be.equal('lectures');
+                getCoursesStub.restore();
+                done();
+            })
+            .catch((err) => {
+                getCoursesStub.restore();
+                done(err);
+            });
+    });
+
+    it('Get current lectures', (done) => {
+        const getCoursesStub = sinon
+            .stub(data, 'getLectureByNumber')
+            .returns(Promise.resolve(courses));
+
+        const filter = {
+            title: '',
+        };
+        const query = {
+            title: '',
+        };
+
+        request.filter = filter;
+        request.query = query;
+
+        courseController.getCurrentLecture(request, response)
+            .then(() => {
+                // eslint-disable-next-line no-unused-expressions
+                expect(response.viewName).to.be.equal('selected-lecture');
+                getCoursesStub.restore();
+                done();
+            })
+            .catch((err) => {
+                getCoursesStub.restore();
+                done(err);
             });
     });
 });

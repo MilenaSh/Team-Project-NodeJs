@@ -11,12 +11,12 @@ block content
                 .col-sm-6.col-md-4.course-container
                     .thumbnail
                         // image here
-                        img.img-responsive.img-rounded(src= c.coverPhoto, alt='')
+                        img.img-responsive.img-rounded.course-img(src= c.coverPhoto, alt='')
                         .caption
                             h3.title-label #{c.title}
-                            p.lecturer-label #{c.lecturer}
+                            p.lecturer-label Lecturer: #{c.lecturer}
                             p.length-label #{c.length}
-                            a(href='/courses/' + c._id)
+                            a(id='details-button' href='/courses/' + c._id)
                                 | View details
                             if isLoggedIn
                                 - const canLike = c.usersLiked.find((u) => u._id == String(user[0]._id))
@@ -26,5 +26,17 @@ block content
                                 else
                                     a(class='like-button')
                                         img.img-responsive.img-rounded.unlike-image(src='/static/images/unliked.png', alt='')
+        .container.page-nav-container
+            .row
+                if (+page === +pageLimits.low)
+                    button(disabled).btn-success.pull-left#previous-page-btn Previous page
+                else
+                    button.btn-success.pull-left#previous-page-btn Previous page
+                if (+page === +pageLimits.high)
+                    button(disabled).btn-success.pull-right#next-page-btn Next page
+                else
+                    button.btn-success.pull-right#next-page-btn Next page
 block footer
     +footer
+block scripts
+    script(src='/static/scripts/courses.js')

@@ -53,11 +53,15 @@ describe('Home controllers', () => {
     it('Get profile page', () => {
         request.user = [{
             name: 'Pesho',
-            enrolledCourses: ['JS']
+            enrolledCourses: ['JS'],
         }];
 
         controller.getProfilePage(request, response);
         expect(response.viewName).to.be.equal('profile');
     });
 
+    it('Get about page', () => {
+        controller.getAboutPage(request, response);
+        expect(response.viewName).to.be.equal('about-us');
+    });
 });
