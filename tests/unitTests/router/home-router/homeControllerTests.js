@@ -64,4 +64,9 @@ describe('Home controllers', () => {
         controller.getAboutPage(request, response);
         expect(response.viewName).to.be.equal('about-us');
     });
+
+    it('Get 404', () => {
+        controller.get404(request, response);
+        expect(response.viewName).to.be.equal('404');
+    });
 });
