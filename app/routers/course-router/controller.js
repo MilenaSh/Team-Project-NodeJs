@@ -24,7 +24,7 @@ const init = (db, data) => {
                 .then((courses) => {
                     const pageLimits = {
                         low: 1,
-                        high: Math.ceil(courses.length / 12),
+                        high: Math.ceil(courses.length / COURSES_PER_PAGE),
                     };
                     if (page < pageLimits.low || page > pageLimits.high) {
                         if (courses.length !== 0) {

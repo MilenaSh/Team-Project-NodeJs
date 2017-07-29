@@ -31,16 +31,73 @@ describe('Sinon-chai tests', () => {
                 update() {
 
                 },
+                findOne() {
+
+                },
             };
         },
     };
 
+    // const data = new Promise((resolve, reject) => {
+    //     const d = {
+    //         getCourses() { },
+    //         pushLikedUser() { },
+    //         pushEnrolledCourse() { },
+    //     };
+    //     resolve(d);
+    // });
+
     // const data = {
+    //     getCourses() { },
     //     pushLikedUser() { },
     //     pushEnrolledCourse() { },
     // };
-    const data = init(db);
-    const courseController = controllerInit(db, data);
+
+    let courseController;
+    const dataPromise = init(db);
+    dataPromise
+        .then((d) => {
+            courseController = controllerInit(db, d);
+            const obj = {
+                d: d,
+                courseController: courseController,
+            };
+            return Promise.resolve(obj);
+        })
+        .then((obj) => {
+            it('getCourses to be called', (done) => {
+                const getCoursesStub = sinon
+                    .stub(obj.d, 'getCourses')
+                    .returns(Promise.resolve());
+
+                const filter = {
+                    title: '',
+                };
+                const query = {
+                    title: '',
+                };
+
+                request.filter = filter;
+                request.query = query;
+                request.isAuthenticated = () => {
+                    return true;
+                };
+
+                obj.courseController.getCourses(request, response)
+                    .then(() => {
+                        expect(obj.getCoursesStub).to.be.calledOnce();
+                        getCoursesStub.restore();
+                        done();
+                    })
+                    .catch((err) => {
+                        getCoursesStub.restore();
+                        done(err);
+                    });
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 
     beforeEach(() => {
         courses = [{
@@ -94,34 +151,34 @@ describe('Sinon-chai tests', () => {
     //     });
     // });
 
-    it('pushEnrolledCourses to be called', (done) => {
-        let pushEnrolledCourseStub;
-        data.then((d) => {
-            pushEnrolledCourseStub = sinon
-                .stub(d, 'pushEnrolledCourse');
-            pushEnrolledCourseStub.returns(Promise.resolve(users));
-            request.user = users;
-                request.body = {
-                    courseID: courses[0].id,
-                };
+    // it('pushEnrolledCourses to be called', (done) => {
+    //     let pushEnrolledCourseStub;
+    //     data.then((d) => {
+    //         pushEnrolledCourseStub = sinon
+    //             .stub(d, 'pushEnrolledCourse');
+    //         pushEnrolledCourseStub.returns(Promise.resolve(users));
+    //         request.user = users;
+    //         request.body = {
+    //             courseID: courses[0].id,
+    //         };
 
-                courseController.enrollCourse(request, response);
-                // .then(() => {
-                //     expect(stub).to.be.calledOnce();
-                //     stub.restore();
-                //     done();
-                // })
-                // .catch((err) => {
-                //     stub.restore();
-                //     done(err);
-                // });
-                expect(pushEnrolledCourseStub).to.be.calledOnce();
-                pushEnrolledCourseStub.restore();
-                done();
-        })
-            .catch((err) => {
-                pushEnrolledCourseStub.restore();
-                done(err);
-            });
-    });
+    //         courseController.enrollCourse(request, response);
+    //         // .then(() => {
+    //         //     expect(stub).to.be.calledOnce();
+    //         //     stub.restore();
+    //         //     done();
+    //         // })
+    //         // .catch((err) => {
+    //         //     stub.restore();
+    //         //     done(err);
+    //         // });
+    //         expect(pushEnrolledCourseStub).to.be.calledOnce();
+    //         pushEnrolledCourseStub.restore();
+    //         done();
+    //     })
+    //         .catch((err) => {
+    //             pushEnrolledCourseStub.restore();
+    //             done(err);
+    //         });
+    // });
 });

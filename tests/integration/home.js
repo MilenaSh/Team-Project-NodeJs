@@ -51,6 +51,11 @@ describe('Integration Tests', () => {
                 .get('/contact')
                 .expect(200, done);
         });
+        it('About page to return status 200', (done) => {
+            request(url)
+                .get('/about')
+                .expect(200, done);
+        });
     });
     describe('Login', () => {
         it('Login with wrong details', (done) => {
