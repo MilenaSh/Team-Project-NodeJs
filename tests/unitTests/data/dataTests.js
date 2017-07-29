@@ -12,12 +12,12 @@ describe('Get data for the courses', () => {
         },
     };
 
-    let toArray = () => {
+    const toArray = () => {
         return Promise.resolve(courses);
     };
 
 
-    let find = (id) => {
+    const find = (id) => {
         console.log(id);
         return {
             toArray,
@@ -56,7 +56,6 @@ describe('Get data for the courses', () => {
     });
 
     it('Get courses', () => {
-
         data.then(function(d) {
             return d.getCourses()
                 .then((coursesCollection) => {

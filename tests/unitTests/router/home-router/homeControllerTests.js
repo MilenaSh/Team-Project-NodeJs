@@ -1,12 +1,13 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-var MongoMock = require('mongomock');
+// const MongoMock = require('mongomock');
+
 
 const { init } = require('../../../../app/routers/home-router/controller');
 
 describe('Home controllers', () => {
     const db = null;
-    //const data = require('../../../../data').init(db);
+    // const data = require('../../../../data').init(db);
     let controller = null;
     let request = null;
     let response = null;
@@ -19,7 +20,9 @@ describe('Home controllers', () => {
         });
         controller = init(db);
 
-
+        request.flash = (() => {
+            return 'error';
+        });
     });
 
     // it('Get home page', () => {

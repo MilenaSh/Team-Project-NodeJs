@@ -16,7 +16,7 @@ const init = (db, data) => {
 
     const controller = {
         getHome(request, response) {
-            data.getCourses()
+            return data.getCourses()
                 .then((courses) => {
                     const mostPopularCourses = courses
                         .sort((x, y) => {
@@ -104,9 +104,9 @@ const init = (db, data) => {
                 .readdirSync(__dirname + '/../../../public/images/uploads/')
                 .filter((file) => regex.test(file))
                 .forEach((f) => {
-                    fs.unlinkSync(__dirname
-                        + '/../../../public/images/uploads/'
-                        + f);
+                    fs.unlinkSync(__dirname +
+                        '/../../../public/images/uploads/' +
+                        f);
                 });
             upload(request, response, (err) => {
                 if (err) {

@@ -17,7 +17,7 @@ const init = (db, data) => {
                 'title': { $regex: new RegExp(request.query.title, 'i') },
             };
 
-            data.getCourses(filter)
+            return data.getCourses(filter)
                 .then((courses) => {
                     return response.render('courses', {
                         courses: courses,
