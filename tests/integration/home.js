@@ -24,6 +24,11 @@ describe('Integration Tests', () => {
                 .get('/register')
                 .expect(200, done);
         });
+        it('404 page to return status 200', (done) => {
+            request(url)
+                .get('/404')
+                .expect(200, done);
+        });
         it('Chat page to return status 200', (done) => {
             request(url)
                 .get('/chat')
@@ -39,11 +44,26 @@ describe('Integration Tests', () => {
                 .get('/profile')
                 .expect(401, done);
         });
-        it('Profile page to return status 200 when logged in', (done) => {
+        it('Profile page to return status 302 when logged in', (done) => {
             request(url)
-                .post('profile')
+                .post('/auth/login')
+                .type('form')
                 .send({ username: 'mitko', password: 'mitko' })
-                .expect(200)
+                .expect(302)
+                .end((error, response) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                    done();
+                });
+        });
+        it('Login page to redirect when logged in', (done) => {
+            request(url)
+                .post('/auth/login')
+                .type('form')
+                .send({ username: 'mitko', password: 'mitko' })
+                .expect(302)
+                .expect('Location', '/login')
                 .end((error, response) => {
                     if (error) {
                         console.log(error);
@@ -68,21 +88,6 @@ describe('Integration Tests', () => {
                 .post('/auth/login')
                 .send({ username: 'mitko', password: 'pesho' })
                 .expect(302)
-                .end((error, response) => {
-                    if (error) {
-                        console.log(error);
-                    }
-                    done();
-                });
-        });
-    });
-    describe('Authorization', () => {
-        it('Seriallize user', (done) => {
-            request(url)
-                .post('/auth/login')
-                .send({ username: 'mitko', password: 'mitko' })
-                .expect('set-cookie', 'cookie=connect.sid; Path=/')
-                .expect(200)
                 .end((error, response) => {
                     if (error) {
                         console.log(error);

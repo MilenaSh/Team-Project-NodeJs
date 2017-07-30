@@ -48,6 +48,10 @@ gulp.task('pre-test', () => {
             '!./app/config**/*.js',
             '!./app/passport**/*.js',
             '!./app/routers/auth-router**/*.js',
+            '!./app/routers/course-router/index.js',
+            '!./app/routers/home-router/index.js',
+            '!./app/routers/home-router/router.js',
+            '!./app/routers/course-router/router.js',
             '!./app/routers/index.js',
             '!./app/routers/routers.js',
         ])
@@ -96,7 +100,7 @@ gulp.task('test-server:start', () => {
         .then((app) => {
             app.listen(
                 configTest.port,
-                () => console.log(`Magic happends at :${configTest.port}`));
+                () => console.log(`Magic happens at: ${configTest.port}`));
         });
 });
 

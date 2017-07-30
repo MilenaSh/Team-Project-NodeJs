@@ -58,11 +58,13 @@ describe('Home data tests', () => {
             id: 1,
             title: 'Java',
             lecturer: 'Doncho',
+            usersLiked: [],
         },
         {
             _id: '00000002cae76707e4f55408',
             title: 'C++',
             lecturer: 'Cuki',
+            usersLiked: [],
         },
         ];
         users = [{
@@ -79,13 +81,6 @@ describe('Home data tests', () => {
             lectures: 'Introduction',
         };
     });
-
-    courses.sort = () => {
-        const obj = {
-            length: 3,
-        };
-        return obj;
-    };
 
     it('getCourses to have been called',
         (done) => {
@@ -134,8 +129,119 @@ describe('Home data tests', () => {
             homeController.getHome(request, response)
                 .then(() => {
                     // eslint-disable-next-line no-unused-expressions
-                    expect(getCoursesStub).to.be.calledWith(3);
+                    expect(getCoursesStub).to.be.calledWith();
                     expect(getCoursesStub).not.to.be.calledWith(2);
+                    getCoursesStub.restore();
+                    done();
+                })
+                .catch((err) => {
+                    getCoursesStub.restore();
+                    done(err);
+                });
+        });
+
+    it('updateUser to have been called',
+        (done) => {
+            const getCoursesStub = sinon
+                .stub(data, 'updateUser')
+                .returns(Promise.resolve(courses));
+
+            request.user = users;
+            request.body = {
+                username: 'pesho',
+            };
+
+            request.isAuthenticated = () => {
+                return true;
+            };
+
+            homeController.updateProfile(request, response)
+                .then(() => {
+                    // eslint-disable-next-line no-unused-expressions
+                    expect(getCoursesStub).to.be.calledOnce;
+                    getCoursesStub.restore();
+                    done();
+                })
+                .catch((err) => {
+                    getCoursesStub.restore();
+                    done(err);
+                });
+        });
+    it('updateUser to have been called with the right arguments',
+        (done) => {
+            const getCoursesStub = sinon
+                .stub(data, 'updateUser')
+                .returns(Promise.resolve(courses));
+
+            request.user = users;
+            request.body = {
+                username: 'pesho',
+            };
+
+            request.isAuthenticated = () => {
+                return true;
+            };
+
+            homeController.updateProfile(request, response)
+                .then(() => {
+                    // eslint-disable-next-line no-unused-expressions
+                    expect(getCoursesStub).to.be.calledWith('pesho');
+                    expect(getCoursesStub).not.to.be.calledWith('gosho');
+                    getCoursesStub.restore();
+                    done();
+                })
+                .catch((err) => {
+                    getCoursesStub.restore();
+                    done(err);
+                });
+        });
+    it('changeUserAvatar to have been called',
+        (done) => {
+            const getCoursesStub = sinon
+                .stub(data, 'changeUserAvatar')
+                .returns(Promise.resolve(courses));
+
+            request.user = users;
+            request.body = {
+                username: 'pesho',
+            };
+
+            request.isAuthenticated = () => {
+                return true;
+            };
+
+            homeController.changeAvatar(request, response)
+                .then(() => {
+                    // eslint-disable-next-line no-unused-expressions
+                    expect(getCoursesStub).to.be.calledOnce;
+                    getCoursesStub.restore();
+                    done();
+                })
+                .catch((err) => {
+                    getCoursesStub.restore();
+                    done(err);
+                });
+        });
+    it('changeUserAvatar to have been called with the right arguments',
+        (done) => {
+            const getCoursesStub = sinon
+                .stub(data, 'changeUserAvatar')
+                .returns(Promise.resolve(courses));
+
+            request.user = users;
+            request.body = {
+                username: 'pesho',
+            };
+
+            request.isAuthenticated = () => {
+                return true;
+            };
+
+            homeController.changeAvatar(request, response)
+                .then(() => {
+                    // eslint-disable-next-line no-unused-expressions
+                    expect(getCoursesStub).to.be.calledWith('pesho');
+                    expect(getCoursesStub).not.to.be.calledWith('gosho');
                     getCoursesStub.restore();
                     done();
                 })

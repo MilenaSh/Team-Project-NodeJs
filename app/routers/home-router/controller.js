@@ -101,7 +101,7 @@ const init = (db, data) => {
                 website: request.body.website,
             };
 
-            data.updateUser(username, details);
+            return data.updateUser(username, details);
         },
 
         postAvatar(request, response) {
@@ -134,8 +134,10 @@ const init = (db, data) => {
 
             const url = '/static/images/uploads/' + imageName;
 
-            data.changeUserAvatar(username, url);
-            response.status(201);
+            return data.changeUserAvatar(username, url)
+                .then(() => {
+                    response.status(201);
+                });
         },
 
         get404(request, response) {
