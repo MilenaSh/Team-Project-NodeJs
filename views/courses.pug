@@ -19,7 +19,7 @@ block content
                             h3.title-label #{c.title}
                             p.lecturer-label Lecturer: #{c.lecturer}
                             p.length-label #{c.length}
-                            a.btn.btn-info(id='details-button' href='/courses/' + c._id)
+                            a.btn(id='details-button' href='/courses/' + c._id)
                                 | View details
                             if isLoggedIn
                                 - const canLike = c.usersLiked.find((u) => u._id == String(user[0]._id))

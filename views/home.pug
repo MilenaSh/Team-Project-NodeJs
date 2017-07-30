@@ -25,7 +25,7 @@ block content
                             h3.title-label #{c.title}
                             p.lecturer-label Lecturer: #{c.lecturer}
                             p.length-label #{c.length}
-                            a(href='/courses/' + c._id)
+                            a.btn(id='details-button-recent' href='/courses/' + c._id)
                                 | View details
                             if isLoggedIn
                                 - const canLike = c.usersLiked.find((u) => u._id == String(user[0]._id))
@@ -47,7 +47,7 @@ block content
                             h3.title-label #{c.title}
                             p.lecturer-label Lecturer: #{c.lecturer}
                             p.length-label #{c.length}
-                            a(href='/courses/' + c._id)
+                            a.btn(id='details-button-popular' href='/courses/' + c._id)
                                 | View details
                             if isLoggedIn
                                 - const canLike = c.usersLiked.find((u) => u._id == String(user[0]._id))

@@ -147,12 +147,20 @@ main {
     background-color: #00F2B6;
 }
 
+#details-button,
+#details-button-recent,
+#details-button-popular {
+    color: #737583;
+    background-color: #DFDEDC;
+    padding: 8px;
+}
+
 #jumbotron-button {
     border-radius: 5px;
     font-weight: bold;
     color: white;
-    background-color: #538074;
-    padding: 10px;
+    background-color: #0A4D3C;
+    padding: 8px;
     text-decoration: none;
 }
 
@@ -240,13 +248,20 @@ h4 {
     box-shadow: none;
 }
 
+#search-button {
+    max-height: 34px;
+}
+
 #login-link:hover,
 #logout-link:hover,
 #register-link:hover,
 #profile-link:hover,
 #courses-nav:hover,
 #chat-nav:hover,
-#jumbotron-button:hover {
+#jumbotron-button:hover,
+#details-button:hover,
+#details-button-recent:hover,
+#details-button-popular:hover {
     color: #398CD2;
     background-color: #CAD7D3;
 }
