@@ -25,7 +25,12 @@ block content
                                 br
                                 input#chat-button.btn.btn-primary(type='submit', value='Send Message')
                 else
-                    h3 Login to Chat with the other connected users.
+                    div.centered
+                        p
+                        |
+                        .col-md-6.col-md-offset-3
+                            .alert.alert-success
+                                h3 Login to chat with other connected users.
 block scripts
     script(src='/socket.io/socket.io.js')
     script(src='/static/scripts/chat.js')

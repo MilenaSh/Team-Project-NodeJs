@@ -172,7 +172,10 @@ main {
 }
 
 #messageForm,
-h3 {
+h1,
+h2,
+h3,
+h4 {
     color: #001C10;
 }
 
@@ -324,4 +327,23 @@ html {
 .course-img {
     max-width: 600px;
     max-height: 300px;
+}
+
+
+/* Error page style */
+
+#error-page {
+    background-color: #EBFFFF;
+}
+
+.error-template {
+    padding: 40px 15px;
+    text-align: center;
+    background-color: #EBFFFF;
+    color: #1B3C34
+}
+
+.error-actions {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
