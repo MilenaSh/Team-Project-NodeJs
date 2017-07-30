@@ -79,7 +79,9 @@ const init = (db, data) => {
 
             return data.pullEnrolledCourse(courseID, userID)
                 .then(() => {
-                    return response.status(200).redirect('/courses/' + courseID);
+                    return response
+                        .status(200)
+                        .redirect('/courses/' + courseID);
                 });
         },
 

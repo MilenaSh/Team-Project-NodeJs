@@ -48,39 +48,39 @@ describe('Data tests', () => {
     // });
 
     const data = {
-        getCourseById() {},
-        getCourses() {},
-        pushLikedUser() {},
-        pullLikedUser() {},
-        pushEnrolledCourse() {},
-        pullEnrolledCourse() {},
-        changeUserAvatar() {},
-        getLectureByNumber() {},
-        updateUser() {},
+        getCourseById() { },
+        getCourses() { },
+        pushLikedUser() { },
+        pullLikedUser() { },
+        pushEnrolledCourse() { },
+        pullEnrolledCourse() { },
+        changeUserAvatar() { },
+        getLectureByNumber() { },
+        updateUser() { },
     };
 
     const courseController = controllerInit(db, data);
 
     beforeEach(() => {
         courses = [{
-                id: 1,
-                title: 'Java',
-                lecturer: 'Doncho',
-            },
-            {
-                _id: '00000002cae76707e4f55408',
-                title: 'C++',
-                lecturer: 'Cuki',
-            },
+            id: 1,
+            title: 'Java',
+            lecturer: 'Doncho',
+        },
+        {
+            _id: '00000002cae76707e4f55408',
+            title: 'C++',
+            lecturer: 'Cuki',
+        },
         ];
         users = [{
-                id: 1,
-                username: 'gosho',
-            },
-            {
-                _id: '00000002cae76707e4f55407',
-                username: 'pesho',
-            },
+            id: 1,
+            username: 'gosho',
+        },
+        {
+            _id: '00000002cae76707e4f55407',
+            username: 'pesho',
+        },
         ];
         details = {
             course: 'JS',
@@ -419,6 +419,34 @@ describe('Data tests', () => {
                 .then(() => {
                     // eslint-disable-next-line no-unused-expressions
                     expect(getCurrentLectureStub).to.be.calledOnce;
+                    getCurrentLectureStub.restore();
+                    done();
+                })
+                .catch((err) => {
+                    getCurrentLectureStub.restore();
+                    done(err);
+                });
+        });
+    it('getLectureByNumber to throw',
+        (done) => {
+            const getCurrentLectureStub = sinon
+                .stub(data, 'getLectureByNumber')
+                .returns(Promise.resolve(details));
+
+            request.user = users;
+            request.params = {
+                id: 3,
+                number: 0,
+            };
+
+            request.isAuthenticated = () => {
+                return true;
+            };
+
+            courseController.getCurrentLecture(request, response)
+                .then(() => {
+                    // eslint-disable-next-line no-unused-expressions
+                    expect(getCurrentLectureStub).to.be.throw;
                     getCurrentLectureStub.restore();
                     done();
                 })
