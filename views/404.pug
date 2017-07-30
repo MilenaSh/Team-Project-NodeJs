@@ -5,8 +5,8 @@ include mixins/footer
 block nav
     +nav(isLoggedIn)
 block content
-    main
-        .container
+    main#error-message
+        #error-page
             .row
                 .col-md-12
                     .error-template
@@ -14,7 +14,7 @@ block content
                         h2
                             b 404 Not Found
                         .error-details
-                            h3 Sorry, an error has occured, Requested page not found!
+                            h3 Sorry, an error has occured
                         div
                             img.img-rounded(src='/static/images/logo.png', alt='404', width='150', height='100')
 block footer

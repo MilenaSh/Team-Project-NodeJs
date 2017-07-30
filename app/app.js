@@ -10,6 +10,7 @@ const ObjectId = require('mongodb').ObjectID;
 // const http = require('http');
 const users = [];
 const connections = [];
+const passportSetUp = require('./passport');
 
 
 const app = express();
@@ -44,6 +45,7 @@ const init = (data) => {
     const io = require('socket.io')(server);
 
     io.sockets.on('connection', function(socket) {
+        const getUsers = require('./passport').getUsers;
         connections.push(socket);
         console.log('Connected: %s sockets connected', connections.length);
 
@@ -60,6 +62,7 @@ const init = (data) => {
             io.sockets.emit('new message', { msg: someData });
         });
 
+        console.log(getUsers());
         // New User
 
         // socket.on('new user', function(data, callback) {

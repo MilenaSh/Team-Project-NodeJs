@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
 const { userValidator } = require('./userValidator');
 
+const connectedUsers = [];
+
 // Generates hash using bCrypt
 const createHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(saltRounds), null);
@@ -30,6 +32,7 @@ const passportSetUp = (app, db) => {
                     if (user.length > 0 &&
                         bcrypt.compareSync(password, user[0].password)) {
                         done(null, user[0]);
+                        connectedUsers.push(user[0].username);
                     } else {
                         done(null, false,
                             request.flash('error',
@@ -109,4 +112,8 @@ const passportSetUp = (app, db) => {
     return passport;
 };
 
-module.exports = { passportSetUp };
+const getUsers = () => {
+    return connectedUsers;
+};
+
+module.exports = { passportSetUp, getUsers };

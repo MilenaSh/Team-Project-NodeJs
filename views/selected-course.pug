@@ -9,6 +9,8 @@ block content
         - const selectedCourse = course[0]
         .container
             .row
+                p
+                |
                 .col-md-8
                     img.img-responsive.img-rounded(src= selectedCourse.coverPhoto, alt='')
                 .col-md-4
@@ -38,7 +40,7 @@ block content
             .row
                 .col-lg-12
                     .well.text-center.lecturer-label
-                        | Course is taught by #{selectedCourse.lecturer}
+                        | The Course is taught by #{selectedCourse.lecturer}
             .row
                 if isLoggedIn
                     each lecture in course[0].lectures
