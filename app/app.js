@@ -45,6 +45,7 @@ const init = (data) => {
     const io = require('socket.io')(server);
 
     io.sockets.on('connection', function(socket) {
+        const getUsers = require('./passport').getUsers;
         connections.push(socket);
         console.log('Connected: %s sockets connected', connections.length);
 
@@ -61,7 +62,7 @@ const init = (data) => {
             io.sockets.emit('new message', { msg: someData });
         });
 
-        console.log(passportSetUp.connctedUsers);
+        console.log(getUsers());
         // New User
 
         // socket.on('new user', function(data, callback) {

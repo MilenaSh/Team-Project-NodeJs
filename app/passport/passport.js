@@ -38,7 +38,6 @@ const passportSetUp = (app, db) => {
                             request.flash('error',
                                 'Username or password is incorrect!'));
                     }
-                    return connectedUsers;
                 })
                 .catch((error) => done(error, false));
         });
@@ -113,4 +112,8 @@ const passportSetUp = (app, db) => {
     return passport;
 };
 
-module.exports = { passportSetUp };
+const getUsers = () => {
+    return connectedUsers;
+};
+
+module.exports = { passportSetUp, getUsers };
