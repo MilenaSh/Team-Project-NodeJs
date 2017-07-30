@@ -4,8 +4,7 @@ include ../mixins/footer
 
 block nav
     +nav(isLoggedIn)
-block styles
-    link(href='https://fonts.googleapis.com/css?family=Ubuntu:500', rel='stylesheet', type='text/css')
+block styles 
 block content
     .login-register-form             
         form.login(method='POST', action='/auth/login')

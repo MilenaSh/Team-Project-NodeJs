@@ -17,6 +17,17 @@ nav {
     overflow:hidden;
 }*/
 
+
+/* latin-ext */
+
+@font-face {
+    font-family: 'Ubuntu';
+    font-style: normal;
+    font-weight: 500;
+    src: local('Ubuntu Medium'), local('Ubuntu-Medium'), url(https://fonts.gstatic.com/s/ubuntu/v10/gMhvhm-nVj1086DvGgmzBxJtnKITppOI_IvcXXDNrsc.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
 body {
     font-family: 'Ubuntu', sans-serif;
     margin: 0 0 200px;
@@ -29,6 +40,9 @@ main {
 .login-register-form {
     margin-top: 150px;
 }
+
+
+/* link(href='https://fonts.googleapis.com/css?family=Ubuntu:500', rel='stylesheet', type='text/css') */
 
 .login h1,
 .login h2,
@@ -204,6 +218,17 @@ h4 {
     background-color: white;
     border-color: black;
 }*/
+
+#my-bar-one,
+#my-bar-two,
+#my-bar-three,
+#my-bar-four {
+    background-color: #1F4838;
+}
+
+#my-bar-one:hover {
+    background-color: white;
+}
 
 .jumbotron {
     background-image: url('../images/jumbotron.jpg');
