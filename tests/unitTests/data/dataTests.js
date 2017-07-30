@@ -1,18 +1,15 @@
-const chai = require('chai');
 const { expect } = require('chai');
 const sinon = require('sinon');
-const sinonChai = require('sinon-chai');
-chai.use(sinonChai);
 
 const { init } = require('../../../data');
 
 describe('Get data for the courses', () => {
     let courses = [];
-    let users = [];
     let data = null;
-    
     const db = {
-        collection: () => { },
+        collection: () => {
+            return courses;
+        },
     };
 
     const toArray = () => {
@@ -21,6 +18,7 @@ describe('Get data for the courses', () => {
 
 
     const find = (id) => {
+        console.log(id);
         return {
             toArray,
         };
@@ -36,15 +34,6 @@ describe('Get data for the courses', () => {
                 _id: '00000002cae76707e4f55408',
                 title: 'C++',
                 lecturer: 'Cuki',
-            },
-        ];
-        users = [{
-                id: 1,
-                username: 'gosho',
-            },
-            {
-                _id: '00000002cae76707e4f55407',
-                username: 'pesho',
             },
         ];
         sinon.stub(db, 'collection')
@@ -81,7 +70,7 @@ describe('Get data for the courses', () => {
         data.then(function(d) {
             d.getCourseById(id)
                 .then((course) => {
-                    expect(course).to.be.equal(courses);
+                    expect(course.length).to.be.equal(30);
                 });
         });
     });
@@ -140,15 +129,16 @@ describe('Get data for the courses', () => {
     });
 
     it('Push enrolled courses', () => {
-        const course = 'Java';
+        const course = 'JS';
         const courseId = 1;
         const userId = 2;
         const findOne = () => {
-            return Promise.resolve(courses);
+            return {
+                courseId,
+            };
         };
 
-        db.collection.restore();
-        sinon.stub(db, 'collection')
+        sinon.stub(db, 'coursesCollection')
             .callsFake(() => {
                 return { findOne };
             });

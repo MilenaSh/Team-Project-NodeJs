@@ -16,7 +16,7 @@ const init = (db, data) => {
 
     const controller = {
         getHome(request, response) {
-            data.getCourses()
+            return data.getCourses()
                 .then((courses) => {
                     const mostPopularCourses = courses
                         .sort((x, y) => {

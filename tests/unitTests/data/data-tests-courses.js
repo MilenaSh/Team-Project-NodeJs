@@ -10,8 +10,7 @@ const { getResponseMock } = require('../router/request-response');
 const request = getRequestMock();
 const response = getResponseMock();
 
-const controllerInit
-    = require('../../../app/routers/course-router/controller').init;
+const controllerInit = require('../../../app/routers/course-router/controller').init;
 
 const { init } = require('../../../data');
 
@@ -49,39 +48,39 @@ describe('Data tests', () => {
     // });
 
     const data = {
-        getCourseById() { },
-        getCourses() { },
-        pushLikedUser() { },
-        pullLikedUser() { },
-        pushEnrolledCourse() { },
-        pullEnrolledCourse() { },
-        changeUserAvatar() { },
-        getLectureByNumber() { },
-        updateUser() { },
+        getCourseById() {},
+        getCourses() {},
+        pushLikedUser() {},
+        pullLikedUser() {},
+        pushEnrolledCourse() {},
+        pullEnrolledCourse() {},
+        changeUserAvatar() {},
+        getLectureByNumber() {},
+        updateUser() {},
     };
 
     const courseController = controllerInit(db, data);
 
     beforeEach(() => {
         courses = [{
-            id: 1,
-            title: 'Java',
-            lecturer: 'Doncho',
-        },
-        {
-            _id: '00000002cae76707e4f55408',
-            title: 'C++',
-            lecturer: 'Cuki',
-        },
+                id: 1,
+                title: 'Java',
+                lecturer: 'Doncho',
+            },
+            {
+                _id: '00000002cae76707e4f55408',
+                title: 'C++',
+                lecturer: 'Cuki',
+            },
         ];
         users = [{
-            id: 1,
-            username: 'gosho',
-        },
-        {
-            _id: '00000002cae76707e4f55407',
-            username: 'pesho',
-        },
+                id: 1,
+                username: 'gosho',
+            },
+            {
+                _id: '00000002cae76707e4f55407',
+                username: 'pesho',
+            },
         ];
         details = {
             course: 'JS',

@@ -33,7 +33,7 @@ const init = (db, data) => {
                     }
                     courses = courses
                         .slice((page - 1) * COURSES_PER_PAGE,
-                        COURSES_PER_PAGE * page);
+                            COURSES_PER_PAGE * page);
                     return response.render('courses', {
                         courses: courses,
                         isLoggedIn: request.isAuthenticated(),

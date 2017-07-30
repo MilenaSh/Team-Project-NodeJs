@@ -7,9 +7,7 @@ Team project for Nodejs course of Team Watchmen.
 - Upload to Amazon
 - UI - nav + footer
   - buttons
-  - 404 styling
   - about Us + photos
-  - Validations
  
  - White board
 
