@@ -10,6 +10,7 @@ const { getResponseMock } = require('../request-response');
 const request = getRequestMock();
 const response = getResponseMock();
 
+// eslint-disable-next-line max-len
 const controllerInit = require('../../../../app/routers/course-router/controller').init;
 
 const { init } = require('../../../../data');
@@ -37,15 +38,6 @@ describe('Course controller render tests', () => {
             };
         },
     };
-
-    // const data = new Promise((resolve, reject) => {
-    //     const d = {
-    //         getCourses() { },
-    //         pushLikedUser() { },
-    //         pushEnrolledCourse() { },
-    //     };
-    //     resolve(d);
-    // });
 
     const data = {
         getCourseById() {},
@@ -146,39 +138,6 @@ describe('Course controller render tests', () => {
                 done(err);
             });
     });
-
-    // it('Redirect if pageLimit is lower or higherthan the page', (done) => {
-    //     const page = 20;
-    //     request.query = {
-    //         page: page,
-    //     };
-
-    //     const getCoursesStub = sinon
-    //         .stub(data, 'getCourses')
-    //         .returns(Promise.resolve(courses));
-
-    //     const filter = {
-    //         title: '',
-    //     };
-    //     const query = {
-    //         title: '',
-    //     };
-
-    //     request.filter = filter;
-    //     request.query = query;
-
-    //     courseController.getCourses(request, response)
-    //         .then(() => {
-    //             // eslint-disable-next-line no-unused-expressions
-    //             expect(response.status).to.equal('/404');
-    //             getCoursesStub.restore();
-    //             done();
-    //         })
-    //         .catch((err) => {
-    //             getCoursesStub.restore();
-    //             done(err);
-    //         });
-    // });
 
     it('Get courses if the user is authenticated', (done) => {
         const getCoursesStub = sinon
