@@ -10,6 +10,7 @@ const ObjectId = require('mongodb').ObjectID;
 // const http = require('http');
 const users = [];
 const connections = [];
+const passportSetUp = require('./passport');
 
 
 const app = express();
@@ -60,6 +61,7 @@ const init = (data) => {
             io.sockets.emit('new message', { msg: someData });
         });
 
+        console.log(passportSetUp.connctedUsers);
         // New User
 
         // socket.on('new user', function(data, callback) {
