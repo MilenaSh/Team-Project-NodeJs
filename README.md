@@ -15,8 +15,8 @@ _Web applications with Node.js for Online learning system_
 
 ## Authors
 
-|     Name      |   Username    |           Gihub               |
-| ------------- |:-------------:| -----------------------------:|
+|     Name      |   Username    |        Gihub                  |
+| :------------:|:-------------:|:-----------------------------:|
 | Milena        | MilenaSh      | https://github.com/MilenaSh   |
 | Ivelin        | nivalen292    | https://github.com/nivalen292 |
 | Tihomir       | TihomirTE     | https://github.com/TihomirTE  |
@@ -42,6 +42,10 @@ npm start
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Home page view
+
+![HOME PAGE](https://raw.githubusercontent.com/MilenaSh/Team-Project-NodeJs/master/public/images/homePage.jpg)
 
 
 
