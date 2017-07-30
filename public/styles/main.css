@@ -384,3 +384,8 @@ html {
     margin-top: 15px;
     margin-bottom: 15px;
 }
+
+#my-iframe {
+    height: 480px;
+    width: 640px;
+}
