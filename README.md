@@ -45,7 +45,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Home page view
 
-![HOME PAGE](https://raw.githubusercontent.com/MilenaSh/Team-Project-NodeJs/master/public/images/homePage.png)
+![HOME PAGE](https://raw.githubusercontent.com/MilenaSh/Team-Project-NodeJs/master/public/images/homePage.jpg)
 
 
 
