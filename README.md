@@ -1,14 +1,3 @@
-## TODO:
-
-- UI - nav + footer
-  - buttons
- - White board
-
-## To Fix:
-
-- Search bar sends empty result on enter key press
-- Like buttons (most popular and most recent should be liked at the same time)
-
 # Team-Project-NodeJs
 Team project for Nodejs course of Team Watchmen.
 _Web applications with Node.js for Online learning system_
