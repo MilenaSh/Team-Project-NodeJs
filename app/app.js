@@ -5,12 +5,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
-const multer = require('multer');
-const ObjectId = require('mongodb').ObjectID;
-// const http = require('http');
-const users = [];
 const connections = [];
-const passportSetUp = require('./passport');
 
 
 const app = express();
@@ -24,13 +19,6 @@ const init = (data) => {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
     app.use(flash());
-    // app.use(multer({
-    //     dest: '/public/images/uploads/',
-    //     rename: function(fieldname, filename) {
-    //         return filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
-    //     },
-    // }));
-
 
     // add .then if needed
     const passport = require('./passport').passportSetUp(app, db);
@@ -41,11 +29,11 @@ const init = (data) => {
     require('./routers')
         .attachTo(app, db, passport, data);
 
+    // eslint-disable-next-line
     const server = require('http').Server(app);
     const io = require('socket.io')(server);
 
     io.sockets.on('connection', function(socket) {
-        const getUsers = require('./passport').getUsers;
         connections.push(socket);
         console.log('Connected: %s sockets connected', connections.length);
 
@@ -61,18 +49,6 @@ const init = (data) => {
             console.log(someData);
             io.sockets.emit('new message', { msg: someData });
         });
-
-        console.log(getUsers());
-        // New User
-
-        // socket.on('new user', function(data, callback) {
-        //     callback(true);
-        //     socet.username = data
-        // })
-
-        // function updateUsernames() {
-        //     io.sockets.emit('get users', usernames);
-        // }
     });
 
     return Promise.resolve(server);

@@ -9,7 +9,7 @@ const istanbul = require('gulp-istanbul');
 const { config } = require('./app/config');
 const { MongoClient } = require('mongodb');
 
-gulp.task('scripts', function() {
+gulp.task('scripts', () => {
     gulp.src(['public/scripts/login.js', '!public/scripts/**/*.min.js'])
         .pipe(plumber())
         .pipe(rename({ suffix: '.min' }))

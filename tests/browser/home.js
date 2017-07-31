@@ -16,7 +16,7 @@ describe('Browser tests', () => {
         return driver.quit();
     });
 
-    it('Document Title', () => {
+    it('Title', () => {
         return driver.get(url)
             .then(() => {
                 return driver.getTitle();
@@ -60,7 +60,7 @@ describe('Browser tests', () => {
             });
     });
 
-    it('Enroll in a course', () => {
+    it('Use tabs course', () => {
         const username = 'Testing' +
             String(parseInt(Math.random() * 1000, 10), 10);
         const password = 'Testing*' +
@@ -90,19 +90,16 @@ describe('Browser tests', () => {
                 return ui.click('#courses-nav');
             })
             .then(() => {
-                return ui.click('.course-container:nth-of-type(1) #details-button');
+                return ui.click('#chat-nav');
             })
             .then(() => {
-                return ui.click('#enroll-button');
+                return ui.click('#logout-link');
             })
             .then(() => {
-                return ui.click('#profile-link');
-            })
-            .then(() => {
-                return ui.getText('.enrolled-course-container .enrolled-title-label');
+                return ui.getText('#jumbotron-button');
             })
             .then((text) => {
-                expect(text.length).not.to.equal('');
+                expect(text).to.equal('Check our courses');
             });
     });
 });
