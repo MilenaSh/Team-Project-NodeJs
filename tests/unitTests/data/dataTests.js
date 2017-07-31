@@ -16,11 +16,14 @@ describe('Get data for the courses', () => {
         return Promise.resolve(courses);
     };
 
+    const findOne = () => {
+        return Promise.resolve(courses[0]);
+    };
+
 
     const find = (id) => {
-        console.log(id);
         return {
-            toArray,
+            toArray, findOne,
         };
     };
 
