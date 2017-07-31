@@ -22,7 +22,7 @@ describe('Browser tests', () => {
                 return driver.getTitle();
             })
             .then((title) => {
-                expect(title).to.equal('Document');
+                expect(title).to.equal('Course Overflow');
             });
     });
 

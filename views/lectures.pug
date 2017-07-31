@@ -19,6 +19,6 @@ block content
                         .caption
                             h3.title-label #{lecture.title}
                             p.number-label #{lecture.number}
-                            a.url-label(href='/courses/' + course[0]._id + '/lectures/' + lecture.number) Watch video
+                            a.btn.btn-success.url-label(href='/courses/' + course[0]._id + '/lectures/' + lecture.number) Watch video
 block footer
     +footer
