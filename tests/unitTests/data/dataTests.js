@@ -12,11 +12,11 @@ describe('Get data for the courses', () => {
         },
     };
 
-    const toArray = () => {
+    let toArray = () => {
         return Promise.resolve(courses);
     };
 
-    const findOne = () => {
+    let findOne = () => {
         return Promise.resolve(courses[0]);
     };
 
@@ -29,15 +29,15 @@ describe('Get data for the courses', () => {
 
     beforeEach(() => {
         courses = [{
-                id: 1,
-                title: 'Java',
-                lecturer: 'Doncho',
-            },
-            {
-                _id: '00000002cae76707e4f55408',
-                title: 'C++',
-                lecturer: 'Cuki',
-            },
+            id: 1,
+            title: 'Java',
+            lecturer: 'Doncho',
+        },
+        {
+            _id: '00000002cae76707e4f55408',
+            title: 'C++',
+            lecturer: 'Cuki',
+        },
         ];
         sinon.stub(db, 'collection')
             .callsFake(() => {
@@ -59,7 +59,7 @@ describe('Get data for the courses', () => {
     });
 
     it('Get courses', () => {
-        data.then(function(d) {
+        data.then(function (d) {
             return d.getCourses()
                 .then((coursesCollection) => {
                     expect(coursesCollection).to.be.equal(courses);
@@ -67,15 +67,26 @@ describe('Get data for the courses', () => {
         });
     });
 
-    it('Get course by Id', () => {
+    it('Get course by Id', (done) => {
         const id = 2;
 
-        data.then(function(d) {
+        toArray = () => {
+            return Promise.resolve(courses[0]);
+        };
+
+        data.then(function (d) {
             d.getCourseById(id)
                 .then((course) => {
-                    expect(course.length).to.be.equal(30);
+                    expect(course.title).to.be.equal('Java');
+                    done();
+                })
+                .catch((err) => {
+                    done(err);
                 });
-        });
+        })
+            .catch((err) => {
+                done(err);
+            });
     });
 
     it('Push liked user', () => {
@@ -83,11 +94,7 @@ describe('Get data for the courses', () => {
         const lecturer = 'Doncho';
         const user = 'Pesho';
         const update = () => {
-            return {
-                title,
-                lecturer,
-                user,
-            };
+            return Promise.resolve();
         };
 
         sinon.stub(db, 'course')
@@ -95,15 +102,17 @@ describe('Get data for the courses', () => {
                 return { update };
             });
 
-        data.then(function(d) {
+        data.then(function (d) {
             return d.pushLikedUser(title, lecturer, user)
                 .then((col) => {
-                    expect(col).to.be.equal(courses);
+                    expect(col).to.be.equal(null);
                 })
-                .catch(function() {
+                .catch(function () {
                     console.log('Error');
                 });
-        });
+        })
+            .catch((err) => {
+            });
     });
 
     it('Pull liked user', () => {
@@ -118,38 +127,44 @@ describe('Get data for the courses', () => {
             };
         };
 
-        sinon.stub(db, 'coursesCollection')
+        db.collection.restore();
+
+        sinon.stub(db, 'collection')
             .callsFake(() => {
                 return { update };
             });
 
-        data.then(function(d) {
+        data.then(function (d) {
             return d.pullLikedUser(title, lecturer, user)
                 .then((col) => {
                     expect(col).to.be.equal(courses);
                 });
-        });
+        })
+            .catch((err) => {
+
+            });
     });
 
     it('Push enrolled courses', () => {
         const course = 'JS';
         const courseId = 1;
         const userId = 2;
-        const findOne = () => {
-            return {
-                courseId,
-            };
+        findOne = () => {
+            return Promise.resolve(courses[0]);
         };
 
-        sinon.stub(db, 'coursesCollection')
+        db.collection.restore();
+        sinon.stub(db, 'collection')
             .callsFake(() => {
                 return { findOne };
             });
-        data.then(function(d) {
+        data.then(function (d) {
             return d.pushEnrolledCourse(courseId, userId)
                 .then((foundCourse) => {
                     expect(foundCourse).to.be.equal(course);
                 });
-        });
+        })
+            .catch((err) => {
+            });
     });
 });

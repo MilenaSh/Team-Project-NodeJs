@@ -7,6 +7,8 @@ const bcrypt = require('bcrypt-nodejs');
 const saltRounds = 10;
 const { userValidator } = require('./userValidator');
 
+const { constants } = require('../../secret-constants');
+
 const connectedUsers = [];
 
 // Generates hash using bCrypt
@@ -16,7 +18,7 @@ const createHash = function(password) {
 
 const passportSetUp = (app, db) => {
     app.use(session({
-        secret: 'the camp alpha',
+        secret: constants.sessionKey,
         resave: true,
         saveUninitiallized: true,
     }));

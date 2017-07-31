@@ -9,16 +9,6 @@ const istanbul = require('gulp-istanbul');
 const { config } = require('./app/config');
 const { MongoClient } = require('mongodb');
 
-// TODO
-// scripts task - still not working etirely
-
-// gulp.task('scripts', function() {
-//     gulp.src(['public/scripts/**/*.js', '!public/scripts/**/*.min.js'])
-//         .pipe(rename({ suffix: '.min' }))
-//         .pipe(uglify())
-//         .pipe(gulp.dest('public/scripts'));
-// });
-
 gulp.task('scripts', function() {
     gulp.src(['public/scripts/login.js', '!public/scripts/**/*.min.js'])
         .pipe(plumber())
@@ -35,7 +25,7 @@ gulp.task('start-server', () => {
         .then((app) => {
             app.listen(
                 config.port,
-                () => console.log(`Server running at localhost:${config.port}`));
+                () => console.log(`Server is at localhost:${config.port}`));
         });
 });
 
