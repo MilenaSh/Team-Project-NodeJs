@@ -1,7 +1,7 @@
 /* globals $ io */
 
 $(function() {
-    const socket = io.connect('http://localhost:3000');
+    const socket = io.connect('http://52.15.162.255');
     const $messageForm = $('#messageForm');
     const $message = $('#message');
     const $chat = $('#chat');
@@ -20,6 +20,6 @@ $(function() {
 
     socket.on('new message', function(someData) {
         $chat.append('<div class="well">' +
-            '<b>' + $userName + ': ' + '</b>' + someData.msg + '</div>');
+            '<b>' + 'User: ' + '</b>' + someData.msg + '</div>');
     });
 });
